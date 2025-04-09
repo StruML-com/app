@@ -1,1 +1,1 @@
-# dev
+# Open [StruML app](https://struml.com/app.html)
