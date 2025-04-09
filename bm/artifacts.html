@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Tools Template</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8 font-sans">
+  <div class="max-w-7xl mx-auto space-y-16">
+    <h1 class="text-4xl font-bold text-gray-800">Business Tools Template</h1>
+
+    <!-- Business Model Canvas -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-4 text-gray-700">Business Model Canvas</h2>
+      <div class="grid grid-cols-4 gap-4 text-sm text-gray-800">
+        <div class="col-span-1 bg-white p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Key Partners</h3>
+          <p>{{Key Partners}}</p>
+        </div>
+        <div class="col-span-1 bg-white p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Key Activities</h3>
+          <p>{{Key Activities}}</p>
+        </div>
+        <div class="col-span-1 bg-white p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Value Propositions</h3>
+          <p>{{Value Propositions}}</p>
+        </div>
+        <div class="col-span-1 bg-white p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Customer Relationships</h3>
+          <p>{{Customer Relationships}}</p>
+        </div>
+        <div class="col-span-2 bg-white p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Customer Segments</h3>
+          <p>{{Customer Segments}}</p>
+        </div>
+        <div class="col-span-1 bg-white p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Key Resources</h3>
+          <p>{{Key Resources}}</p>
+        </div>
+        <div class="col-span-1 bg-white p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Channels</h3>
+          <p>{{Channels}}</p>
+        </div>
+        <div class="col-span-2 bg-white p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Cost Structure</h3>
+          <p>{{Cost Structure}}</p>
+        </div>
+        <div class="col-span-2 bg-white p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Revenue Streams</h3>
+          <p>{{Revenue Streams}}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Empathy Map -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-4 text-gray-700">Empathy Map</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-800">
+        <div class="bg-white p-4 rounded shadow col-span-2">
+          <h3 class="font-bold mb-2">Think & Feel</h3>
+          <p>{{What does the customer think and feel?}}</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow col-span-2">
+          <h3 class="font-bold mb-2">See</h3>
+          <p>{{What does the customer see?}}</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow col-span-2">
+          <h3 class="font-bold mb-2">Hear</h3>
+          <p>{{What does the customer hear?}}</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow col-span-2">
+          <h3 class="font-bold mb-2">Say & Do</h3>
+          <p>{{What does the customer say and do?}}</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow col-span-2">
+          <h3 class="font-bold mb-2">Pains</h3>
+          <p>{{Customer Pains}}</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow col-span-2">
+          <h3 class="font-bold mb-2">Gains</h3>
+          <p>{{Customer Gains}}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Proposition Canvas -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-4 text-gray-700">Value Proposition Canvas</h2>
+      <div class="grid grid-cols-2 gap-4 text-sm text-gray-800">
+        <div class="bg-white p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Customer Jobs</h3>
+          <p>{{What are customers trying to get done?}}</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Products & Services</h3>
+          <p>{{What products/services do you offer?}}</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Pains</h3>
+          <p>{{What annoys your customers before, during or after?}}</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Pain Relievers</h3>
+          <p>{{How do you relieve those pains?}}</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Gains</h3>
+          <p>{{What benefits do your customers expect or desire?}}</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Gain Creators</h3>
+          <p>{{How do you create those gains?}}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customer Journey Map -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-4 text-gray-700">Customer Journey Map</h2>
+      <div class="overflow-auto rounded-lg shadow-md">
+        <table class="min-w-full text-sm text-left text-gray-800 bg-white">
+          <thead class="bg-gray-200 text-xs uppercase tracking-wider">
+            <tr>
+              <th class="px-6 py-3">Stage</th>
+              <th class="px-6 py-3">Customer Actions</th>
+              <th class="px-6 py-3">Touchpoints</th>
+              <th class="px-6 py-3">Emotions</th>
+              <th class="px-6 py-3">Opportunities</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 font-semibold">{{Stage}}</td>
+              <td class="px-6 py-4">{{Customer Actions}}</td>
+              <td class="px-6 py-4">{{Touchpoints}}</td>
+              <td class="px-6 py-4">{{Emotions}}</td>
+              <td class="px-6 py-4">{{Opportunities}}</td>
+            </tr>
+            <!-- Repeat rows as needed -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* CSS Común */
+        body {
+            background-color: #fff;
+            margin: 1rem;
+            font-size: 16px;
+            color: #777;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            all: unset;
+            font-size: 2rem !important;
+            font-weight: 700 !important;
+            margin-bottom: 16px !important;
+            display: block !important;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            background-color: #e0f2ff;
+            color: #3730a3;
+            border-bottom: 4px solid #6366f1;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+            padding: 0;
+        }
+
+        ol.numbered {
+            list-style: decimal;
+            margin-left: 1.3rem;
+        }
+
+        .pnn-box {
+            background-color: #f5f5f5;
+            border-radius: 0.4rem;
+            padding: 1rem;
+        }
+
+        .title {
+            color: #333;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Select para mostrar/ocultar etiquetas -->
+    <div class="mb-4">
+        <label for="toggle-tags" class="font-bold mr-2">Show Tags:</label>
+        <select id="toggle-tags" class="p-2 border">
+            <option value="show">Show Tags</option>
+            <option value="hide">Hide Tags</option>
+        </select>
+        <label for="toggle-markers" class="font-bold mr-2">Show Markers:</label>
+        <select id="toggle-markers" class="p-2 border">
+            <option value="show">Show Markers</option>
+            <option value="hide">Hide Markers</option>
+        </select>
+    </div>
+
+    <script>
+        // Expresión regular para detectar etiquetas (#tag)
+        const tagRegex = /(#\w+\s)/g;
+
+        // Expresión regular mejorada para detectar marcadores (emoji + número)
+        const markerRegex = /([\u{1F300}-\u{1FAFF}|\u{2600}-\u{26FF}|\u{2700}-\u{27BF}|➕|❓|🚩|🔥]\d+)/gu;
+
+        // Función para ocultar o mostrar etiquetas
+function toggleTags() {
+    const hideTags = document.getElementById('toggle-tags').value === 'hide';
+    const elements = document.querySelectorAll('.ingress');
+
+    // Nueva expresión regular para detectar etiquetas, sin afectar emojis ni texto circundante
+    const tagRegex = /(#\w+)(?=\s|$)/g;
+
+    elements.forEach((element) => {
+        if (!element.hasAttribute('data-original-tags')) {
+            element.setAttribute('data-original-tags', element.innerHTML);
+        }
+
+        if (hideTags) {
+            element.innerHTML = element.innerHTML.replace(tagRegex, '<span class="hidden">$1</span>');
+        } else {
+            element.innerHTML = element.getAttribute('data-original-tags');
+        }
+    });
+}
+
+        // Función para ocultar o mostrar marcadores
+        function toggleMarkers() {
+            const hideMarkers = document.getElementById('toggle-markers').value === 'hide';
+            const elements = document.querySelectorAll('.ingress');
+
+            elements.forEach((element) => {
+                if (!element.hasAttribute('data-original-markers')) {
+                    element.setAttribute('data-original-markers', element.innerHTML);
+                }
+
+                if (hideMarkers) {
+                    element.innerHTML = element.innerHTML.replace(markerRegex, '<span class="hidden">$1</span>');
+                } else {
+                    element.innerHTML = element.getAttribute('data-original-markers');
+                }
+            });
+        }
+
+        // Event listeners para los select
+        document.getElementById('toggle-tags').addEventListener('change', toggleTags);
+        document.getElementById('toggle-markers').addEventListener('change', toggleMarkers);
+
+        // Inicializar mostrando etiquetas y marcadores
+        toggleTags();
+        toggleMarkers();
+    </script>
+
+    <h1>Artifacts</h1>
+
+    <!-- Business Model Canvas -->
+    <h2>Business Model Canvas</h2>
+    <style>
+        .bmc {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: auto;
+            grid-template-areas:
+                "kp kp kr kr vp vp cr cr cseg cseg"
+                "kp kp ka ka vp vp c c cseg cseg"
+                "cst cst cst cst cst rs rs rs rs rs";
+            column-gap: 1rem;
+            row-gap: 1rem;
+        }
+
+        .bmc .key-partners { grid-area: kp; }
+        .bmc .key-activities { grid-area: ka; }
+        .bmc .key-resources { grid-area: kr; }
+        .bmc .value-propositions { grid-area: vp; }
+        .bmc .customer-relationships { grid-area: cr; }
+        .bmc .channels { grid-area: c; }
+        .bmc .customer-segments { grid-area: cseg; }
+        .bmc .cost-structure { grid-area: cst; }
+        .bmc .revenue-streams { grid-area: rs; }
+    </style>
+    <div class="bmc">
+        <div class="pnn-box key-partners">
+            <h3 class="title">🤔 Key Partners</h3>
+            <ul class="ingress">{{#stakeholder}}</ul>
+        </div>
+        <div class="pnn-box key-activities">
+            <h3 class="title">⚙️ Key Activities</h3>
+            <ul class="ingress">{{#work}}</ul>
+        </div>
+        <div class="pnn-box key-resources">
+            <h3 class="title">⭐ Key Resources</h3>
+            <ul class="ingress">{{#asset}}</ul>
+        </div>
+        <div class="pnn-box value-propositions">
+            <h3 class="title">💎 Value Propositions</h3>
+            <ul class="ingress">{{#value}}</ul>
+        </div>
+        <div class="pnn-box customer-relationships">
+            <h3 class="title">🤝 Customer Relationships</h3>
+            <ul class="ingress">{{#relationship}}</ul>
+        </div>
+        <div class="pnn-box channels">
+            <h3 class="title">🎙️ Channels</h3>
+            <ul class="ingress">{{#channel}}</ul>
+        </div>
+        <div class="pnn-box customer-segments">
+            <h3 class="title">🙎‍♂️ Customer Segments</h3>
+            <ul class="ingress">{{#profile}}</ul>
+        </div>
+        <div class="pnn-box cost-structure">
+            <h3 class="title">💸 Cost Structure</h3>
+            <ul class="ingress">{{#cost}}</ul>
+        </div>
+        <div class="pnn-box revenue-streams">
+            <h3 class="title">💰 Revenue Streams</h3>
+            <ul class="ingress">{{#revenue}}</ul>
+        </div>
+    </div>
+
+    <p>Atribution: Business Model Canvas, developed by Alexander Osterwalder and Yves Pigneur.</p>
+
+    <!-- Value Proposition Canvas -->
+    <h2>Value Proposition Canvas</h2>
+    <style>
+        .vpc {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: auto auto;
+            grid-template-areas:
+                "vp gain-creators customer-gains customer-segment"
+                "vp pain-relievers customer-pains customer-segment";
+            column-gap: 1rem;
+            row-gap: 1rem;
+        }
+
+        .vpc .value-propositions { grid-area: vp; }
+        .vpc .gain-creators { grid-area: gain-creators; }
+        .vpc .pain-relievers { grid-area: pain-relievers; }
+        .vpc .customer-gains { grid-area: customer-gains; }
+        .vpc .customer-pains { grid-area: customer-pains; }
+        .vpc .customer-segments { grid-area: customer-segment; }
+    </style>
+    <div class="vpc">
+        <div class="pnn-box value-propositions">
+            <h3 class="title">💎 Value Proposition</h3>
+            <ul class="ingress">{{#value}}</ul>
+        </div>
+        <div class="pnn-box gain-creators">
+            <h3 class="title">🎉 Gain Creators</h3>
+            <ul class="ingress">{{#benefit}}</ul>
+        </div>
+        <div class="pnn-box pain-relievers">
+            <h3 class="title">💊 Pain Relievers</h3>
+            <ul class="ingress">{{#reliever}}</ul>
+        </div>
+        <div class="pnn-box customer-gains">
+            <h3 class="title">🎉 Customer Gains</h3>
+            <ul class="ingress">{{#gain}}</ul>
+        </div>
+        <div class="pnn-box customer-pains">
+            <h3 class="title">😖 Customer Pains</h3>
+            <ul class="ingress">{{#pain}}</ul>
+        </div>
+        <div class="pnn-box customer-segments">
+            <h3 class="title">🙎‍♂️ Customer Segment</h3>
+            <ul class="ingress">{{#profile}}</ul>
+        </div>
+    </div>
+
+    <p>Value Proposition Canvas, developed by Alexander Osterwalder.</p>
+
+    <!-- Empathy Map -->
+    <h2>Empathy Map</h2>
+    <style>
+        .empathy-map {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: repeat(4, auto);
+            gap: 1rem;
+        }
+
+        .empathy-map .think-feel { grid-row: 1; grid-column: 1 / span 2; }
+        .empathy-map .hear { grid-row: 2; grid-column: 1; }
+        .empathy-map .see { grid-row: 2; grid-column: 2; }
+        .empathy-map .say-do { grid-row: 3; grid-column: 1 / span 2; }
+        .empathy-map .pains { grid-row: 4; grid-column: 1; }
+        .empathy-map .gains { grid-row: 4; grid-column: 2; }
+    </style>
+    <div class="empathy-map">
+        <div class="pnn-box think-feel">
+            <h3 class="title">😊 Think & Feel</h3>
+            <ul>{{#think}}</ul>
+            <ul>{{#feel}}</ul>
+        </div>
+        <div class="pnn-box hear">
+            <h3 class="title">👂 Hear</h3>
+            <ul>{{#hear}}</ul>
+        </div>
+        <div class="pnn-box see">
+            <h3 class="title">👀 See</h3>
+            <ul>{{#see}}</ul>
+        </div>
+        <div class="pnn-box say-do">
+            <h3 class="title">💬 Say & 🛠️ Do</h3>
+            <ul>{{#say}}</ul>
+            <ul>{{#do}}</ul>
+        </div>
+        <div class="pnn-box pains">
+            <h3 class="title">😖 Pains</h3>
+            <ul>{{#pain}}</ul>
+        </div>
+        <div class="pnn-box gains">
+            <h3 class="title">🎉 Gains</h3>
+            <ul>{{#gain}}</ul>
+        </div>
+    </div>
+
+    <p>Empathy Map, developed by Dave Gray.</p>
+
+    <!-- Customer Journey Map -->
+    <h2>Customer Journey Map</h2>
+    <style>
+        .customer-journey-map {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+        }
+
+        .customer-journey-map .pnn-box {
+            background-color: #f3f4f6;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+    </style>
+    <div class="customer-journey-map">
+        <div class="pnn-box">
+            <h3 class="title">Attention</h3>
+            <ul>{{#attention}}</ul>
+        </div>
+        <div class="pnn-box">
+            <h3 class="title">Interest</h3>
+            <ul>{{#interest}}</ul>
+        </div>
+        <div class="pnn-box">
+            <h3 class="title">Consideration</h3>
+            <ul>{{#consideration}}</ul>
+        </div>
+        <div class="pnn-box">
+            <h3 class="title">Decision</h3>
+            <ul>{{#decision}}</ul>
+        </div>
+        <div class="pnn-box">
+            <h3 class="title">Evangelization</h3>
+            <ul>{{#evangelization}}</ul>
+        </div>
+    </div>
+</body>
+
+</html>

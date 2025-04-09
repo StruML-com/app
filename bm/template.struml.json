@@ -1,0 +1,557 @@
+{
+  "title": "StruML doc",
+  "items": [
+    {
+      "title": "📄Business summary",
+      "content": "",
+      "tags": "type::text,mode::basic",
+      "items": []
+    },
+    {
+      "title": "📂Market",
+      "content": "",
+      "tags": "type::category,mode::basic",
+      "items": [
+        {
+          "title": "🤔Stakeholders",
+          "content": "",
+          "tags": "type::weight,mode::basic",
+          "items": []
+        },
+        {
+          "title": "🙋Segments",
+          "content": "",
+          "tags": "type::weight,mode::basic",
+          "items": [
+            {
+              "title": "🙎Profiles",
+              "content": "",
+              "tags": "type::weight,mode::basic",
+              "items": []
+            },
+            {
+              "title": "✂️Segmentation",
+              "content": "",
+              "tags": "type::weight,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "📈Market trends",
+              "content": "",
+              "tags": "type::weight,mode::expert",
+              "items": []
+            },
+            {
+              "title": "📄Market size",
+              "content": "",
+              "tags": "type::text,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "🏅Competition",
+              "content": "",
+              "tags": "type::weight,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "🎩Roles",
+              "content": "",
+              "tags": "type::weight,mode::expert",
+              "items": []
+            },
+            {
+              "title": "📄Persona",
+              "content": "",
+              "tags": "type::text,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "😟Problems",
+              "content": "",
+              "tags": "type::weight,mode::basic",
+              "items": []
+            },
+            {
+              "title": "📣Messages",
+              "content": "",
+              "tags": "type::weight,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "🎙️Channels",
+              "content": "",
+              "tags": "type::weight,mode::basic",
+              "items": []
+            },
+            {
+              "title": "🤝Relationships",
+              "content": "",
+              "tags": "type::text,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "👁️Perceptions",
+              "content": "",
+              "tags": "type::weight,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "😐Emotions",
+              "content": "",
+              "tags": "type::weight,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "🦾Behaviors",
+              "content": "",
+              "tags": "type::weight,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "✈️Journey",
+              "content": "",
+              "tags": "type::steps,mode::advanced",
+              "items": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "📂Solutions",
+      "content": "",
+      "tags": "type::category,mode::basic",
+      "items": [
+        {
+          "title": "💊Products and services",
+          "content": "",
+          "tags": "type::weight,mode::basic",
+          "items": [
+            {
+              "title": "💼Portfolio",
+              "content": "",
+              "tags": "type::text,mode::basic",
+              "items": []
+            },
+            {
+              "title": "📄Brochure",
+              "content": "",
+              "tags": "type::text,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "🌟Features",
+              "content": "",
+              "tags": "type::weight,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "📄Roadmap",
+              "content": "",
+              "tags": "type::steps,mode::expert",
+              "items": []
+            },
+            {
+              "title": "📄Pricing",
+              "content": "",
+              "tags": "type::text,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "🛍️Offerings",
+              "content": "",
+              "tags": "type::weight,mode::advanced",
+              "items": []
+            }
+          ]
+        },
+        {
+          "title": "📂Marketing",
+          "content": "",
+          "tags": "type::category,mode::advanced",
+          "items": [
+            {
+              "title": "📄Naming",
+              "content": "",
+              "tags": "type::text,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "📄Branding",
+              "content": "",
+              "tags": "type::text,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "📄Visual identity",
+              "content": "",
+              "tags": "type::text,mode::expert",
+              "items": []
+            },
+            {
+              "title": "📄Logo",
+              "content": "",
+              "tags": "type::text,mode::expert",
+              "items": []
+            }
+          ]
+        },
+        {
+          "title": "📂Communication",
+          "content": "",
+          "tags": "type::category,mode::advanced",
+          "items": [
+            {
+              "title": "📄Pitch",
+              "content": "",
+              "tags": "type::text,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "📄Web",
+              "content": "",
+              "tags": "type::text,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "📄Storytelling",
+              "content": "",
+              "tags": "type::text,mode::expert",
+              "items": []
+            },
+            {
+              "title": "📄Presentations",
+              "content": "",
+              "tags": "type::text,mode::advanced",
+              "items": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "📂Organization",
+      "content": "",
+      "tags": "type::category,mode::advanced",
+      "items": [
+        {
+          "title": "📂Business idea",
+          "content": "",
+          "tags": "type::category,mode::advanced",
+          "items": [
+            {
+              "title": "📄Inspiration",
+              "content": "",
+              "tags": "type::weight,mode::expert",
+              "items": []
+            },
+            {
+              "title": "📄Opportunity",
+              "content": "",
+              "tags": "type::weight,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "📄Business status",
+              "content": "",
+              "tags": "type::text,mode::basic",
+              "items": []
+            },
+            {
+              "title": "📄Challenges",
+              "content": "",
+              "tags": "type::weight,mode::expert",
+              "items": []
+            }
+          ]
+        },
+        {
+          "title": "📂Business objectives",
+          "content": "",
+          "tags": "type::category,mode::basic",
+          "items": [
+            {
+              "title": "📄Mission",
+              "content": "",
+              "tags": "type::text,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "📄Vision",
+              "content": "",
+              "tags": "type::text,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "🧠Organizational values",
+              "content": "",
+              "tags": "type::weight,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "🎯Organizational goals",
+              "content": "",
+              "tags": "type::weight,mode::advanced",
+              "items": []
+            }
+          ]
+        },
+        {
+          "title": "📄Operations",
+          "content": "",
+          "tags": "type::category,mode::advanced",
+          "items": [
+            {
+              "title": "⚙️Activities",
+              "content": "",
+              "tags": "type::weight,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "👔Functions",
+              "content": "",
+              "tags": "type::weight,mode::expert",
+              "items": []
+            },
+            {
+              "title": "⭐Resources",
+              "content": "",
+              "tags": "type::weight,mode::expert",
+              "items": []
+            }
+          ]
+        },
+        {
+          "title": "👤Team",
+          "content": "",
+          "tags": "type::category,mode::basic",
+          "items": [
+            {
+              "title": "🎯Goals",
+              "content": "",
+              "tags": "type::weight,mode::expert",
+              "items": []
+            },
+            {
+              "title": "🔧Skills",
+              "content": "",
+              "tags": "type::weight,mode::expert",
+              "items": []
+            },
+            {
+              "title": "➡️Contributions",
+              "content": "",
+              "tags": "type::weight,mode::expert",
+              "items": []
+            },
+            {
+              "title": "⬅️Compensations",
+              "content": "",
+              "tags": "type::weight,mode::expert",
+              "items": []
+            },
+            {
+              "title": "🪪Positions",
+              "content": "",
+              "tags": "type::weight,mode::expert",
+              "items": []
+            }
+          ]
+        },
+        {
+          "title": "📄Project plan",
+          "content": "",
+          "tags": "type::category,mode::expert",
+          "items": [
+            {
+              "title": "🗓️Phases",
+              "content": "",
+              "tags": "type::steps,mode::expert",
+              "items": []
+            },
+            {
+              "title": "🏁Milestones",
+              "content": "",
+              "tags": "type::sequence,mode::expert",
+              "items": []
+            }
+          ]
+        },
+        {
+          "title": "📐Metrics",
+          "content": "",
+          "tags": "type::weight,mode::advanced",
+          "items": []
+        },
+        {
+          "title": "📂Finance",
+          "content": "",
+          "tags": "type::category,mode::basic",
+          "items": [
+            {
+              "title": "💰Revenue",
+              "content": "",
+              "tags": "type::weight,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "📄Life Time Value",
+              "content": "",
+              "tags": "type::text,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "💸Costs",
+              "content": "",
+              "tags": "type::weight,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "📄Customer Aquisition Cost",
+              "content": "",
+              "tags": "type::text,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "📄Unit economics",
+              "content": "",
+              "tags": "type::text,mode::expert",
+              "items": []
+            },
+            {
+              "title": "💵Funding sources",
+              "content": "",
+              "tags": "type::weight,mode::expert",
+              "items": []
+            },
+            {
+              "title": "💼Shareholders",
+              "content": "",
+              "tags": "type::weight,mode::expert",
+              "items": []
+            },
+            {
+              "title": "📄Projections",
+              "content": "",
+              "tags": "type::weight,mode::expert",
+              "items": []
+            }
+          ]
+        },
+        {
+          "title": "📂Legal",
+          "content": "",
+          "tags": "type::category,mode::advanced",
+          "items": [
+            {
+              "title": "📄Legal issues",
+              "content": "",
+              "tags": "type::weight,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "📄Contracts",
+              "content": "",
+              "tags": "type::weight,mode::expert",
+              "items": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "📂Analysis",
+      "content": "",
+      "tags": "type::category,mode::basic",
+      "items": [
+        {
+          "title": "🔮Assumptions",
+          "content": "",
+          "tags": "type::weight,mode::advanced",
+          "items": []
+        },
+        {
+          "title": "🚨Risks",
+          "content": "",
+          "tags": "type::weight,mode::basic",
+          "items": []
+        },
+        {
+          "title": "📄Suggestions",
+          "content": "",
+          "tags": "type::weight,mode::expert",
+          "items": []
+        },
+        {
+          "title": "📄Unfair advantage",
+          "content": "",
+          "tags": "type::text,mode::expert",
+          "items": []
+        }
+      ]
+    },
+    {
+      "title": "📂Validation",
+      "content": "",
+      "tags": "type::category,mode::basic",
+      "items": [
+        {
+          "title": "📄Coherence",
+          "content": "",
+          "tags": "type::weight,mode::expert",
+          "items": []
+        },
+        {
+          "title": "🧪Experiments",
+          "content": "",
+          "tags": "type::weight,mode::advanced",
+          "items": []
+        }
+      ]
+    },
+    {
+      "title": "📄Metamodel",
+      "content": "",
+      "tags": "type::category,mode::advanced",
+      "items": [
+        {
+          "title": "📄Markers",
+          "content": "",
+          "tags": "type::weight,mode::advanced",
+          "items": [
+            {
+              "title": "➕weight",
+              "content": "* How important is this block for the business model?\n* If it turns out not to be true, is my business model greatly affected?\n* Is this something that could easily change without affecting the business model?",
+              "tags": "type::marker,mode::expert",
+              "items": []
+            },
+            {
+              "title": "✔️completion",
+              "content": "* Is the block completed?\n* Is it likely to change in the future?\n* Is this content fixed, or can it change based on my decisions?",
+              "tags": "type::marker,mode::expert",
+              "items": []
+            },
+            {
+              "title": "❓certainty",
+              "content": "* How sure am I that this is true? Do I have enough experience to assert this confidently?\n* Have I verified this in the real world, or are these just assumptions?\n* Is this a statement I can prove with objective facts and data?",
+              "tags": "type::marker,mode::advanced",
+              "items": []
+            },
+            {
+              "title": "🚩priority",
+              "content": "* Is this something I should prioritize?\n* Is this something urgent?\n* Is this something I should pay attention to?",
+              "tags": "type::marker,mode::advanced",
+              "items": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "🔑Keys",
+      "content": "",
+      "tags": "type::weight,mode::advanced",
+      "items": []
+    }
+  ]
+}
