@@ -220,40 +220,49 @@
                     <h1 class="display-5 mb-3">StruML</h1>
                     <p class="lead mb-5">Create, organize, and structure your domain knowledge</p>
                 -->
-                <section class="bg-light py-5">
-                    <div class="container">
-                      <div class="row justify-content-center text-center">
-                        <div class="col-lg-10">
-                          <h1 class="display-5 mb-4">What do you want to do?</h1>
-                          <div class="text-start">
-                            <ul class="list-unstyled fs-5">
-                              <li class="mb-3">
-                                <strong>Keep working on my own document:</strong><br>
-                                Click the <strong>"Upload document"</strong> button and upload your document (.json).
-                              </li>
-                              <li class="mb-3">
-                                <strong>Use a template to create a new document:</strong><br>
-                                Download the template document to your computer, then click the <strong>"Upload document"</strong> button and upload the template.
-                              </li>
-                              <li class="mb-3">
-                                <strong>Explore the tool with a sample document already loaded.</strong>
-                              </li>
-                            </ul>
+                <section class="container py-5 text-center">
+                    <h1 class="display-5 fw-bold mb-5">What would you like to do?</h1>
+                    <div class="row g-4 justify-content-center">
+                
+                      <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm border-0">
+                          <div class="card-body">
+                            <h5 class="card-title mb-3">Keep working on my document</h5>
+                            <p class="card-text">Click the <strong>"import document"</strong> button below and import your file (with .json extension).</p>
                           </div>
                         </div>
                       </div>
+                
+                      <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm border-0">
+                          <div class="card-body">
+                            <h5 class="card-title mb-3">Use a template to create a new document</h5>
+                            <p class="card-text">Download <a href="/bm/template.struml.json" download target="_blank">empty document template</a> to your computer, then click the <strong>"import document"</strong> button below and import the downloaded template (template.struml.json).</p>
+                          </div>
+                        </div>
+                      </div>
+                
+                      <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm border-0">
+                          <div class="card-body">
+                            <h5 class="card-title mb-3">Explore with a sample document</h5>
+                            <p class="card-text">Discover the tool using a sample documentDownload <a href="/bm/sample.struml.json" download target="_blank">empty document template</a> to your computer, then click the <strong>"import document"</strong> button below and import the downloaded document (sample.struml.json)</p>
+                          </div>
+                        </div>
+                      </div>
+                
                     </div>
                   </section>
                     <div class="dropzone border border-2 border-dashed p-5 rounded mb-4 bg-body-tertiary" id="file-dropzone">
                         <i class="bi bi-cloud-upload display-4 mb-2"></i>
                         <p>Drag and drop your JSON file here or click to select</p>
                         <button 
-                            class="btn btn-outline-primary mt-2"
+                            class="btn btn-primary mt-2"
                             data-bs-toggle="tooltip" 
                             data-bs-placement="top" 
                             title="Select a JSON file to import"
                         >
-                            Upload document
+                            import document
                         </button>
                     </div>
                     <input type="file" id="file-input" accept=".json" class="d-none">
