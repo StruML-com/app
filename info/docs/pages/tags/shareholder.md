@@ -1,0 +1,8 @@
+
+
+## 💼 shareholder
+
+### Definition 
+
+
+

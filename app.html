@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StruML - Structured Modeling Language</title>
-    <link rel="icon" href="logo.ico" type="image/x-icon">
+    <link rel="icon" href="assets/img/logo.ico" type="image/x-icon">
     
     <!-- Core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
     <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
 
     <script src="config.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
     </style>
 </head>
@@ -96,7 +96,7 @@
     <div id="app-container">
         <div id="sidebar" class="p-3">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <img src="bm/logo.png" width="120"/>
+                <img src="assets/img/logo.svg" width="120"/>
                 <button 
                     type="button" 
                     class="btn-close" 
@@ -246,7 +246,7 @@
                         <div class="card h-100 shadow-sm border-0">
                           <div class="card-body">
                             <h5 class="card-title mb-3">Explore with a sample document</h5>
-                            <p class="card-text">Discover the tool using a sample documentDownload <a href="/bm/sample.struml.json" download target="_blank">empty document template</a> to your computer, then click the <strong>"import document"</strong> button below and import the downloaded document (sample.struml.json)</p>
+                            <p class="card-text">Discover the tool using a <a href="/bm/sample.struml.json" download target="_blank">sample document template</a> to your computer, then click the <strong>"import document"</strong> button below and import the downloaded document (sample.struml.json)</p>
                           </div>
                         </div>
                       </div>
@@ -670,12 +670,16 @@
     <!-- Initialize the global namespace -->
     <script>window.StruMLApp = {};</script>
 
-    <!-- Load your new JS modules (Babel will process them) -->
+    <!-- Load JS modules (Babel will process them) -->
+    <!-- Legacy scripts for backward compatibility -->
     <script type="text/babel" src="js/utils.js"></script>
     <script type="text/babel" src="js/export.js"></script>
     <script type="text/babel" src="js/state.js"></script>
     <script type="text/babel" src="js/components.js"></script>
-    <script type="text/babel" src="js/chatbot.js"></script> <!-- Added chatbot script -->
+    <script type="text/babel" src="js/chatbot.js"></script>
     <script type="text/babel" src="js/main.js"></script>
+    
+    <!-- New modular structure -->
+    <script type="module" src="js/index.js"></script>
 </body>
 </html>

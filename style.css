@@ -34,136 +34,141 @@
     flex: 1;
     transition: margin-left 0.3s;
     padding: 20px;
-    margin-left: 380px;
-    padding-top: 65px;
-    max-width: calc(90vw - 380px);
-    margin-right: auto;
+    margin-left: 400px; /* Adjusted for sidebar width + gap */
+    padding-top: 65px; /* Space for header */
+    max-width: calc(90vw - 570px); /* Adjust based on sidebar and potential right panel */
+    margin-right: auto; /* Center content */
 }
 
+#chatbot-panel {
+    width: 570px; /* Width of the chatbot panel */
+}
+
+/* Adjust max-width for larger screens */
 @media (min-width: 1600px) {
     #main-content {
-        max-width: 1200px;
+        max-width: 1200px; /* Or a fixed larger width */
     }
 }
 
+
 #main-content.expanded {
     margin-left: 0;
-    max-width: 90vw;
+    max-width: 90vw; /* Expand to take more width */
 }
 
 .main-header {
+    /* position: fixed; /* Fixed header */
     top: 0;
     right: 0;
-    z-index: 1020;
+    /* left: 380px; /* Align with sidebar */
+    z-index: 1020; /* Below sidebar */
     transition: left 0.3s ease;
-    background-color: var(--bs-body-bg);
-    border-bottom: 1px solid var(--bs-border-color);
+    background-color: var(--bs-body-bg); /* Match background */
+    border-bottom: 1px solid var(--bs-border-color); /* Subtle separator */
 }
 
 .main-header.expanded {
-    left: 0;
+    left: 0; /* Expand header when sidebar is collapsed */
 }
 
 /* Updated Item Container Styling (inspired by shadcn/ui cards) */
 .item-container {
-    margin-bottom: 1rem;
-    border: 1px solid var(--bs-border-color); /* Slightly more prominent border */
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
     border-radius: var(--bs-border-radius-lg); /* Larger radius */
     background-color: var(--bs-body-bg); /* Match page background */
-    scroll-margin-top: 80px;
-    position: relative;
+    scroll-margin-top: 80px; /* Adjust for fixed header */
+    position: relative; /* For absolute positioning of actions */
     box-shadow: var(--bs-box-shadow-sm); /* Subtle shadow */
+    transition: all 0.2s ease; /* Smooth transitions */
+}
+
+.item-container.active {
+    border: 2px solid var(--bs-primary); /* Highlight active item */
+    background-color: rgba(var(--bs-primary-rgb), 0.05); /* Subtle background tint */
+}
+
+.item-container.active .item-header {
+    background-color: rgba(var(--bs-primary-rgb), 0.1); /* Slightly darker header for active */
 }
 
 .item-header {
-    padding: 0.75rem 1.25rem; /* Increased padding */
-    background-color: transparent; /* Remove distinct header background */
+    padding: 0.25rem 0.5rem; /* Reduced padding */
+    background-color: whitesmoke; /* Remove distinct header background */
     border-bottom: 1px solid var(--bs-border-color); /* Keep border */
-    position: relative;
+    position: relative; /* Needed for item-actions positioning */
 }
 
 .item-title-area {
     display: flex;
     align-items: center;
-    flex: 1;
-    position: relative;
+    flex: 1; /* Take available space */
+    position: relative; /* For absolute positioning context */
 }
 
 .item-title {
-    margin-bottom: 0;
-    font-weight: 500;
+    margin-bottom: 0; /* Remove default margin */
+    font-weight: 500; /* Slightly bolder */
 }
 
 .item-content {
-    padding: 1rem 1.25rem; /* Increased padding */
+    padding: 0.4rem; /* Consistent padding */
+    margin: 0; /* Remove default margin */
+    border: none; /* Remove default border */
 }
 
-/* Adjustments for nested items */
+/* Indentation for child items */
 .item-children .item-container {
-    margin-left: 1rem; /* Reduce left margin slightly */
-    border-left: 2px solid var(--bs-border-color-translucent); /* Add subtle left border */
-    border-radius: 0 var(--bs-border-radius-lg) var(--bs-border-radius-lg) 0; /* Adjust radius */
-    box-shadow: none; /* Remove shadow for nested items */
+    margin-left: 0.5rem; /* Indent child containers */
+    margin-right: 0.3rem; /* Small right margin */
 }
-.item-children .item-header {
-    padding-left: 1rem;
-}
+
 .item-children .item-content {
-    padding-left: 1rem;
+    padding-left: 0.4rem; /* Indent child content */
 }
 
 
 .item-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.25rem;
-    margin-left: 0.5rem;
+    gap: 0.25rem; /* Space between tags */
+    margin-left: auto; /* Push tags to the right */
 }
-
-.item-tag {
-    font-size: 0.7rem;
-    padding: 0.15rem 0.35rem;
-    border-radius: var(--bs-border-radius-sm);
-    background-color: var(--bs-secondary-bg);
-    color: var(--bs-secondary-color);
-}
-
-/* Remove old item-tag style */
 
 .item-children {
-    margin-left: 1.5rem;
-    margin-bottom: 1rem;
+    margin-left: 0.8rem; /* Indentation for children block */
+    margin-bottom: 0.4rem; /* Space below children block */
 }
 
 .item-actions {
     position: absolute;
-    right: 16px;
-    top: 50%;
+    right: 2px; /* Position to the right */
+    top: 50%; /* Center vertically */
     transform: translateY(-50%);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    background-color: var(--bs-tertiary-bg);
-    padding: 4px;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.2s ease; /* Fade in/out */
+    background-color: var(--bs-tertiary-bg); /* Subtle background */
     border-radius: var(--bs-border-radius-sm);
-    z-index: 100;
-    display: flex;
+    z-index: 100; /* Ensure actions are above content */
+    display: flex; /* Align buttons horizontally */
 }
 
 .item-header:hover .item-actions {
-    opacity: 1;
+    opacity: 1; /* Show on hover */
 }
 
 .action-btn {
-    width: 28px;
+    width: 28px; /* Fixed size */
     height: 28px;
-    padding: 0;
+    padding: 0; /* Remove padding */
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: transparent;
-    border: none;
+    background-color: transparent; /* No background */
+    border: none; /* No border */
     border-radius: var(--bs-border-radius-sm);
-    color: var(--bs-secondary-color);
+    color: var(--bs-secondary-color); /* Default icon color */
 }
 
 /* Enhance general hover effect */
@@ -171,22 +176,16 @@
     background-color: var(--bs-secondary-bg); /* Use a more distinct background */
 }
 
-/* Ensure add button uses default secondary color */
-.action-btn.add-btn {
-    color: var(--bs-secondary-color);
-}
-
 /* Style the chatbot button */
 .action-btn.chatbot-btn {
-    background-color: var(--bs-primary);
-    color: white;
+    background-color: var(--bs-primary); /* Primary color background */
+    color: white; /* White icon */
 }
 
 /* Correct chatbot hover effect */
 .action-btn.chatbot-btn:hover {
     background-color: var(--bs-primary); /* Keep base color */
     filter: brightness(90%); /* Slightly darken */
-    color: white; /* Ensure icon stays white */
 }
 
 /* Sidebar button group alignment */
@@ -221,8 +220,8 @@
 }
 
 .doc-nav-item {
-    margin-bottom: 0;
-    line-height: 1.1;
+    margin-bottom: 0; /* Compact list */
+    line-height: 1.1; /* Adjust line height */
 }
 
 .doc-nav-toggle {
@@ -234,40 +233,40 @@
 
 .doc-nav-indent {
     display: inline-block;
-    width: 4px;
-    color: var(--bs-secondary-color);
+    width: 4px; /* Indentation spacer */
+    color: var(--bs-secondary-color); /* Subtle color */
 }
 
 .doc-nav-link {
     display: inline-block;
     color: var(--bs-body-color);
     text-decoration: none;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Show ellipsis */
     transition: all 0.2s;
     border-radius: var(--bs-border-radius-sm);
-    max-width: 300px;
-    font-size: 0.85rem;
+    max-width: 300px; /* Limit width */
+    font-size: 0.85rem; /* Smaller font */
 }
 
 .doc-nav-link:hover {
-    background-color: var(--bs-tertiary-bg);
+    background-color: var(--bs-tertiary-bg); /* Hover background */
 }
 
 .doc-nav-link.active {
-    background-color: var(--bs-primary);
-    color: white;
+    background-color: var(--bs-primary); /* Active background */
+    color: white; /* Active text color */
 }
 
 .item-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
+    width: 28px; /* Match action buttons */
     height: 28px;
-    margin-right: 10px;
-    font-size: 1.1rem;
+    margin-right: 10px; /* Space before title */
+    font-size: 1.1rem; /* Icon size */
 }
 
 /* List type styles */
@@ -287,14 +286,14 @@
 .item-children .item-container:nth-child(n+4) .item-icon { opacity: 0.3; }
 
 #tag-filter-accordion .accordion-button.filtering {
-    background-color: rgba(var(--bs-primary-rgb), 0.2);
+    background-color: rgba(var(--bs-primary-rgb), 0.2); /* Initial state for animation */
     animation: pulse 2s infinite;
 }
 
 /* Use secondary color for pulse */
 @keyframes pulse {
     0% { background-color: rgba(var(--bs-tertiary-bg-rgb), 1); }
-    50% { background-color: rgba(var(--bs-secondary-rgb), 0.2); } /* Changed to secondary */
+    50% { background-color: rgba(var(--bs-secondary-rgb), 0.2); }
     100% { background-color: rgba(var(--bs-tertiary-bg-rgb), 1); }
 }
 
@@ -317,16 +316,18 @@
     transform: rotate(-180deg);
 }
 
+/* SimpleMDE in modal */
 .modal .CodeMirror {
-    height: 200px;
+    height: 200px; /* Fixed height for editor in modal */
 }
 
 .app-logo {
-    font-size: 2rem; 
+    font-size: 2rem;
     font-weight: bold;
-    color: #4B0082;
+    color: #4B0082; /* Indigo */
 }
 
+/* SortableJS styles */
 .sortable-ghost {
     opacity: 0.4;
     background-color: var(--bs-tertiary-bg);
@@ -337,7 +338,7 @@
 }
 
 .item-drag-handle {
-    cursor: move;
+    cursor: move; /* Indicate draggable area */
 }
 
 /* New Unified Tag Styling (inspired by shadcn/ui badges) */
@@ -359,9 +360,9 @@
 /* Style for special tags (like type::matrix) using the new base class */
 .strudol-tag.special-tag {
     background-color: var(--bs-info-bg-subtle);
-    color: var(--bs-info);
+    /* color: var(--bs-info); /* Original color */
     border: 1px solid var(--bs-info-border-subtle);
-    color: var(--bs-info-text-emphasis);
+    color: var(--bs-info-text-emphasis); /* Use emphasis color for better contrast */
 }
 
 /* Adjust filter buttons to look more like tags */
@@ -391,84 +392,84 @@
     font-size: 0.75rem;
     padding: 0.15rem 0.5rem;
     border-radius: var(--bs-border-radius-sm);
-    background-color: rgba(var(--relation-bg-rgb, 0, 0, 0), 0.1);
+    background-color: rgba(var(--relation-bg-rgb, 0, 0, 0), 0.1); /* Use CSS variables for color */
     color: rgba(var(--relation-color-rgb, 0, 0, 0), 1);
     border: 1px solid rgba(var(--relation-border-rgb, 0, 0, 0), 0.2);
     margin-right: 0.25rem;
     margin-bottom: 0.25rem;
     white-space: nowrap;
-    cursor: pointer;
+    cursor: pointer; /* Indicate clickable */
 }
 
 .relation-tag i {
-    margin-right: 0.25rem;
-    font-size: 0.7rem;
+    margin-right: 0.25rem; /* Space after icon */
+    font-size: 0.7rem; /* Smaller icon */
 }
 
 .relation-tag .relation-target {
-    font-weight: 500;
+    font-weight: 500; /* Slightly bolder target name */
 }
 
 /* Relation colors - negative values (-3 to -1) */
 .relation-negative-3 {
-    --relation-bg-rgb: 201, 48, 44;
+    --relation-bg-rgb: 201, 48, 44; /* Dark Red */
     --relation-color-rgb: 201, 48, 44;
     --relation-border-rgb: 201, 48, 44;
 }
 
 .relation-negative-2 {
-    --relation-bg-rgb: 225, 82, 77;
+    --relation-bg-rgb: 225, 82, 77; /* Medium Red */
     --relation-color-rgb: 225, 82, 77;
     --relation-border-rgb: 225, 82, 77;
 }
 
 .relation-negative-1 {
-    --relation-bg-rgb: 242, 139, 139;
+    --relation-bg-rgb: 242, 139, 139; /* Light Red */
     --relation-color-rgb: 242, 139, 139;
     --relation-border-rgb: 242, 139, 139;
 }
 
 /* Relation colors - neutral (0) */
 .relation-neutral {
-    --relation-bg-rgb: 128, 128, 128;
+    --relation-bg-rgb: 128, 128, 128; /* Gray */
     --relation-color-rgb: 128, 128, 128;
     --relation-border-rgb: 128, 128, 128;
 }
 
 /* Relation colors - positive values (+1 to +3) */
 .relation-positive-1 {
-    --relation-bg-rgb: 92, 184, 92;
+    --relation-bg-rgb: 92, 184, 92; /* Light Green */
     --relation-color-rgb: 92, 184, 92;
     --relation-border-rgb: 92, 184, 92;
 }
 
 .relation-positive-2 {
-    --relation-bg-rgb: 57, 132, 57;
+    --relation-bg-rgb: 57, 132, 57; /* Medium Green */
     --relation-color-rgb: 57, 132, 57;
     --relation-border-rgb: 57, 132, 57;
 }
 
 .relation-positive-3 {
-    --relation-bg-rgb: 46, 112, 49;
+    --relation-bg-rgb: 46, 112, 49; /* Dark Green */
     --relation-color-rgb: 46, 112, 49;
     --relation-border-rgb: 46, 112, 49;
 }
 
 /* Relation colors - blue scale (1 to 3) */
 .relation-blue-1 {
-    --relation-bg-rgb: 59, 139, 178;
+    --relation-bg-rgb: 59, 139, 178; /* Light Blue */
     --relation-color-rgb: 59, 139, 178;
     --relation-border-rgb: 59, 139, 178;
 }
 
 .relation-blue-2 {
-    --relation-bg-rgb: 45, 109, 156;
+    --relation-bg-rgb: 45, 109, 156; /* Medium Blue */
     --relation-color-rgb: 45, 109, 156;
     --relation-border-rgb: 45, 109, 156;
 }
 
 .relation-blue-3 {
-    --relation-bg-rgb: 19, 63, 110;
+    --relation-bg-rgb: 19, 63, 110; /* Dark Blue */
     --relation-color-rgb: 19, 63, 110;
     --relation-border-rgb: 19, 63, 110;
 }
@@ -484,13 +485,13 @@
 .tabulator {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    width: 100%;
+    width: 100%; /* Ensure table takes full width */
 }
 
 .table-toolbar {
     margin: 1rem 0;
     display: flex;
-    gap: 0.5rem;
+    gap: 0.5rem; /* Space between toolbar buttons */
 }
 
 /* Relations sections */
@@ -509,7 +510,7 @@
 .relation-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.3rem;
+    gap: 0.3rem; /* Space between relation tags */
 }
 
 /* Matrix editor styling */
@@ -539,7 +540,7 @@
 
 .matrix-action-buttons {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end; /* Align buttons to the right */
     margin-top: 1rem;
 }
 
@@ -552,15 +553,15 @@
     background: rgba(0, 0, 0, 0.8);
     color: white;
     border-radius: 4px;
-    pointer-events: none;
-    z-index: 1100;
-    opacity: 0;
-    transition: opacity 0.2s;
+    pointer-events: none; /* Prevent tooltip from interfering with mouse events */
+    z-index: 1100; /* Ensure tooltip is above other elements */
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.2s; /* Fade effect */
 }
 
 .visualization-container {
     margin-bottom: 1.5rem;
-    overflow-x: auto;
+    overflow-x: auto; /* Allow horizontal scrolling if needed */
 }
 
 /* Heatmap specific styles */
@@ -570,7 +571,7 @@
 }
 
 .heatmap-cell:hover rect {
-    opacity: 0.8;
+    opacity: 0.8; /* Highlight on hover */
 }
 
 /* Sankey diagram specific styles */
@@ -580,7 +581,7 @@
 }
 
 .sankey-node:hover rect {
-    opacity: 0.8;
+    opacity: 0.8; /* Highlight node on hover */
 }
 
 .sankey-link {
@@ -589,7 +590,7 @@
 }
 
 .sankey-link:hover {
-    opacity: 0.8;
+    opacity: 0.8; /* Highlight link on hover */
 }
 
 /* Ensure heatmap has horizontal scrolling */
@@ -618,9 +619,9 @@
 }
 
 #chat-messages {
-    height: 600px;
-    overflow-y: auto;
-    padding: 2px;
+    height: 600px; /* Fixed height for chat area */
+    overflow-y: auto; /* Enable scrolling */
+    padding: 2px; /* Small padding */
     border: 1px solid var(--bs-border-color);
     border-radius: var(--bs-border-radius);
     background-color: var(--bs-body-bg);
@@ -648,16 +649,17 @@
 .compact-relation-tag {
     display: inline-flex;
     align-items: center;
-    font-size: 0.7rem;
-    padding: 0.1rem 0.3rem;
+    font-size: 0.7rem; /* Smaller font */
+    padding: 0.1rem 0.3rem; /* Tighter padding */
     border-radius: var(--bs-border-radius-sm);
     background-color: rgba(var(--relation-bg-rgb, 0, 0, 0), 0.1);
     color: rgba(var(--relation-color-rgb, 0, 0, 0), 1);
     border: 1px solid rgba(var(--relation-border-rgb, 0, 0, 0), 0.2);
-    margin-right: 0.15rem;
+    margin-right: 0.15rem; /* Less margin */
     white-space: nowrap;
 }
 
+/* JSON preview styling */
 .json-item-preview {
     background-color: var(--bs-body-bg);
     border: 1px solid var(--bs-border-color);
@@ -665,4 +667,47 @@
 
 .json-subitem {
     background-color: var(--bs-body-bg);
+}
+
+/* Custom toast styles */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1100; /* Ensure toasts are on top */
+}
+
+.custom-toast {
+    background-color: transparent; /* Remove default background */
+    border: none; /* Remove default border */
+    box-shadow: none; /* Remove default shadow */
+}
+
+.custom-toast .toast-header {
+    display: none; /* Hide header */
+}
+
+.custom-toast .toast-body {
+    padding: 1rem 1.5rem; /* Custom padding */
+    border-radius: 0.5rem; /* Rounded corners */
+    color: white; /* White text */
+    font-size: 0.9rem; /* Slightly smaller font */
+}
+
+/* Toast type colors */
+.custom-toast.success .toast-body {
+    background-color: #28a745; /* Green */
+}
+
+.custom-toast.warning .toast-body {
+    background-color: #ffc107; /* Yellow */
+}
+
+.custom-toast.error .toast-body {
+    background-color: #dc3545; /* Red */
+}
+
+.custom-toast.info .toast-body {
+    background-color: #17a2b8; /* Blue */
 }

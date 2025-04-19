@@ -1,0 +1,107 @@
+/*
+ * StruDoL - Structured Domain Language
+ * Chatbot component styles
+ */
+
+#chatbot-panel {
+    width: 570px; /* Width of the chatbot panel */
+}
+
+#chat-messages {
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    padding: 1rem;
+    height: 600px;
+    overflow-y: auto;
+    background-color: var(--bs-body-bg);
+}
+
+#chat-messages .alert {
+    margin-bottom: 0.5rem;
+    padding: 0.75rem;
+}
+
+#chat-messages .alert:last-child {
+    margin-bottom: 0;
+}
+
+#chat-messages .alert-primary {
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+    border-color: rgba(var(--bs-primary-rgb), 0.2);
+    color: var(--bs-primary);
+}
+
+#chat-messages .alert-secondary {
+    background-color: rgba(var(--bs-secondary-rgb), 0.1);
+    border-color: rgba(var(--bs-secondary-rgb), 0.2);
+    color: var(--bs-secondary);
+}
+
+#chat-input-container {
+    margin-top: 1rem;
+}
+
+#chat-input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#chat-send-btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#chat-loading {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: var(--bs-border-radius);
+    background-color: rgba(var(--bs-primary-rgb), 0.05);
+}
+
+/* JSON item preview in chat */
+.json-item-preview {
+    background-color: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.json-item-header {
+    border-bottom: 1px solid var(--bs-border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.json-item-content {
+    margin-bottom: 1rem;
+}
+
+.json-item-subitems {
+    margin-top: 1rem;
+}
+
+.json-subitem {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+}
+
+.json-subitem-content {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Chat context info */
+#chat-context-info {
+    padding: 0.5rem;
+    background-color: var(--bs-tertiary-bg);
+    border-radius: var(--bs-border-radius);
+    margin-bottom: 1rem;
+}
+
+#current-item-title {
+    font-weight: 500;
+    color: var(--bs-primary);
+}

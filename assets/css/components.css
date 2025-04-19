@@ -1,0 +1,11 @@
+/*
+ * StruDoL - Structured Domain Language
+ * Component styles imports
+ */
+
+/* Import component-specific styles */
+@import 'components/item.css';
+@import 'components/sidebar.css';
+@import 'components/matrix.css';
+@import 'components/chatbot.css';
+@import 'components/modals.css';

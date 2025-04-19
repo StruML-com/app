@@ -1,0 +1,8 @@
+
+
+## 💵 funding
+
+### Definition 
+
+
+

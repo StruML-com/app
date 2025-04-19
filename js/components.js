@@ -74,23 +74,17 @@ window.StruMLApp.Components = (() => {
 
     // Empty State component for when no items are present
     const EmptyState = React.memo(({ isFiltered, onAddItem }) => {
-        return (
-            <div className="text-center py-5">
-                <p className="lead">
-                    {isFiltered 
-                        ? 'No items found with the selected tags.' 
-                        : 'No items yet. Create your first item to get started.'}
-                </p>
-                {!isFiltered && (
-                    <button 
-                        className="btn btn-primary"
-                        onClick={onAddItem}
-                    >
-                        <i className="bi bi-plus-circle me-2"></i> Add First Item
-                    </button>
-                )}
-            </div>
-        );
+        // Show welcome screen when there are no items
+        React.useEffect(() => {
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const documentContent = document.getElementById('document-content');
+            if (welcomeScreen && documentContent) {
+                welcomeScreen.classList.remove('d-none');
+                documentContent.classList.add('d-none');
+            }
+        }, []);
+
+        return null;
     });
 
     // Item component - renders a single item with all its properties
@@ -520,9 +514,16 @@ window.StruMLApp.Components = (() => {
                 if (sourceItem.id === item.id) return; // Don't link item to itself
                 const relations = Utils.getRelationsFromTags(sourceItem.tags);
                 relations.forEach(rel => {
-                    if (rel.target === item.title) {
+                    // Match both direct title matches and is>> relations
+                    if (rel.target === item.title || 
+                        (rel.relation === 'is' && rel.target === item.title)) {
                         // Found an incoming relation
-                        incoming.push({ ...rel, sourceTitle: sourceItem.title, sourceId: sourceItem.id }); // Add source title and ID
+                        incoming.push({ 
+                            ...rel, 
+                            sourceTitle: sourceItem.title, 
+                            sourceId: sourceItem.id,
+                            relation: rel.relation === 'is' ? 'is' : rel.relation
+                        });
                     }
                 });
             });
@@ -567,8 +568,8 @@ window.StruMLApp.Components = (() => {
         const { showItemDetails } = context;
 
         return (
-            <div className={`item-container ${listClass} ${hasChildren ? 'has-children' : ''}`} id={item.id} data-id={item.id}>
-                <div className={`item-header ${isSelected ? 'bg-light' : ''}`} id={`${encodeURIComponent(item.title.replace(/\s+/g, '-').replace(/[^\p{L}\p{N}\s-]/gu, '').toLowerCase())}`}>
+            <div className={`item-container ${listClass} ${hasChildren ? 'has-children' : ''} ${isSelected ? 'active' : ''}`} id={item.id} data-id={item.id}>
+                <div className="item-header" id={`${encodeURIComponent(item.title.replace(/\s+/g, '-').replace(/[^\p{L}\p{N}\s-]/gu, '').toLowerCase())}`}>
                     <div className="item-title-area">
                         <button 
                             className="btn btn-sm btn-link p-0 me-2"
@@ -649,14 +650,13 @@ window.StruMLApp.Components = (() => {
                         
                         {/* Restore conditional rendering with explicit boolean check */}
                         {showItemDetails === true && (
-                            <div className="item-details-section mt-3 border-top pt-3">
+                            <div className="item-details-section mt-2 pt-2">
                                 {/* Tags Display Area */}
-                                {renderedTags && renderedTags.length > 0 && (
-                                    <div className="item-tags-display mb-3">
-                                        <h6><i className="bi bi-tags me-1"></i>Tags</h6>
-                                        {renderedTags}
-                                    </div>
-                                )}
+                        {renderedTags && renderedTags.length > 0 && (
+                            <div className="d-flex align-items-center item-tags-display">
+                                {renderedTags}
+                            </div>
+                        )}
 
                                 {/* Relations Section */}
                                 {(outgoingRelations.length > 0 || incomingRelations.length > 0) && (

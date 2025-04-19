@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+ <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StruML - Structured Modeling Language</title>
+    <link rel="icon" href="assets/img/logo.ico" type="image/x-icon">
+    
+    <!-- Core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://unpkg.com/@yaireo/tagify@4.17.8/dist/tagify.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/dragsort/dist/dragsort.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/dragsort/dist/dragsort.css">
+    <link href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/tabulator-tables@5.5.0/dist/css/tabulator.min.css" rel="stylesheet">
+
+    <!-- D3.js and Sankey libraries -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+
+    <script src="config.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+    </style>
+</head>
+<body>
+    <nav id="main-header" class="main-header navbar navbar-expand-lg navbar-light py-2 px-3">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center">
+                <button id="expand-sidebar-btn" class="btn btn-sm me-2 d-none" title="Show sidebar">
+                    <i class="bi bi-layout-sidebar-inset"></i>
+                </button>
+                <span id="document-title" class="h5 mb-0" tabindex="-1">Untitled Document</span>
+            </div>
+            <div class="d-flex gap-2 align-items-center">
+                <div class="dropdown">
+                    <button 
+                        class="btn btn-outline-primary btn-sm dropdown-toggle" 
+                        type="button" 
+                        id="export-dropdown" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="Provides options to export the document in various formats"
+                    >
+                        <i class="bi bi-download me-1"></i> Export
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="export-dropdown">
+                        <li>
+                            <a class="dropdown-item" id="export-json-btn" href="#"><i class="bi bi-filetype-json me-2"></i>Export as JSON</a>
+                            <small class="text-muted d-block px-3">Exports the full structure in StruDoL's native strudol.json format (used for saving/loading).</small>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" id="export-md-btn" href="#"><i class="bi bi-filetype-md me-2"></i>Export as Markdown</a>
+                            <small class="text-muted d-block px-3">Exports content as a hierarchical Markdown file.</small>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" id="export-html-btn" href="#"><i class="bi bi-filetype-doc me-2"></i>Export as DOC</a>
+                            <small class="text-muted d-block px-3">Generates an HTML file; copy content for use in text editors.</small>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" id="export-csv-btn" href="#"><i class="bi bi-filetype-csv me-2"></i>Export as CSV</a>
+                            <small class="text-muted d-block px-3">Exports data in Comma Separated Values format, suitable for spreadsheets.</small>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <button 
+                        id="import-btn" 
+                        class="btn btn-outline-secondary btn-sm"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="Import a JSON file to load a document"
+                    >
+                        <i class="bi bi-upload me-1"></i> Import
+                    </button>
+                </div>
+                <div>
+                    <button 
+                        id="clear-btn" 
+                        class="btn btn-outline-danger btn-sm"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="Clear the current document and all its items"
+                    >
+                        <i class="bi bi-trash me-1"></i> Clear
+                    </button>
+                </div>
+                <!-- Toggle button moved to sidebar -->
+            </div>
+        </div>
+    </nav>
+
+    <div id="app-container">
+        <div id="sidebar" class="p-3">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <img src="assets/img/logo.svg" width="120"/>
+                <button 
+                    type="button" 
+                    class="btn-close" 
+                    id="collapse-sidebar-btn" 
+                    aria-label="Close"
+                    data-bs-toggle="tooltip" 
+                    data-bs-placement="top" 
+                    title="Collapse the sidebar"
+                ></button>
+            </div>
+            <div class="sidebar-content p-0">
+                <ul class="nav nav-tabs mb-3" id="sidebar-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="document-tab" data-bs-toggle="tab" data-bs-target="#document-tab-pane" type="button" role="tab" aria-controls="document-tab-pane" aria-selected="true">Document</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="guide-tab" data-bs-toggle="tab" data-bs-target="#guide-tab-pane" type="button" role="tab" aria-controls="guide-tab-pane" aria-selected="false">Guide</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="sidebar-tab-content">
+                    <div class="tab-pane fade show active" id="document-tab-pane" role="tabpanel" aria-labelledby="document-tab" tabindex="0">
+                        <!-- Moved Button Group -->
+                        <div class="d-flex justify-content-between align-items-center p-3 mb-2">
+                            <!-- Container for buttons -->
+                            <div class="d-flex align-items-center gap-1">
+                                <button 
+                                    id="collapse-all-items-btn" 
+                                    class="btn btn-sm btn-outline-secondary" 
+                                    data-collapsed="false"
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="top" 
+                                    title="Toggles the display state (collapsed/expanded) for all items"
+                                >
+                                    <i class="bi bi-arrows-collapse"></i> Collapse all
+                                </button>
+                                <button 
+                                    id="toggle-item-details-btn" 
+                                    class="btn btn-outline-secondary btn-sm"
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="top" 
+                                    title="Toggles the visibility of tags and relations within each item's content area"
+                                >
+                                    <i class="bi bi-eye-slash"></i><span class="button-text"> Hide Details</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- End Moved Button Group -->
+
+                        <div class="accordion mb-3" id="tag-filter-accordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <!-- Modified Accordion Button: Removed data-bs-toggle, added custom class -->
+                                    <button class="accordion-button collapsed custom-accordion-button" type="button" id="tag-filter-btn">
+                                        <span class="flex-grow-1"><i class="bi bi-tags me-2"></i> Filter by Tags</span>
+                                        <i class="bi bi-info-circle ms-1 me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Shows only items containing selected tags based on mode (AND/OR). Click tag to remove filter."></i>
+                                        <!-- Chevron icon now handles the toggle -->
+                                        <i class="bi bi-chevron-down accordion-toggle-icon" data-bs-toggle="collapse" data-bs-target="#tag-filter-collapse"></i>
+                                    </button>
+                                </h2>
+                                <!-- Removed 'show' class to make it collapsed by default -->
+                                <div id="tag-filter-collapse" class="accordion-collapse collapse" data-bs-parent="#tag-filter-accordion">
+                                    <div class="accordion-body">
+                                        <div class="mb-2">
+                                            <div class="d-flex flex-column mb-2">
+                                                <div class="mb-2">
+                                                    <select id="tag-filter-mode" class="form-select form-select-sm">
+                                                        <option value="OR">OR - Match any tag</option>
+                                                        <option value="AND">AND - Match all tags</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" role="switch" id="show-subitems-checkbox" checked>
+                                                    <label class="form-check-label" for="show-subitems-checkbox">Show subitems</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tag-filters" class="d-flex flex-wrap gap-1 mb-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                            <div class="d-flex justify-content-between align-items-center p-3 mb-2">
+                                <span class="fw-bold"><h6 class="fs-6 mb-0">Document Navigation</h6></span>
+                                <!-- Button group moved above -->
+                            </div>
+                            <div id="document-navigation" class="doc-nav"></div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="guide-tab-pane" role="tabpanel" aria-labelledby="guide-tab" tabindex="0">
+                        <div id="guide-content" class="p-2">
+                            <div class="text-center">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2">Loading guide...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <button 
+                        id="add-top-item-btn" 
+                        class="btn btn-outline-primary"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="Add a new top-level item to the document structure"
+                    >
+                        <i class="bi bi-plus-circle me-2"></i> Add Item
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="main-content">
+            <div id="welcome-screen">
+                <div class="text-center py-5">
+<!--
+                    <h1 class="display-5 mb-3">StruML</h1>
+                    <p class="lead mb-5">Create, organize, and structure your domain knowledge</p>
+                -->
+                <section class="container py-5 text-center">
+                    <h1 class="display-5 fw-bold mb-5">What would you like to do?</h1>
+                    <div class="row g-4 justify-content-center">
+                
+                      <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm border-0">
+                          <div class="card-body">
+                            <h5 class="card-title mb-3">Keep working on my document</h5>
+                            <p class="card-text">Click the <strong>"import document"</strong> button below and import your file (with .json extension).</p>
+                          </div>
+                        </div>
+                      </div>
+                
+                      <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm border-0">
+                          <div class="card-body">
+                            <h5 class="card-title mb-3">Use a template to create a new document</h5>
+                            <p class="card-text">Download <a href="/bm/template.struml.json" download target="_blank">empty document template</a> to your computer, then click the <strong>"import document"</strong> button below and import the downloaded template (template.struml.json).</p>
+                          </div>
+                        </div>
+                      </div>
+                
+                      <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm border-0">
+                          <div class="card-body">
+                            <h5 class="card-title mb-3">Explore with a sample document</h5>
+                            <p class="card-text">Discover the tool using a <a href="/bm/sample.struml.json" download target="_blank">sample document template</a> to your computer, then click the <strong>"import document"</strong> button below and import the downloaded document (sample.struml.json)</p>
+                          </div>
+                        </div>
+                      </div>
+                
+                    </div>
+                  </section>
+                    <div class="dropzone border border-2 border-dashed p-5 rounded mb-4 bg-body-tertiary" id="file-dropzone">
+                        <i class="bi bi-cloud-upload display-4 mb-2"></i>
+                        <p>Drag and drop your JSON file here or click to select</p>
+                        <button 
+                            class="btn btn-primary mt-2"
+                            data-bs-toggle="tooltip" 
+                            data-bs-placement="top" 
+                            title="Select a JSON file to import"
+                        >
+                            import document
+                        </button>
+                    </div>
+                    <input type="file" id="file-input" accept=".json" class="d-none">
+<!--
+                    <p><a href="bm/ghosthunters.struml.json" target="_blank">Download sample business model</a></p>
+                    <button 
+                        id="create-new-btn" 
+                        class="btn btn-primary"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="Start a new empty document"
+                    >
+                        Create New Document
+                    </button>
+                -->
+                </div>
+            </div>
+            
+            <div id="document-content" class="d-none"></div>
+        </div>
+    </div>
+    
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="chatbot-panel" aria-labelledby="chatbotPanelLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="chatbotPanelLabel">AI Assistant</h5>
+            <button 
+                type="button" 
+                class="btn-close" 
+                data-bs-dismiss="offcanvas" 
+                id="close-chatbot-btn" 
+                aria-label="Close"
+                data-bs-toggle="tooltip" 
+                data-bs-placement="top" 
+                title="Close the AI assistant panel"
+            ></button>
+        </div>
+        <div class="offcanvas-body">
+            <div id="chat-context-info" class="mb-3">
+                <p class="mb-1 fw-bold">Current section: <span id="current-item-title">None selected</span></p>
+            </div>
+            <div id="chat-messages" class="border rounded mb-3 overflow-auto" style="height: 600px;">
+            </div>
+            <div id="chat-input-container">
+                <div class="mb-3">
+                    <select class="form-select" id="chat-query-type">
+                        <option value="custom request" selected>Custom Request</option>
+                        <option value="create complete item">Create Complete Item</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3" id="custom-question-container">
+                    <input type="text" id="chat-input" class="form-control" placeholder="Type your question...">
+                    <button id="chat-send-btn" class="btn btn-primary">
+                        <i class="bi bi-send"></i>
+                    </button>
+                </div>
+                <div class="text-center mb-3 d-none" id="preset-buttons-container">
+                    <button id="execute-preset-btn" class="btn btn-primary">
+                        Execute Selected Query
+                    </button>
+                </div>
+            </div>
+            
+            <div id="chat-loading" class="d-none">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="spinner-border text-primary spinner-border-sm me-2" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <span>This might take a moment...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="info-panel" aria-labelledby="infoPanelLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="info-panel-title">Information</h5>
+            <button 
+                type="button" 
+                class="btn-close" 
+                data-bs-dismiss="offcanvas" 
+                id="close-info-btn" 
+                aria-label="Close"
+                data-bs-toggle="tooltip" 
+                data-bs-placement="top" 
+                title="Close the information panel"
+            ></button>
+        </div>
+        <div class="offcanvas-body">
+            <div id="related-items" class="related-items mb-4">
+                <h5>Related Items</h5>
+                <div id="related-items-list" class="list-group"></div>
+            </div>
+            <div id="info-panel-content"></div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="item-editor-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="item-editor-title">Edit Item</h5>
+                    <button 
+                        type="button" 
+                        class="btn-close" 
+                        data-bs-dismiss="modal" 
+                        aria-label="Close"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="Close the item editor without saving changes"
+                    ></button>
+                </div>
+                <div class="modal-body">
+                    <form id="item-editor-form">
+                        <div class="mb-3">
+                            <label for="item-title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="item-title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="item-tags" class="form-label">Tags</label>
+                            <button type="button" class="btn btn-sm btn-link p-0 " id="tags-help-btn">
+                                <i class="bi bi-info-circle"></i>
+                            </button>
+                            <div class="form-text mt-1 d-none" id="tags-help-text">
+                                Use comma-separated tags. Special tag format: <code>type::value</code> is used for items classification. To specify a list type, add a tag with format <code>type::priority</code>, <code>type::weight</code>, <code>type::sequence</code>, etc...
+                            </div>
+                            <input type="text" class="form-control" id="item-tags">
+                        </div>
+                        <div class="mb-3">
+                            <label for="item-content" class="form-label">Content</label>
+                            <button type="button" class="btn btn-sm btn-link p-0 " id="content-help-btn">
+                                <i class="bi bi-info-circle"></i>
+                            </button>
+                            <div class="form-text mt-1 d-none" id="content-help-text">
+                                Click below to see the content. Use https://postimages.org/ for image hosting (recommended).
+                            </div>
+                            <textarea class="form-control" id="item-content" rows="5"></textarea>
+                        </div>
+                        <div class="mb-3" id="relations-editor-container">
+                            <label class="form-label">Relations</label>
+                            <button type="button" class="btn btn-sm btn-link p-0" id="relation-types-help-btn">
+                                <i class="bi bi-info-circle"></i>
+                            </button>
+                            <div class="form-text d-none" id="relation-types-help-text">
+                                <small>Common relation types: extremely-high, very-high, high, slightly-high, neutral, slightly-low, low, very-low, extremely-low, depends, related</small>
+                            </div>
+                            <div id="relations-editor" class="border rounded p-3">
+                                <div id="relations-list" class="mb-3"></div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input type="text" id="relation-type" class="form-control mb-2" placeholder="Relation type (e.g. depends, high)">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="relation-target" class="form-control mb-2" placeholder="Target item title">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button 
+                                            type="button" 
+                                            id="add-relation-btn" 
+                                            class="btn btn-primary w-100"
+                                            data-bs-toggle="tooltip" 
+                                            data-bs-placement="top" 
+                                            title="Add a new relation between items"
+                                        >
+                                            <i class="bi bi-plus-lg"></i> Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="item-id">
+                        <input type="hidden" id="parent-id">
+                        <input type="hidden" id="original-title">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button 
+                        type="button" 
+                        class="btn btn-secondary" 
+                        data-bs-dismiss="modal"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="Close the editor without saving changes"
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        type="button" 
+                        class="btn btn-danger me-auto" 
+                        id="delete-item-btn"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="Delete this item and all its child items"
+                    >
+                        Delete
+                    </button>
+                    <button 
+                        type="button" 
+                        class="btn btn-primary" 
+                        id="save-item-btn"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="Save changes to this item"
+                    >
+                        Save Changes
+                    </button>
+                    <button 
+                        type="button" 
+                        class="btn btn-outline-primary" 
+                        id="save-download-btn"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="Save changes and download this item as a JSON file"
+                    >
+                        Save & Download
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="update-relations-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Relations</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>The item title has changed. Would you like to update all references to this item in relation tags?</p>
+                    <p><strong>Old title:</strong> <span id="old-title-ref"></span></p>
+                    <p><strong>New title:</strong> <span id="new-title-ref"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button 
+                        type="button" 
+                        class="btn btn-secondary" 
+                        id="skip-update-btn"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="Close the dialog and keep existing relation references"
+                    >
+                        No, Keep Old References
+                    </button>
+                    <button type="button" class="btn btn-primary" id="confirm-update-btn">Yes, Update References</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="matrix-editor-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Matrix Editor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="form-label">Source Item (Rows)</label>
+                                <select id="source-item-select" class="form-select">
+                                    <option value="">Select item for rows...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Target Item (Columns)</label>
+                                <select id="target-item-select" class="form-select">
+                                    <option value="">Select item for columns...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Cell Values (semicolon-separated)</label>
+                                <input type="text" id="matrix-cell-values" class="form-control" 
+                                       placeholder="e.g. extremely-high;very-high;high;slightly-high;neutral">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label">&nbsp;</label>
+                                <button 
+                                    id="load-matrix-btn" 
+                                    class="btn btn-primary w-100"
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="top" 
+                                    title="Load the matrix with selected source and target items"
+                                >
+                                    Load
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="matrix-editor" id="matrix-container">
+                        <div class="alert alert-info">Select source and target items to build the matrix</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button 
+                        type="button" 
+                        class="btn btn-secondary" 
+                        data-bs-dismiss="modal"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="Close the matrix editor without saving changes"
+                    >
+                        Close
+                    </button>
+                    <button 
+                        type="button" 
+                        class="btn btn-primary" 
+                        id="save-matrix-btn"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="Save changes to the matrix"
+                    >
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="delete-confirm-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this item? This will also delete all child items.</p>
+                    <p class="text-danger"><strong>This action cannot be undone.</strong></p>
+                </div>
+                <div class="modal-footer">
+                    <button 
+                        type="button" 
+                        class="btn btn-secondary" 
+                        data-bs-dismiss="modal"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="Close the confirmation dialog without deleting the item"
+                    >
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger" id="confirm-delete-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="clear-confirm-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Clear</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to clear the current document? This will remove all items.</p>
+                    <p class="text-danger"><strong>This action cannot be undone.</strong></p>
+                </div>
+                <div class="modal-footer">
+                    <button 
+                        type="button" 
+                        class="btn btn-secondary" 
+                        data-bs-dismiss="modal"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="Close the confirmation dialog without clearing the document"
+                    >
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="export-before-clear-btn">
+                        <i class="bi bi-download me-1"></i> Export as JSON
+                    </button>
+                    <button type="button" class="btn btn-danger" id="confirm-clear-btn">Clear Document</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="d3-tooltip" id="d3-tooltip"></div>
+    <div class="matrix-cell-tooltip" id="matrix-cell-tooltip" style="display: none;"></div>
+    
+    <div class="toast-container position-fixed top-0 end-0 p-3" id="toast-container">
+    </div>
+    
+    <!-- Core libraries -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.23.2/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script src="https://unpkg.com/@yaireo/tagify@4.17.8/dist/tagify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+    
+    <!-- Export libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/file-saver/dist/FileSaver.min.js"></script>
+    
+    <!-- Add UUID library implementation -->
+    <script>
+        !function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):(t="undefined"!=typeof globalThis?globalThis:t||self).uuidv4=e()}(this,(function(){"use strict";var t="undefined"!=typeof crypto&&crypto.getRandomValues&&crypto.getRandomValues.bind(crypto)||"undefined"!=typeof msCrypto&&"function"==typeof msCrypto.getRandomValues&&msCrypto.getRandomValues.bind(msCrypto),e=new Uint8Array(16);function o(){if(!t)throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");return t(e)}var n=/^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;function r(t){return"string"==typeof t&&n.test(t)}for(var i=[],f=0;f<256;++f)i.push((f+256).toString(16).substr(1));return function(t,e,n){var f=(t=t||{}).random||(t.rng||o)();if(f[6]=15&f[6]|64,f[8]=63&f[8]|128,e){n=n||0;for(var u=0;u<16;++u)e[n+u]=f[u];return e}return function(t){var e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:0,o=(i[t[e+0]]+i[t[e+1]]+i[t[e+2]]+i[t[e+3]]+"-"+i[t[e+4]]+i[t[e+5]]+"-"+i[t[e+6]]+i[t[e+7]]+"-"+i[t[e+8]]+i[t[e+9]]+"-"+i[t[e+10]]+i[t[e+11]]+i[t[e+12]]+i[t[e+13]]+i[t[e+14]]+i[t[e+15]]).toLowerCase();if(!r(o))throw TypeError("Stringified UUID is invalid");return o}(f)}}));
+    </script>
+
+    <!-- Initialize the global namespace -->
+    <script>window.StruMLApp = {};</script>
+
+    <!-- Load your new JS modules (Babel will process them) -->
+    <script type="text/babel" src="js/utils.js"></script>
+    <script type="text/babel" src="js/export.js"></script>
+    <script type="text/babel" src="js/state.js"></script>
+    <script type="text/babel" src="js/components.js"></script>
+    <script type="text/babel" src="js/chatbot.js"></script> <!-- Added chatbot script -->
+    <script type="text/babel" src="js/main.js"></script>
+</body>
+</html>

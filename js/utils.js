@@ -628,10 +628,18 @@ window.StruMLApp.Utils = {
             .map(relationTag => {
                 const [relation, target] = relationTag.split(">>");
                 return { 
-                    relation, 
-                    target: target.trim() 
+                    relation: relation.trim(), 
+                    target: target.trim(),
+                    fullTag: relationTag
                 };
             });
+    },
+
+    // Check if a tag is a relation tag
+    isRelationTag(tag) {
+        if (!tag) return false;
+        // Match both standard relations (relation>>target) and is relations (is>>target)
+        return tag.includes(">>") && tag.split(">>").length === 2;
     },
 
     // Add a relation to item tags

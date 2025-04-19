@@ -1,0 +1,8 @@
+
+
+## 📈 trend
+
+### Definition 
+
+
+

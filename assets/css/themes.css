@@ -1,0 +1,84 @@
+/*
+ * StruDoL - Structured Domain Language
+ * Theme variables and color definitions
+ */
+
+/* Relation colors - negative values (-3 to -1) */
+.relation-negative-3 {
+    --relation-bg-rgb: 201, 48, 44; /* Dark Red */
+    --relation-color-rgb: 201, 48, 44;
+    --relation-border-rgb: 201, 48, 44;
+}
+
+.relation-negative-2 {
+    --relation-bg-rgb: 225, 82, 77; /* Medium Red */
+    --relation-color-rgb: 225, 82, 77;
+    --relation-border-rgb: 225, 82, 77;
+}
+
+.relation-negative-1 {
+    --relation-bg-rgb: 242, 139, 139; /* Light Red */
+    --relation-color-rgb: 242, 139, 139;
+    --relation-border-rgb: 242, 139, 139;
+}
+
+/* Relation colors - neutral (0) */
+.relation-neutral {
+    --relation-bg-rgb: 128, 128, 128; /* Gray */
+    --relation-color-rgb: 128, 128, 128;
+    --relation-border-rgb: 128, 128, 128;
+}
+
+/* Relation colors - positive values (+1 to +3) */
+.relation-positive-1 {
+    --relation-bg-rgb: 92, 184, 92; /* Light Green */
+    --relation-color-rgb: 92, 184, 92;
+    --relation-border-rgb: 92, 184, 92;
+}
+
+.relation-positive-2 {
+    --relation-bg-rgb: 57, 132, 57; /* Medium Green */
+    --relation-color-rgb: 57, 132, 57;
+    --relation-border-rgb: 57, 132, 57;
+}
+
+.relation-positive-3 {
+    --relation-bg-rgb: 46, 112, 49; /* Dark Green */
+    --relation-color-rgb: 46, 112, 49;
+    --relation-border-rgb: 46, 112, 49;
+}
+
+/* Relation colors - blue scale (1 to 3) */
+.relation-blue-1 {
+    --relation-bg-rgb: 59, 139, 178; /* Light Blue */
+    --relation-color-rgb: 59, 139, 178;
+    --relation-border-rgb: 59, 139, 178;
+}
+
+.relation-blue-2 {
+    --relation-bg-rgb: 45, 109, 156; /* Medium Blue */
+    --relation-color-rgb: 45, 109, 156;
+    --relation-border-rgb: 45, 109, 156;
+}
+
+.relation-blue-3 {
+    --relation-bg-rgb: 19, 63, 110; /* Dark Blue */
+    --relation-color-rgb: 19, 63, 110;
+    --relation-border-rgb: 19, 63, 110;
+}
+
+/* List type styles */
+.list-priority .item-icon { color: var(--bs-danger); }
+.list-weight .item-icon { color: var(--bs-success); }
+.list-sequence .item-icon { color: var(--bs-primary); }
+.list-steps .item-icon { color: var(--bs-info); }
+.list-temporality .item-icon { color: var(--bs-purple); }
+.list-range .item-icon { color: var(--bs-orange); }
+.list-category .item-icon { color: var(--bs-warning); }
+.list-matrix .item-icon { color: var(--bs-teal); }
+
+/* Item opacity by position */
+.item-children .item-container:nth-child(1) .item-icon { opacity: 1; }
+.item-children .item-container:nth-child(2) .item-icon { opacity: 0.7; }
+.item-children .item-container:nth-child(3) .item-icon { opacity: 0.5; }
+.item-children .item-container:nth-child(n+4) .item-icon { opacity: 0.3; }

@@ -1,0 +1,145 @@
+/*
+ * StruDoL - Structured Domain Language
+ * Sidebar component styles
+ */
+
+#sidebar {
+    position: fixed;
+    height: 100vh;
+    width: 380px;
+    top: 0;
+    left: 0;
+    z-index: 1030;
+    overflow-y: auto;
+    background-color: var(--bs-body-bg);
+    border-right: 1px solid var(--bs-border-color);
+    transition: transform 0.3s ease;
+}
+
+#sidebar.collapsed {
+    transform: translateX(-380px);
+}
+
+#main-content {
+    flex: 1;
+    transition: margin-left 0.3s;
+    padding: 20px;
+    margin-left: 400px; /* Adjusted for sidebar width + gap */
+    padding-top: 65px; /* Space for header */
+    max-width: calc(90vw - 570px); /* Adjust based on sidebar and potential right panel */
+    margin-right: auto; /* Center content */
+}
+
+#main-content.expanded {
+    margin-left: 0;
+    max-width: 90vw; /* Expand to take more width */
+}
+
+.main-header {
+    /* position: fixed; /* Fixed header */
+    top: 0;
+    right: 0;
+    /* left: 380px; /* Align with sidebar */
+    z-index: 1020; /* Below sidebar */
+    transition: left 0.3s ease;
+    background-color: var(--bs-body-bg); /* Match background */
+    border-bottom: 1px solid var(--bs-border-color); /* Subtle separator */
+}
+
+.main-header.expanded {
+    left: 0; /* Expand header when sidebar is collapsed */
+}
+
+/* Sidebar button group alignment */
+.sidebar-content .d-flex.align-items-center.gap-1 > .bi-info-circle {
+    vertical-align: middle; /* Align info icon with buttons */
+    margin-left: -4px; /* Adjust spacing slightly */
+    margin-right: 4px;
+}
+
+/* Ensure info icon next to View/Hide Details is aligned */
+.sidebar-content .d-flex.align-items-center.gap-1 > .bi-info-circle:last-of-type {
+     vertical-align: middle;
+}
+
+/* Guide Tab Styling */
+#guide-tab-pane {
+    height: calc(100vh - 250px); /* Adjust height based on other sidebar elements */
+    overflow-y: auto; /* Ensure vertical scroll */
+}
+#guide-content {
+    height: auto; /* Allow content to determine height */
+}
+#guide-content img {
+    max-width: 100%; /* Ensure images don't overflow */
+    height: auto;
+}
+
+.doc-nav {
+    list-style: none;
+    padding-left: 0;
+}
+
+.doc-nav-item {
+    margin-bottom: 0; /* Compact list */
+    line-height: 1.1; /* Adjust line height */
+}
+
+.doc-nav-toggle {
+    cursor: pointer;
+    display: inline-block;
+    width: 16px;
+    text-align: center;
+}
+
+.doc-nav-indent {
+    display: inline-block;
+    width: 4px; /* Indentation spacer */
+    color: var(--bs-secondary-color); /* Subtle color */
+}
+
+.doc-nav-link {
+    display: inline-block;
+    color: var(--bs-body-color);
+    text-decoration: none;
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Show ellipsis */
+    transition: all 0.2s;
+    border-radius: var(--bs-border-radius-sm);
+    max-width: 300px; /* Limit width */
+    font-size: 0.85rem; /* Smaller font */
+}
+
+.doc-nav-link:hover {
+    background-color: var(--bs-tertiary-bg); /* Hover background */
+}
+
+.doc-nav-link.active {
+    background-color: var(--bs-primary); /* Active background */
+    color: white; /* Active text color */
+}
+
+#tag-filter-accordion .accordion-button.filtering {
+    background-color: rgba(var(--bs-primary-rgb), 0.2); /* Initial state for animation */
+    animation: pulse 2s infinite;
+}
+
+/* Adjust filter buttons to look more like tags */
+#tag-filters .btn {
+    font-size: 0.75rem;
+    padding: 0.2em 0.5em;
+}
+#tag-filters .btn.btn-secondary { /* Active filter tag */
+     background-color: var(--bs-secondary);
+     color: var(--bs-white);
+     border-color: var(--bs-secondary);
+}
+#tag-filters .btn.btn-outline-secondary { /* Inactive filter tag */
+    background-color: var(--bs-secondary-bg);
+    color: var(--bs-secondary-color);
+    border-color: var(--bs-border-color-translucent);
+}
+#tag-filters .btn.btn-outline-secondary:hover {
+    background-color: var(--bs-tertiary-bg);
+}

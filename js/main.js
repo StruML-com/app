@@ -546,6 +546,8 @@ window.StruMLApp.Main = (() => {
             if (success) {
                 document.getElementById('welcome-screen')?.classList.add('d-none');
                 document.getElementById('document-content')?.classList.remove('d-none');
+                document.getElementById('sidebar')?.classList.remove('collapsed');
+                document.getElementById('main-content')?.classList.remove('expanded');
 
                 setTimeout(() => {
                     window.app.updateDocumentNavigation();
@@ -562,6 +564,8 @@ window.StruMLApp.Main = (() => {
             window.initialFilename = filename;
             document.getElementById('welcome-screen')?.classList.add('d-none');
             document.getElementById('document-content')?.classList.remove('d-none');
+            document.getElementById('sidebar')?.classList.remove('collapsed');
+            document.getElementById('main-content')?.classList.remove('expanded');
 
             return true;
         }
@@ -570,6 +574,10 @@ window.StruMLApp.Main = (() => {
     // Render the application
     const rootElement = document.getElementById('document-content');
     if (rootElement) {
+        // Hide sidebar initially
+        document.getElementById('sidebar')?.classList.add('collapsed');
+        document.getElementById('main-content')?.classList.add('expanded');
+        
         const root = ReactDOM.createRoot(rootElement);
         root.render(<AppWithContext />);
     } else {

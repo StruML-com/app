@@ -1,0 +1,8 @@
+
+
+## 👥 partner
+
+### Definition 
+
+
+
