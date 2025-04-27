@@ -1,8 +1,0 @@
-
-
-## 💵 funding
-
-### Definition 
-
-
-

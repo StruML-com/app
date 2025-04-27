@@ -1,987 +1,968 @@
-// Assign Components object to the global namespace
-window.StruMLApp = window.StruMLApp || {};
+/**
+ * StruML React Components
+ */
 
-window.StruMLApp.Components = (() => {
-    // Access React, Utils, State from global scope
-    const React = window.React;
-    const Utils = window.StruMLApp.Utils;
-    const { DataContext } = window.StruMLApp.State;
-    const RELATION_TYPES = window.StruMLApp.Constants?.RELATION_TYPES || {}; // Access constants
-
-    // Matrix Visualization component - improved with memoization
-    const MatrixVisualization = React.memo(({ item, items }) => {
-        const [activeTab, setActiveTab] = React.useState('heatmap');
-        const context = React.useContext(DataContext);
-        
-        // Refs for the visualization containers
-        const heatmapRef = React.useRef(null);
-        const sankeyRef = React.useRef(null);
-        
-        // Effect to create visualizations when component mounts or item changes
-        React.useEffect(() => {
-            if (activeTab === 'heatmap' && heatmapRef.current) {
-                Utils.createHeatmap(heatmapRef.current, item, items);
-            } else if (activeTab === 'sankey' && sankeyRef.current) {
-                Utils.createSankeyDiagram(sankeyRef.current, item, items);
-            }
-        }, [item, items, activeTab]);
-        
-        // Event handlers
-        const handleTabChange = tab => {
-            setActiveTab(tab);
-        };
-        
-        const handleEditMatrix = () => {
-            context.openMatrixEditor(item);
-        };
-        
-        return (
-            <div className="matrix-visualization">
-                <div className="d-flex justify-content-between align-items-center matrix-visualization-title">
-                <span>Matrix Visualizations (<i class="bi bi-beaker"></i>experimental feature)</span>
-                <button 
-                    className="btn btn-primary"
-                    onClick={handleEditMatrix}
-                >
-                    <i className="bi bi-pencil me-1"></i> Edit Matrix
-                </button>
-                </div>
-                <ul className="nav nav-tabs mb-3">
-                    <li className="nav-item">
-                        <button 
-                            className={`nav-link ${activeTab === 'heatmap' ? 'active' : ''}`}
-                            onClick={() => handleTabChange('heatmap')}
-                        >
-                            <i className="bi bi-grid-3x3 me-1"></i> Heatmap
-                        </button>
-                    </li>
-                    <li className="nav-item">
-                        <button 
-                            className={`nav-link ${activeTab === 'sankey' ? 'active' : ''}`}
-                            onClick={() => handleTabChange('sankey')}
-                        >
-                            <i className="bi bi-diagram-3 me-1"></i> Sankey Diagram
-                        </button>
-                    </li>
-                </ul>
-                <div className="visualization-container">
-                    <div ref={heatmapRef} style={{ display: activeTab === 'heatmap' ? 'block' : 'none' }}></div>
-                    <div ref={sankeyRef} style={{ display: activeTab === 'sankey' ? 'block' : 'none' }}></div>
-                </div>
-            </div>
-        );
-    });
-
-    // Empty State component for when no items are present
-    const EmptyState = React.memo(({ isFiltered, onAddItem }) => {
-        // Show welcome screen when there are no items
-        React.useEffect(() => {
-            const welcomeScreen = document.getElementById('welcome-screen');
-            const documentContent = document.getElementById('document-content');
-            if (welcomeScreen && documentContent) {
-                welcomeScreen.classList.remove('d-none');
-                documentContent.classList.add('d-none');
-            }
-        }, []);
-
-        return null;
-    });
-
-    // Item component - renders a single item with all its properties
-    const Item = React.memo(({ item, depth = 0 }) => {
-        const context = React.useContext(DataContext);
-        if (!context) return <div>Loading...</div>;
-        
-        const {
-            currentItemId,
-            expandedItems,
-            toggleItemExpansion,
-            setCurrentItemId,
-            setIsInfoPanelOpen,
-            fetchMarkdownContent,
-            reorderItems,
-            addItem,
-            items // Need full items list for context
-        } = context;
-        
-        const isExpanded = expandedItems[item.id];
-        const hasChildren = React.useMemo(() => Boolean(item.items && item.items.length > 0), [item.items]);
-        const isSelected = currentItemId === item.id;
-        const isMatrixItem = React.useMemo(() => Boolean(item.tags && item.tags.includes('type::matrix')), [item.tags]);
-        
-        const itemRef = React.useRef(null);
-        const listType = React.useMemo(() => Utils.getTypeFromTags(item.tags) || '', [item.tags]);
-        const listIcon = React.useMemo(() => Utils.getListTypeIcon(listType), [listType]);
-        const listClass = listType ? `list-${listType}` : '';
-
-        // Setup sortable for drag-and-drop
-        React.useEffect(() => {
-            if (itemRef.current && hasChildren && isExpanded) {
-                const sortable = new Sortable(itemRef.current, {
-                    group: 'items',
-                    animation: 150,
-                    ghostClass: 'sortable-ghost',
-                    chosenClass: 'sortable-chosen',
-                    handle: '.item-drag-handle',
-                    onEnd: function(evt) {
-                        if (!item.items || evt.oldIndex === undefined || evt.newIndex === undefined) {
-                            return;
-                        }
-                        
-                        if (evt.oldIndex < 0 || evt.oldIndex >= item.items.length ||
-                            evt.newIndex < 0 || evt.newIndex >= item.items.length) {
-                            return;
-                        }
-
-                        const sourceItem = item.items[evt.oldIndex];
-                        if (!sourceItem) return;
-
-                        const targetItem = item;
-                        const originalItems = [...item.items];
-                        
-                        Utils.showDragConfirmation(
-                            sourceItem, 
-                            targetItem,
-                            () => {
-                                reorderItems(sourceItem.id, item.id, evt.newIndex);
-                                Utils.showAlert(`Item "${sourceItem.title}" moved successfully.`, "success");
-                            },
-                            () => {
-                                evt.from.classList.add('restoring');
-                                setTimeout(() => {
-                                    evt.from.innerHTML = '';
-                                    originalItems.forEach(child => {
-                                        const placeholder = document.createElement('div');
-                                        placeholder.className = 'item-placeholder';
-                                        placeholder.dataset.id = child.id;
-                                        placeholder.innerHTML = '<div class="p-2">Restoring...</div>';
-                                        evt.from.appendChild(placeholder);
-                                    });
-                                    
-                                    setTimeout(() => {
-                                        context.updateDocumentNavigation();
-                                        context.setItems(prevItems => [...prevItems]); 
-                                        evt.from.classList.remove('restoring');
-                                    }, 50);
-                                }, 50);
-                            }
-                        );
-                    }
-                });
-                
-                return () => sortable.destroy();
-            }
-        }, [hasChildren, isExpanded, item, context, reorderItems]);
-
-        // Memoized handlers
-        const handleToggleExpand = React.useCallback(() => {
-            toggleItemExpansion(item.id);
-        }, [toggleItemExpansion, item.id]);
-
-        const handleCreateMatrix = React.useCallback(() => {
-            // Find if we have a Markers item
-            const markersItem = Utils.findItemByTitle(context.items, "📄Markers");
-            
-            if (!markersItem) {
-                Utils.showAlert("No 'Markers' item found. Please create an item titled '📄Markers' first.", "warning");
-                return;
-            }
-            
-            // Create a matrix with the current item as source and Markers as target
-            const matrixItem = {
-                id: Utils.generateItemId(),
-                title: `Matrix: ${item.title} x Markers`,
-                content: `Matrix showing relationship between ${item.title} elements and standard markers.`,
-                tags: "type::matrix, source-item::" + item.title + ", target-item::📄Markers, values::🟥(-3);🔴(-2);▾(-1);▴(+1);🟢(+2);🟩(+3);🔹(1);🔷(2);🟦(3)"
-            };
-            
-            context.addItem(matrixItem);
-            setTimeout(() => {
-                context.openMatrixEditor(matrixItem);
-            }, 300);
-        }, [context.items, context.addItem, context.openMatrixEditor, item.title]);
-
-        const handleEditItem = React.useCallback(() => {
-            // Save scroll position before opening modal
-            Utils.saveScrollPosition();
-            
-            const modalElement = document.getElementById('item-editor-modal');
-            if (!modalElement) return;
-            const modal = new bootstrap.Modal(modalElement);
-            const titleInput = document.getElementById('item-title');
-            const tagsInput = document.getElementById('item-tags');
-            const contentInput = document.getElementById('item-content');
-            const idInput = document.getElementById('item-id');
-            const originalTitleInput = document.getElementById('original-title');
-            const parentIdInput = document.getElementById('parent-id');
-            const relationsList = document.getElementById('relations-list');
-            
-            // Fill the form with current values
-            if (titleInput) titleInput.value = item.title || '';
-            if (originalTitleInput) originalTitleInput.value = item.title || '';
-            if (tagsInput) tagsInput.value = item.tags || '';
-            if (contentInput) contentInput.value = item.content || '';
-            if (idInput) idInput.value = item.id;
-            if (parentIdInput) parentIdInput.value = '';
-            
-            // Initialize SimpleMDE
-            if (window.simpleMDE) {
-                window.simpleMDE.value(item.content || '');
-                setTimeout(() => window.simpleMDE.codemirror.refresh(), 10);
-            } else if (contentInput) {
-                window.simpleMDE = new SimpleMDE({ 
-                    element: contentInput,
-                    spellChecker: false,
-                    status: false
-                });
-            }
-            
-            // Initialize Tagify
-            if (tagsInput) {
-                if (!window.tagify) {
-                    // Get all tags from all items to use as whitelist
-                    const allTags = Utils.extractAllTags(context.items);
-                    
-                    window.tagify = new Tagify(tagsInput, {
-                        dropdown: {
-                            enabled: 1,
-                            maxItems: 5,
-                            position: "text",
-                            closeOnSelect: false,
-                            highlightFirst: true,
-                            searchKeys: ["value"]
-                        },
-                        whitelist: allTags,
-                        enforceWhitelist: false,
-                        pattern: /^(?!.*>>)/,
-                        maxTags: 50
-                    });
-                    
-                    new DragSort(window.tagify.DOM.scope, {
-                        selector: '.' + window.tagify.settings.classNames.tag,
-                        callbacks: {
-                            dragEnd: function() {
-                                window.tagify.updateValueByDOMTags();
-                            }
-                        }
-                    });
-                } else {
-                    window.tagify.removeAllTags();
-                    
-                    // Filter out relation tags
-                    const normalTags = item.tags ? item.tags.split(',')
-                        .map(tag => tag.trim())
-                        .filter(tag => !tag.includes('>>'))
-                        .join(', ') : '';
-                    
-                    window.tagify.addTags(normalTags);
-                    
-                    // Ensure DragSort is initialized after tags are added
-                    new DragSort(window.tagify.DOM.scope, {
-                        selector: '.' + window.tagify.settings.classNames.tag,
-                        callbacks: {
-                            dragEnd: function() {
-                                window.tagify.updateValueByDOMTags();
-                            }
-                        }
-                    });
-                }
-            }
-            
-            // Show relations in the relation list
-            if (relationsList) {
-                const relations = Utils.getRelationsFromTags(item.tags);
-                relationsList.innerHTML = Utils.renderRelationTags(relations);
-                
-                // Clear relation inputs
-                const relationType = document.getElementById('relation-type');
-                const relationTarget = document.getElementById('relation-target');
-                if (relationType) relationType.value = '';
-                if (relationTarget) relationTarget.value = '';
-                
-                // Setup click handler for removing relations
-                relationsList.addEventListener('click', function(e) {
-                    if (e.target.tagName === 'BUTTON' || e.target.parentElement.tagName === 'BUTTON') {
-                        const button = e.target.tagName === 'BUTTON' ? e.target : e.target.parentElement;
-                        const relationStr = button.dataset.relation;
-                        
-                        if (relationStr && tagsInput) {
-                            // Update item's tags by removing this relation
-                            const newTags = Utils.removeRelationFromTags(item.tags, relationStr.split('>>')[1]);
-                            tagsInput.value = newTags; // Update the hidden input value
-                            item.tags = newTags; // Update the item object directly for immediate feedback
-                            
-                            // Re-render relations list
-                            const updatedRelations = Utils.getRelationsFromTags(newTags);
-                            relationsList.innerHTML = Utils.renderRelationTags(updatedRelations);
-                        }
-                    }
-                });
-                
-                // Setup add relation button
-                const addRelationBtn = document.getElementById('add-relation-btn');
-                if (addRelationBtn) {
-                    addRelationBtn.onclick = function() {
-                        const relationTypeInput = document.getElementById('relation-type');
-                        const targetTitleInput = document.getElementById('relation-target');
-                        const relationType = relationTypeInput ? relationTypeInput.value : '';
-                        const targetTitle = targetTitleInput ? targetTitleInput.value : '';
-
-                        if (!relationType || !targetTitle) {
-                            Utils.showAlert("Please enter both relation type and target item", "warning");
-                            return;
-                        }
-                        
-                        // Add relation to tags
-                        const currentTags = tagsInput ? tagsInput.value : item.tags;
-                        const updatedTags = Utils.addRelationToTags(currentTags, relationType, targetTitle);
-                        if (tagsInput) tagsInput.value = updatedTags; // Update hidden input
-                        item.tags = updatedTags; // Update item object
-
-                        // Update relations list
-                        const relations = Utils.getRelationsFromTags(updatedTags);
-                        relationsList.innerHTML = Utils.renderRelationTags(relations);
-                        
-                        // Clear inputs for next entry
-                        if (relationTypeInput) relationTypeInput.value = '';
-                        if (targetTitleInput) targetTitleInput.value = '';
-                    };
-                }
-            }
-            
-            const editorTitle = document.getElementById('item-editor-title');
-            if (editorTitle) editorTitle.textContent = 'Edit Item';
-            
-            // Add event listener for modal hidden to restore scroll position
-            modalElement.addEventListener('hidden.bs.modal', function onHidden() {
-                Utils.restoreScrollPosition();
-                modalElement.removeEventListener('hidden.bs.modal', onHidden);
-            });
-            
-            modal.show();
-        }, [context.items, item, context.openMatrixEditor]); // Added dependencies
-
-        const handleOpenChat = React.useCallback(() => {
-            setCurrentItemId(item.id);
-            
-            const contextSpan = document.getElementById('current-item-title');
-             if (contextSpan) contextSpan.textContent = item.title;
-             
-             window.StruMLApp.Chatbot?.showPanel(); // Use new Chatbot module
-         }, [setCurrentItemId, item.id, item.title]);
- 
-         const handleOpenInfo = React.useCallback(async () => {
-            setCurrentItemId(item.id);
-            await fetchMarkdownContent(item.title);
-            setIsInfoPanelOpen(true);
-            
-            const panelTitle = document.getElementById('info-panel-title');
-            if (panelTitle) panelTitle.textContent = `About ${item.title}`;
-            
-            window.StruMLApp.Main?.infoPanel?.show(); // Use global reference
-            
-            // REMOVED: Utils.updateRelatedItems(context.items, item);
-        }, [context.items, fetchMarkdownContent, item, setCurrentItemId, setIsInfoPanelOpen]);
-
-        const handleAddChild = React.useCallback(() => {
-            // Save scroll position
-            Utils.saveScrollPosition();
-            
-            const modalElement = document.getElementById('item-editor-modal');
-            if (!modalElement) return;
-            const modal = new bootstrap.Modal(modalElement);
-            const titleInput = document.getElementById('item-title');
-            const tagsInput = document.getElementById('item-tags');
-            const contentInput = document.getElementById('item-content');
-            const idInput = document.getElementById('item-id');
-            const originalTitleInput = document.getElementById('original-title');
-            const parentIdInput = document.getElementById('parent-id');
-            const relationsList = document.getElementById('relations-list');
-            
-            if (titleInput) titleInput.value = '';
-            if (originalTitleInput) originalTitleInput.value = '';
-            if (tagsInput) tagsInput.value = '';
-            if (contentInput) contentInput.value = '';
-            if (idInput) idInput.value = '';
-            if (parentIdInput) parentIdInput.value = item.id;
-            
-            if (window.simpleMDE) {
-                window.simpleMDE.value('');
-                setTimeout(() => window.simpleMDE.codemirror.refresh(), 10);
-            } else if (contentInput) {
-                window.simpleMDE = new SimpleMDE({ 
-                    element: contentInput,
-                    spellChecker: false,
-                    status: false
-                });
-            }
-            
-            if (tagsInput) {
-                if (!window.tagify) {
-                    // Get all tags from all items to use as whitelist
-                    const allTags = Utils.extractAllTags(context.items);
-                    
-                    window.tagify = new Tagify(tagsInput, {
-                        dropdown: {
-                            enabled: 1,
-                            maxItems: 5,
-                            position: "text",
-                            closeOnSelect: false,
-                            highlightFirst: true,
-                            searchKeys: ["value"]
-                        },
-                        whitelist: allTags,
-                        enforceWhitelist: false,
-                        maxTags: 50
-                    });
-                    
-                    new DragSort(window.tagify.DOM.scope, {
-                        selector: '.' + window.tagify.settings.classNames.tag,
-                        callbacks: {
-                            dragEnd: function() {
-                                window.tagify.updateValueByDOMTags();
-                            }
-                        }
-                    });
-                } else {
-                    window.tagify.removeAllTags();
-                    
-                    // Ensure DragSort is initialized after tags are cleared
-                    new DragSort(window.tagify.DOM.scope, {
-                        selector: '.' + window.tagify.settings.classNames.tag,
-                        callbacks: {
-                            dragEnd: function() {
-                                window.tagify.updateValueByDOMTags();
-                            }
-                        }
-                    });
-                }
-            }
-            
-            // Reset relations list
-            if (relationsList) {
-                relationsList.innerHTML = '<div class="alert alert-info">No relations defined</div>';
-            }
-            
-            const editorTitle = document.getElementById('item-editor-title');
-            if (editorTitle) editorTitle.textContent = 'Add New Item';
-            
-            // Add event listener for modal hidden to restore scroll position
-            modalElement.addEventListener('hidden.bs.modal', function onHidden() {
-                Utils.restoreScrollPosition();
-                modalElement.removeEventListener('hidden.bs.modal', onHidden);
-            });
-            
-            modal.show();
-        }, [context.items, item.id]);
-
-        // Memoized tag rendering
-        const renderedTags = React.useMemo(() => {
-            if (!item.tags) return []; // Return empty array if no tags
-            
-            return item.tags.split(',').map((tag, index) => {
-                const trimmedTag = tag.trim();
-                if (!trimmedTag) return null;
-                
-                // Skip relation tags and type tags
-                if (trimmedTag.includes('>>') || trimmedTag.startsWith('type::')) return null;
-                
-                // Use the new unified tag class
-                return (
-                    <span key={`${item.id}-tag-${index}`} className="strudol-tag">
-                        {trimmedTag}
-                    </span>
-                );
-            }).filter(tag => tag !== null);
-        }, [item.id, item.tags]);
-
-        // Memoized outgoing relation calculation
-        const outgoingRelations = React.useMemo(() => {
-            if (!item.tags) return []; // Return empty array if no relations
-            
-            const relations = Utils.getRelationsFromTags(item.tags);
-            if (relations.length === 0) return []; // Return empty array if no relations
-            
-            return relations; // Return the array of relation objects
-        }, [item.tags]);
-
-        // Memoized incoming relation calculation
-        const incomingRelations = React.useMemo(() => {
-            const incoming = [];
-            if (!context || !context.items) return incoming; // Ensure context and items exist
-
-            context.items.forEach(sourceItem => {
-                if (sourceItem.id === item.id) return; // Don't link item to itself
-                const relations = Utils.getRelationsFromTags(sourceItem.tags);
-                relations.forEach(rel => {
-                    // Match both direct title matches and is>> relations
-                    if (rel.target === item.title || 
-                        (rel.relation === 'is' && rel.target === item.title)) {
-                        // Found an incoming relation
-                        incoming.push({ 
-                            ...rel, 
-                            sourceTitle: sourceItem.title, 
-                            sourceId: sourceItem.id,
-                            relation: rel.relation === 'is' ? 'is' : rel.relation
-                        });
-                    }
-                });
-            });
-            return incoming;
-        }, [context.items, item.id, item.title]);
-
-        // Reusable function to render a single relation tag
-        const renderSingleRelation = (rel, index, isIncoming = false) => {
-            const relInfo = RELATION_TYPES[rel.relation] || { 
-                icon: 'bi-link', 
-                label: rel.relation,
-                level: '' 
-            };
-            const colorClass = Utils.getRelationColorClass(rel.relation);
-            const levelClass = colorClass || (relInfo.level ? `relation-${relInfo.level}` : '');
-            const targetOrSourceTitle = isIncoming ? rel.sourceTitle : rel.target;
-            const targetOrSourceId = isIncoming ? rel.sourceId : Utils.findItemIdByTitle(context.items, rel.target); // Find target ID for outgoing
-
-            const handleClick = (e) => {
-                e.preventDefault();
-                if (targetOrSourceId) {
-                    context.scrollToItem(targetOrSourceId);
-                    context.setCurrentItemId(targetOrSourceId); // Also select the item
-                } else {
-                    Utils.showAlert(`Item "${targetOrSourceTitle}" not found.`, "warning");
-                }
-            };
-
-            return (
-                <span key={`${item.id}-${isIncoming ? 'in' : 'out'}-rel-${index}`} className={`relation-tag ${levelClass}`}>
-                    <i className={`bi ${relInfo.icon}`}></i>
-                    {isIncoming ? `${rel.sourceTitle} ${relInfo.label}` : `${relInfo.label}:`}
-                    &nbsp;
-                    <a href="#" onClick={handleClick} className="relation-target" title={`Go to item: ${targetOrSourceTitle}`}>
-                        {isIncoming ? '' : targetOrSourceTitle}
-                    </a>
-                </span>
-            );
-        };
-
-        // Access global state for showing details
-        const { showItemDetails } = context;
-
-        return (
-            <div className={`item-container ${listClass} ${hasChildren ? 'has-children' : ''} ${isSelected ? 'active' : ''}`} id={item.id} data-id={item.id}>
-                <div className="item-header" id={`${encodeURIComponent(item.title.replace(/\s+/g, '-').replace(/[^\p{L}\p{N}\s-]/gu, '').toLowerCase())}`}>
-                    <div className="item-title-area">
-                        <button 
-                            className="btn btn-sm btn-link p-0 me-2"
-                            onClick={handleToggleExpand}
-                        >
-                            <i className={`bi ${isExpanded ? 'bi-chevron-down' : 'bi-chevron-right'}`}></i>
-                        </button>
-                        
-                        <div className="item-icon">
-                            <i className={`bi ${listIcon}`}></i>
-                        </div>
-                        
-                        <h5 className="item-title">{item.title}</h5>
-                        
-                        {/* REMOVED Tag display from here */}
-                        
-                        <div className="item-actions">
-                            <span className="item-drag-handle action-btn">
-                                <i className="bi bi-arrows-move"></i>
-                            </span>
-                            
-                            <button 
-                                className="action-btn"
-                                onClick={handleEditItem}
-                                title="Edit this item"
-                            >
-                                <i className="bi bi-pencil"></i>
-                            </button>
-                            
-                            <button
-                                className="action-btn"
-                                onClick={handleOpenInfo}
-                                title="Learn more about this concept"
-                            >
-                                <i className="bi bi-info-circle"></i>
-                            </button>
-                            
-                            {hasChildren && (
-                                <button
-                                    className="action-btn"
-                                    onClick={handleCreateMatrix}
-                                    title="Create matrix with this item"
-                                >
-                                    <i className="bi bi-table"></i>
-                                </button>
-                            )}
-                            
-                            <button
-                                className="action-btn add-btn"
-                                onClick={handleAddChild}
-                                title="Add a child item"
-                            >
-                                <i className="bi bi-plus-circle"></i>
-                            </button>
-                            
-                            <button
-                                className="action-btn chatbot-btn"
-                                onClick={handleOpenChat}
-                                title="Ask AI about this item"
-                                data-bs-toggle="tooltip" 
-                                data-bs-placement="top" 
-                                data-bs-title="Opens/closes the AI assistant panel for help and content generation."
-                            >
-                                <i className="bi bi-robot"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                {isExpanded && (
-                    <div className="item-content">
-                        {item.content && (
-                            <div 
-                                className="markdown-content"
-                                dangerouslySetInnerHTML={{ __html: Utils.renderMarkdown(item.content) }}
-                            ></div>
-                        )}
-                        
-                        {/* Restore conditional rendering with explicit boolean check */}
-                        {showItemDetails === true && (
-                            <div className="item-details-section mt-2 pt-2">
-                                {/* Tags Display Area */}
-                        {renderedTags && renderedTags.length > 0 && (
-                            <div className="d-flex align-items-center item-tags-display">
-                                {renderedTags}
-                            </div>
-                        )}
-
-                                {/* Relations Section */}
-                                {(outgoingRelations.length > 0 || incomingRelations.length > 0) && (
-                                    <div className="row">
-                                        {/* Left Column: Outgoing Relations */}
-                                        <div className="col-md-6">
-                                            <h6><i className="bi bi-arrow-right-circle me-1"></i>Outgoing Relations</h6>
-                                            {outgoingRelations.length > 0 ? (
-                                                <div className="relation-tags mt-2">
-                                                    {outgoingRelations.map((rel, index) => renderSingleRelation(rel, index, false))}
-                                                </div>
-                                            ) : (
-                                                <div className="text-muted small mt-2">None</div>
-                                            )}
-                                        </div>
-
-                                        {/* Right Column: Incoming Relations */}
-                                        <div className="col-md-6">
-                                            <h6><i className="bi bi-arrow-left-circle me-1"></i>Incoming Relations</h6>
-                                            {incomingRelations.length > 0 ? (
-                                                <div className="relation-tags mt-2">
-                                                    {incomingRelations.map((rel, index) => renderSingleRelation(rel, index, true))}
-                                                </div>
-                                            ) : (
-                                                <div className="text-muted small mt-2">None</div>
-                                            )}
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        )}
-
-                        {/* Matrix Visualization (if applicable) - Placed after conditional details */}
-                        {isMatrixItem && (
-                            <MatrixVisualization item={item} items={context.items} />
-                        )}
-                    </div>
-                )}
-                
-                {hasChildren && (
-                    <div 
-                        ref={itemRef}
-                        className={`item-children collapse ${isExpanded ? 'show' : ''}`}
-                        id={`collapse-${item.id}`}
-                    >
-                        {item.items.map(child => (
-                            <Item 
-                                key={child.id} 
-                                item={child} 
-                                depth={depth + 1}
-                            />
-                        ))}
-                    </div>
-                )}
-            </div>
-        );
-    });
-
-    // Document component - Shows the document content
-    const Document = React.memo(() => {
-        const context = React.useContext(DataContext);
-        
-        if (!context) {
-            return <div>Loading document context...</div>;
+// Header component
+const Header = () => {
+  const { state, actions } = useAppContext();
+  const { document } = state;
+  const { updateDocumentTitle, createNewDocument, importDocument, toggleSidebar } = actions;
+  
+  const [isEditingTitle, setIsEditingTitle] = React.useState(false);
+  const [titleValue, setTitleValue] = React.useState(document.title);
+  
+  React.useEffect(() => {
+    setTitleValue(document.title);
+  }, [document.title]);
+  
+  const handleTitleChange = (e) => {
+    setTitleValue(e.target.value);
+  };
+  
+  const handleTitleSubmit = () => {
+    updateDocumentTitle(titleValue);
+    setIsEditingTitle(false);
+  };
+  
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleTitleSubmit();
+    } else if (e.key === 'Escape') {
+      setTitleValue(document.title);
+      setIsEditingTitle(false);
+    }
+  };
+  
+  const handleImportClick = () => {
+    const input = window.document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json,.struml.json';
+    
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const importedDocument = JSON.parse(event.target.result);
+          importDocument(importedDocument);
+        } catch (error) {
+          alert('Error importing document: ' + error.message);
         }
+      };
+      reader.readAsText(file);
+    };
+    
+    input.click();
+  };
+  
+  const handleExportClick = (format) => {
+    switch (format) {
+      case 'json':
+        window.StruMLApp.Utils.exportAsJson(document);
+        break;
+      case 'markdown':
+        window.StruMLApp.Utils.exportAsMarkdown(document);
+        break;
+      case 'html':
+        window.StruMLApp.Utils.exportAsHtml(document);
+        break;
+      case 'csv':
+        window.StruMLApp.Utils.exportAsCsv(document);
+        break;
+      default:
+        break;
+    }
+  };
+  
+  return (
+    <header className="bg-white shadow-sm border-b border-gray-200 px-4 py-2 flex items-center justify-between">
+      <div className="flex items-center">
+        <button 
+          onClick={toggleSidebar}
+          className="mr-4 p-2 rounded-md hover:bg-gray-100"
+          title="Toggle Sidebar"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+          </svg>
+        </button>
         
-        const { 
-            items, 
-            filteredItems,
-            activeTags
-        } = context;
-        
-        const documentRef = React.useRef(null);
-        
-        // Memoize displayed items
-        const displayItems = React.useMemo(() => {
-            // Default to all items if filtering is active but filteredItems is somehow empty/invalid
-            if (!activeTags.includes('all') && (!filteredItems || filteredItems.length === 0)) {
-                 // If filtering is active but results are empty, show all items as a fallback?
-                 // Or perhaps better to rely on EmptyState? Let's stick to original logic for now.
-                 // Consider adding a console warning here if filteredItems is empty when filtering.
-                 // console.warn("Filtering active but filteredItems is empty. Showing EmptyState.");
-                 return filteredItems || []; // Ensure it's at least an empty array
-            }
-            return activeTags.includes('all') ? items : (filteredItems || []); // Ensure filteredItems is an array
-        }, [activeTags, items, filteredItems]);
-        
-        // Sortable drag handler
-        const handleSortEnd = React.useCallback((evt) => {
-            if (!displayItems || evt.oldIndex === undefined || evt.newIndex === undefined) {
-                return;
-            }
-            
-            if (evt.oldIndex < 0 || evt.oldIndex >= displayItems.length ||
-                evt.newIndex < 0 || evt.newIndex >= displayItems.length) {
-                return;
-            }
-            
-            const sourceItem = displayItems[evt.oldIndex];
-            if (!sourceItem) return;
-            
-            Utils.showDragConfirmation(
-                sourceItem, 
-                null,
-                () => {
-                    const newItems = [...items];
-                    let sourceIndex = -1;
-                    for (let i = 0; i < newItems.length; i++) {
-                        if (newItems[i].id === sourceItem.id) {
-                            sourceIndex = i;
-                            break;
-                        }
-                    }
-                    
-                    if (sourceIndex >= 0) {
-                        const [movedItem] = newItems.splice(sourceIndex, 1);
-                        newItems.splice(evt.newIndex, 0, movedItem);
-                        context.setItems(newItems);
-                        Utils.showAlert(`Item "${sourceItem.title}" moved successfully.`, "success");
-                    }
-                },
-                () => {
-                    context.setItems([...items]);
-                }
-            );
-        }, [context, displayItems, items]);
-        
-        // Setup sortable for top-level items
-        React.useEffect(() => {
-            if (documentRef.current) {
-                const sortable = new Sortable(documentRef.current, {
-                    group: 'items',
-                    animation: 150,
-                    ghostClass: 'sortable-ghost',
-                    chosenClass: 'sortable-chosen',
-                    handle: '.item-drag-handle',
-                    onEnd: handleSortEnd
-                });
-                
-                return () => {
-                    if (sortable && typeof sortable.destroy === 'function') {
-                        sortable.destroy();
-                    }
-                };
-            }
-        }, [handleSortEnd]);
-        
-        // Handler to add top-level item
-        const handleAddTopLevelItem = React.useCallback(() => {
-            if (window.addTopLevelItem) {
-                window.addTopLevelItem();
-            }
-        }, []);
-        
-        return (
-            <div className="document-container">
-                <div ref={documentRef} className="items-container">
-                    {displayItems.length > 0 ? (
-                        displayItems.map(item => (
-                            <Item key={item.id} item={item} />
-                        ))
-                    ) : (
-                        <EmptyState 
-                            isFiltered={!activeTags.includes('all')} 
-                            onAddItem={handleAddTopLevelItem} 
-                        />
-                    )}
-                </div>
-            </div>
-        );
-    });
+        {isEditingTitle ? (
+          <input
+            type="text"
+            value={titleValue}
+            onChange={handleTitleChange}
+            onBlur={handleTitleSubmit}
+            onKeyDown={handleKeyDown}
+            autoFocus
+            className="border border-gray-300 rounded-md px-2 py-1 text-lg font-medium"
+          />
+        ) : (
+          <h1 
+            onClick={() => setIsEditingTitle(true)}
+            className="text-lg font-medium cursor-pointer hover:text-primary-600"
+            title="Click to edit document title"
+          >
+            {document.title}
+          </h1>
+        )}
+      </div>
+      
+      <div className="flex items-center space-x-2">
+        <div className="relative dropdown">
+          <button 
+            className="px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100"
+            onClick={(e) => {
+              const dropdown = e.currentTarget.nextElementSibling;
+              dropdown.classList.toggle('hidden');
+              e.stopPropagation();
+              
+              const closeDropdown = () => {
+                dropdown.classList.add('hidden');
+                document.removeEventListener('click', closeDropdown);
+              };
+              
+              document.addEventListener('click', closeDropdown);
+            }}
+          >
+            File
+          </button>
+          <div className="absolute right-0 mt-1 w-48 bg-white shadow-lg rounded-md border border-gray-200 hidden z-10">
+            <ul className="py-1">
+              <li>
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    createNewDocument();
+                  }}
+                  className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  New Document
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleImportClick();
+                  }}
+                  className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  Import Document
+                </button>
+              </li>
+              <li className="border-t border-gray-200 mt-1 pt-1">
+                <div className="px-4 py-1 text-xs text-gray-500">Export As</div>
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleExportClick('json');
+                  }}
+                  className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  JSON
+                </button>
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleExportClick('markdown');
+                  }}
+                  className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  Markdown
+                </button>
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleExportClick('html');
+                  }}
+                  className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  HTML
+                </button>
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleExportClick('csv');
+                  }}
+                  className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  CSV
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
 
-    // App component - Main application component
-    const App = React.memo(() => {
-        const [isInitialized, setIsInitialized] = React.useState(false);
-        const context = React.useContext(DataContext);
+// Tag component
+const Tag = ({ tag }) => {
+  let tagClass = 'tag tag-default';
+  
+  if (tag.type === 'relation') {
+    tagClass = 'tag tag-relation';
+  } else if (tag.type !== 'default') {
+    tagClass = `tag tag-${tag.type}`;
+  }
+  
+  return (
+    <span className={tagClass} title={tag.full}>
+      {tag.full}
+    </span>
+  );
+};
 
-        // Initialize event handlers and data
-        React.useEffect(() => {
-            // Setup handlers
-            const destroyHandlers = window.StruMLApp.Main?.setupEventHandlers(); // Call from main.js
-            
-            // Try to load data from localStorage
-            const savedData = localStorage.getItem(window.StruMLApp.Constants?.LOCAL_STORAGE_KEY);
-            if (savedData) {
-                try {
-                    const parsedData = JSON.parse(savedData);
-                    if (parsedData && parsedData.items && parsedData.items.length > 0) {
-                        window.StruMLApp.Main?.initializeApp(parsedData); // Call from main.js
-                    }
-                } catch (error) {
-                    console.error("Failed to load data:", error);
-                }
-            }
-            
-            // Mark as initialized after setup
-            setIsInitialized(true);
+// Tags list component
+const TagsList = ({ tagsString }) => {
+  const tags = window.StruMLApp.Utils.parseTags(tagsString);
+  
+  if (!tags.length) return null;
+  
+  return (
+    <div className="flex flex-wrap mt-1">
+      {tags.map((tag, index) => (
+        <Tag key={index} tag={tag} />
+      ))}
+    </div>
+  );
+};
 
-            return destroyHandlers;
-        }, []);
+// Tree item component with drag and drop functionality
+const TreeItem = ({ item, level = 0, filteredItems }) => {
+  const { state, actions } = useAppContext();
+  const { selectedItemId, document } = state;
+  const { selectItem, reorderItems } = actions;
+  
+  const [isExpanded, setIsExpanded] = React.useState(true);
+  const [isDragging, setIsDragging] = React.useState(false);
+  const [dropPosition, setDropPosition] = React.useState(null);
+  
+  const hasChildren = item.items && item.items.length > 0;
+  const isSelected = selectedItemId === item.id;
+  
+  const isVisible = (currentItem) => {
+    if (!filteredItems) return true;
+    if (filteredItems.includes(currentItem.id)) return true;
+    
+    if (currentItem.items && currentItem.items.length > 0) {
+      return currentItem.items.some(isVisible);
+    }
+    
+    return false;
+  };
+  
+  const visibleChildren = hasChildren && filteredItems
+    ? item.items.filter(isVisible)
+    : item.items;
+  
+  const hasVisibleChildren = visibleChildren && visibleChildren.length > 0;
+  
+  const toggleExpand = (e) => {
+    e.stopPropagation();
+    setIsExpanded(!isExpanded);
+  };
+  
+  const handleSelect = () => {
+    selectItem(item.id);
+  };
+  
+  const isHighlighted = filteredItems && filteredItems.includes(item.id);
+  
+  // Drag and drop handlers
+  const handleDragStart = (e) => {
+    e.stopPropagation();
+    e.dataTransfer.setData('text/plain', item.id);
+    e.dataTransfer.effectAllowed = 'move';
+    
+    // Add a delay to prevent immediate drag start
+    setTimeout(() => {
+      setIsDragging(true);
+    }, 0);
+  };
+  
+  const handleDragEnd = () => {
+    setIsDragging(false);
+    setDropPosition(null);
+  };
+  
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (isDragging) return; // Don't allow dropping onto self while dragging
+    
+    const rect = e.currentTarget.getBoundingClientRect();
+    const mouseY = e.clientY;
+    const relativeY = mouseY - rect.top;
+    
+    // Determine drop position (before, after, or inside)
+    if (relativeY < rect.height * 0.25) {
+      setDropPosition('before');
+    } else if (relativeY > rect.height * 0.75) {
+      setDropPosition('after');
+    } else {
+      // Always allow dropping inside, even if the item doesn't have children yet
+      setDropPosition('inside');
+    }
+    
+    e.dataTransfer.dropEffect = 'move';
+  };
+  
+  const handleDragLeave = () => {
+    setDropPosition(null);
+  };
+  
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Check if this is a JSON item from the chatbot
+    let jsonData = null;
+    try {
+      const jsonString = e.dataTransfer.getData('application/json');
+      if (jsonString) {
+        jsonData = JSON.parse(jsonString);
+      }
+    } catch (error) {
+      console.error('Error parsing JSON data:', error);
+    }
+    
+    if (jsonData) {
+      // This is a new item from the chatbot
+      
+      // Determine the parent ID for the drop
+      let targetParentId = null;
+      
+      if (dropPosition === 'inside') {
+        // Drop as a child of this item
+        targetParentId = item.id;
+      } else {
+        // Find the parent of this item
+        const parentInfo = window.StruMLApp.DndUtils.findParentItem(document.items, item.id);
         
-        // Setup global app functions and load initial data if needed
-         React.useEffect(() => {
-           if (isInitialized && context) {
-             window.app = context; // Make context globally available as window.app
- 
-             // Initialize the Chatbot module *after* context is available
-             if (window.StruMLApp.Chatbot && typeof window.StruMLApp.Chatbot.init === 'function') {
-                 console.log("Initializing Chatbot module..."); // Debug log
-                 window.StruMLApp.Chatbot.init(context);
-             } else {
-                 console.error("Chatbot module or init function not found."); // Debug log
-             }
- 
-             // Define function to add top level item globally
-            window.addTopLevelItem = () => {
-                // Save scroll position
-                Utils.saveScrollPosition();
-                
-                const modalElement = document.getElementById('item-editor-modal');
-                if (!modalElement) return;
-                const modal = new bootstrap.Modal(modalElement);
-                const titleInput = document.getElementById('item-title');
-                const tagsInput = document.getElementById('item-tags');
-                const contentInput = document.getElementById('item-content');
-                const idInput = document.getElementById('item-id');
-                const originalTitleInput = document.getElementById('original-title');
-                const parentIdInput = document.getElementById('parent-id');
-                const relationsList = document.getElementById('relations-list');
-                
-                // Clear form
-                if (titleInput) titleInput.value = '';
-                if (originalTitleInput) originalTitleInput.value = '';
-                if (tagsInput) tagsInput.value = '';
-                if (contentInput) contentInput.value = '';
-                if (idInput) idInput.value = '';
-                if (parentIdInput) parentIdInput.value = '';
-                
-                // Initialize or reset editor
-                if (window.simpleMDE) {
-                    window.simpleMDE.value('');
-                    setTimeout(() => window.simpleMDE.codemirror.refresh(), 10);
-                } else if (contentInput) {
-                    window.simpleMDE = new SimpleMDE({ 
-                        element: contentInput,
-                        spellChecker: false,
-                        status: false
-                    });
-                }
-                
-                // Initialize or reset tagify
-                if (tagsInput) {
-                    if (!window.tagify) {
-                        // Get all tags as whitelist
-                        const allTags = Utils.extractAllTags(context.items);
-                        
-                        window.tagify = new Tagify(tagsInput, {
-                            dropdown: {
-                                enabled: 1,
-                                maxItems: 5,
-                                position: "text",
-                                closeOnSelect: false,
-                                highlightFirst: true,
-                                searchKeys: ["value"]
-                            },
-                            whitelist: allTags,
-                            enforceWhitelist: false,
-                            maxTags: 50
-                        });
-                    } else {
-                        window.tagify.removeAllTags();
-                    }
-                }
-                
-                // Reset relations list
-                if (relationsList) {
-                    relationsList.innerHTML = '<div class="alert alert-info">No relations defined</div>';
-                }
-                
-                const editorTitle = document.getElementById('item-editor-title');
-                if (editorTitle) editorTitle.textContent = 'Add New Item';
-                
-                // Restore scroll position when modal closes
-                modalElement.addEventListener('hidden.bs.modal', function onHidden() {
-                    Utils.restoreScrollPosition();
-                    modalElement.removeEventListener('hidden.bs.modal', onHidden);
-                });
-                
-                modal.show();
-            };
+        if (parentInfo) {
+          targetParentId = parentInfo.parent ? parentInfo.parent.id : null;
+        } else {
+          // This is a top-level item
+          targetParentId = null;
+        }
+      }
+      
+      // Create a new item with the JSON data
+      const newItem = {
+        id: window.StruMLApp.Utils.generateId(),
+        title: jsonData.title || "New Item",
+        content: jsonData.content || "",
+        tags: jsonData.tags || "",
+        items: []
+      };
+      
+      // Add child items if present
+      if (jsonData.items && Array.isArray(jsonData.items)) {
+        newItem.items = jsonData.items.map(childItem => ({
+          id: window.StruMLApp.Utils.generateId(),
+          title: childItem.title || "Child Item",
+          content: childItem.content || "",
+          tags: childItem.tags || "",
+          items: []
+        }));
+      }
+      
+      // Add the new item to the document
+      actions.createItem(targetParentId, newItem);
+      window.StruMLApp.Utils.showAlert(`Added "${newItem.title}" to the document`, "success");
+      
+    } else {
+      // This is an existing item being reordered
+      const draggedItemId = e.dataTransfer.getData('text/plain');
+      if (!draggedItemId || draggedItemId === item.id) {
+        setDropPosition(null);
+        return;
+      }
+      
+      // Find the dragged item
+      const draggedItem = window.StruMLApp.DndUtils.findItemById(document.items, draggedItemId)?.item;
+      if (!draggedItem) {
+        setDropPosition(null);
+        return;
+      }
+      
+      // Check if we can drop this item (prevent circular references)
+      if (!window.StruMLApp.DndUtils.canDropItem(document.items, draggedItemId, item.id)) {
+        setDropPosition(null);
+        return;
+      }
+      
+      // Determine the parent ID and position for the drop
+      let targetParentId = null;
+      let newIndex = 0;
+      
+      if (dropPosition === 'inside') {
+        // Drop as a child of this item
+        targetParentId = item.id;
+        newIndex = 0; // Add to the beginning of children
+      } else {
+        // Find the parent of this item
+        const parentInfo = window.StruMLApp.DndUtils.findParentItem(document.items, item.id);
+        
+        if (parentInfo) {
+          targetParentId = parentInfo.parent ? parentInfo.parent.id : null;
+          newIndex = dropPosition === 'before' ? parentInfo.index : parentInfo.index + 1;
+        } else {
+          // This is a top-level item
+          targetParentId = null;
+          
+          // Find the index of this item in the top-level items
+          const topLevelIndex = document.items.findIndex(i => i.id === item.id);
+          newIndex = dropPosition === 'before' ? topLevelIndex : topLevelIndex + 1;
+        }
+      }
+      
+      // Show confirmation dialog
+      window.StruMLApp.DndUtils.confirmItemMove(
+        draggedItem,
+        targetParentId ? window.StruMLApp.DndUtils.findItemById(document.items, targetParentId)?.item : null,
+        () => {
+          // Confirmed - perform the reordering
+          reorderItems(draggedItemId, targetParentId, newIndex);
+          window.StruMLApp.Utils.showAlert(`Item "${draggedItem.title}" moved successfully.`, "success");
+        },
+        () => {
+          // Cancelled - do nothing
+          window.StruMLApp.Utils.showAlert("Move cancelled.", "info");
+        }
+      );
+    }
+    
+    setDropPosition(null);
+  };
+  
+  return (
+    <div>
+      <div 
+        className={`tree-item flex items-center px-2 py-1 cursor-pointer ${isSelected ? 'selected' : ''} ${isHighlighted ? 'bg-blue-50' : ''} ${isDragging ? 'is-dragging' : ''} ${dropPosition ? `drop-${dropPosition}` : ''}`}
+        style={{ paddingLeft: `${level * 16 + 8}px` }}
+        onClick={handleSelect}
+        draggable="true"
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        data-item-id={item.id}
+      >
+        {/* Drop indicator */}
+        {dropPosition && (
+          <div className={`drop-indicator ${dropPosition} ${dropPosition === 'inside' ? 'active' : ''}`}></div>
+        )}
+        
+        {/* Drag handle */}
+        <div className="drag-handle mr-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-grip-vertical" viewBox="0 0 16 16">
+            <path d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+          </svg>
+        </div>
+        
+        {hasVisibleChildren && (
+          <button 
+            onClick={toggleExpand}
+            className="mr-1 p-1 rounded-md hover:bg-gray-200 doc-nav-toggle"
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className={`h-3 w-3 transform ${isExpanded ? 'rotate-90' : ''}`} 
+              viewBox="0 0 20 20" 
+              fill="currentColor"
+            >
+              <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+            </svg>
+          </button>
+        )}
+        {!hasVisibleChildren && <div className="w-5"></div>}
+        <span className="truncate">{item.title}</span>
+        {item.items && item.items.length > 0 && (
+          <span className="ml-1 text-xs text-gray-500">
+            ({item.items.length})
+          </span>
+        )}
+      </div>
+      
+      {hasVisibleChildren && isExpanded && (
+        <div>
+          {visibleChildren.map(childItem => (
+            <TreeItem 
+              key={childItem.id} 
+              item={childItem} 
+              level={level + 1}
+              filteredItems={filteredItems}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
-            // Load initial data if available (passed from main.js)
-            if (window.initialData) {
-                context.importDocument(window.initialData, window.initialFilename || "");
-                window.initialData = null;
-                window.initialFilename = null;
+// Sidebar component
+const Sidebar = () => {
+  const { state, actions } = useAppContext();
+  const { document, filteredItems, showTagFilter } = state;
+  const { createItem, toggleTagFilter } = actions;
+  
+  // State for tracking expand/collapse all
+  const [allExpanded, setAllExpanded] = React.useState(true);
+  
+  const isItemVisible = (item) => {
+    if (!filteredItems) return true;
+    const isVisible = (currentItem) => {
+      if (filteredItems.includes(currentItem.id)) return true;
+      if (currentItem.items && currentItem.items.length > 0) {
+        return currentItem.items.some(isVisible);
+      }
+      return false;
+    };
+    return isVisible(item);
+  };
+  
+  const visibleItems = filteredItems 
+    ? document.items.filter(isItemVisible)
+    : document.items;
+  
+  // Reference to the sidebar element
+  const sidebarRef = React.useRef(null);
+  
+  // Function to expand or collapse all items
+  const handleExpandCollapseAll = () => {
+    const newExpandedState = !allExpanded;
+    setAllExpanded(newExpandedState);
+    
+    // Function to recursively set the expanded state of all items
+    const setExpandedStateForAllItems = (items, expanded) => {
+      items.forEach(item => {
+        // Set the expanded state for this item
+        const itemId = item.id;
+        const itemElement = sidebarRef.current.querySelector(`[data-item-id="${itemId}"]`);
+        
+        if (itemElement) {
+          const toggleButton = itemElement.querySelector('.doc-nav-toggle');
+          if (toggleButton) {
+            const icon = toggleButton.querySelector('svg');
+            const isCurrentlyExpanded = icon && icon.classList.contains('rotate-90');
+            
+            if (expanded && !isCurrentlyExpanded) {
+              toggleButton.click(); // Expand if not already expanded
+            } else if (!expanded && isCurrentlyExpanded) {
+              toggleButton.click(); // Collapse if currently expanded
             }
           }
-        }, [isInitialized, context]); // Depend on context being available
-        
-        if (!isInitialized || !context) {
-            // Show loading or welcome screen until initialized
-            return null; // Or a loading indicator
         }
         
-        return <Document />;
-    });
-
-    // Application with context wrapper
-    const AppWithContext = () => {
-        const { DataProvider } = window.StruMLApp.State; // Get Provider from State
-        return (
-            <DataProvider>
-                <App />
-            </DataProvider>
-        );
+        // Recursively set the expanded state for child items
+        if (item.items && item.items.length > 0) {
+          setExpandedStateForAllItems(item.items, expanded);
+        }
+      });
     };
+    
+    // Start the recursive process with the top-level items
+    if (sidebarRef.current) {
+      // Use the recursive function to handle all items
+      setExpandedStateForAllItems(document.items, newExpandedState);
+    }
+  };
+  
+  return (
+    <div ref={sidebarRef} className="w-96 border-r border-gray-200 bg-white h-full overflow-y-auto flex flex-col">
+      <div className="p-3 border-b border-gray-200">
+        <div className="flex justify-between items-center mb-2">
+          <h2 className="font-medium">Document Structure</h2>
+          <div className="flex items-center">
+            <button 
+              onClick={toggleTagFilter}
+              className={`p-1 rounded-md hover:bg-gray-100 mr-1 ${showTagFilter ? 'text-blue-600' : ''}`}
+              title="Toggle tag filter"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clipRule="evenodd" />
+              </svg>
+            </button>
+            <button 
+              onClick={() => createItem()}
+              className="p-1 rounded-md hover:bg-gray-100"
+              title="Add top-level item"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        {/* Expand/Collapse All button */}
+        <button 
+          onClick={handleExpandCollapseAll}
+          className="w-full py-1 px-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-md flex items-center justify-center"
+          title={allExpanded ? "Collapse all items" : "Expand all items"}
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="h-4 w-4 mr-1" 
+            viewBox="0 0 20 20" 
+            fill="currentColor"
+          >
+            {allExpanded ? (
+              <path fillRule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clipRule="evenodd" />
+            ) : (
+              <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
+            )}
+          </svg>
+          {allExpanded ? "Collapse All" : "Expand All"}
+        </button>
+      </div>
+      
+      {showTagFilter && <TagFilter />}
+      
+      <div className="py-2 flex-1 overflow-y-auto">
+        {visibleItems.map(item => (
+          <TreeItem 
+            key={item.id} 
+            item={item} 
+            filteredItems={filteredItems}
+          />
+        ))}
+        
+        {visibleItems.length === 0 && (
+          <div className="px-4 py-3 text-gray-500 text-sm">
+            {document.items.length === 0 
+              ? "No items in this document. Click the + button to add an item."
+              : "No items match the current filter."}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
-    // Return the components
-    return {
-        MatrixVisualization,
-        EmptyState,
-        Item,
-        Document,
-        App,
-        AppWithContext
-    };
-})();
+// Helper function to find the path from root to an item
+const findItemPath = (items, itemId, path = []) => {
+  for (const item of items) {
+    if (item.id === itemId) {
+      return [...path, item];
+    }
+    
+    if (item.items && item.items.length > 0) {
+      const foundPath = findItemPath(item.items, itemId, [...path, item]);
+      if (foundPath) return foundPath;
+    }
+  }
+  
+  return null;
+};
+
+// Breadcrumbs component
+const Breadcrumbs = ({ item, document }) => {
+  const { actions } = useAppContext();
+  const { selectItem } = actions;
+  
+  // Find the path from root to the current item
+  const path = findItemPath(document.items, item.id);
+  
+  if (!path || path.length <= 1) return null;
+  
+  return (
+    <div className="flex items-center text-sm text-gray-500 mb-3 overflow-x-auto">
+      {path.map((pathItem, index) => (
+        <React.Fragment key={pathItem.id}>
+          {index > 0 && (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-1" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+            </svg>
+          )}
+          <span 
+            className={`hover:text-primary-600 cursor-pointer ${index === path.length - 1 ? 'font-medium text-gray-700' : ''}`}
+            onClick={() => index < path.length - 1 && selectItem(pathItem.id)}
+          >
+            {pathItem.title}
+          </span>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+};
+
+// Item view component
+const ItemView = ({ item }) => {
+  const { state, actions } = useAppContext();
+  const { document, isChatbotOpen } = state;
+  const { startEditingItem, deleteItem, createItem, selectItem, toggleChatbot } = actions;
+  
+  const handleEdit = () => {
+    startEditingItem(item.id);
+  };
+  
+  const handleDelete = () => {
+    if (confirm('Are you sure you want to delete this item?')) {
+      deleteItem(item.id);
+    }
+  };
+  
+  const handleAddChild = () => {
+    createItem(item.id);
+  };
+  
+  const handleToggleChatbot = () => {
+    toggleChatbot();
+  };
+  
+  return (
+    <div className="p-4">
+      {/* Breadcrumbs navigation */}
+      <Breadcrumbs item={item} document={document} />
+      
+      <div className="flex justify-between items-start mb-4">
+        <h2 className="text-2xl font-bold">{item.title}</h2>
+        
+        <div className="flex space-x-2">
+          <button 
+            onClick={handleEdit}
+            className="px-3 py-1 bg-primary-500 text-white rounded-md hover:bg-primary-600"
+            title="Edit this item"
+          >
+            Edit
+          </button>
+          <button 
+            onClick={handleAddChild}
+            className="px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600"
+            title="Add a child item"
+          >
+            Add Child
+          </button>
+          <button 
+            onClick={handleDelete}
+            className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600"
+            title="Delete this item"
+          >
+            Delete
+          </button>
+          <button 
+            onClick={handleToggleChatbot}
+            className={`px-3 py-1 ${isChatbotOpen ? 'bg-purple-500 hover:bg-purple-600' : 'bg-purple-400 hover:bg-purple-500'} text-white rounded-md`}
+            title={isChatbotOpen ? "Close AI Assistant" : "Open AI Assistant"}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline-block" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
+            </svg>
+            {isChatbotOpen ? " Close AI" : " AI Assistant"}
+          </button>
+        </div>
+      </div>
+      
+      <TagsList tagsString={item.tags} />
+      
+      {item.content && (
+        <div 
+          className="markdown-content mt-4 prose"
+          dangerouslySetInnerHTML={{ __html: window.StruMLApp.Utils.renderMarkdown(item.content) }}
+        ></div>
+      )}
+      
+      {/* Relations - displayed below content */}
+      <RelationsView item={item} allItems={document.items} />
+      
+      {item.items && item.items.length > 0 && (
+        <div className="mt-6">
+          <h3 className="text-lg font-medium mb-2">Child Items</h3>
+          <div className="space-y-4">
+            {item.items.map(childItem => (
+              <ItemCard 
+                key={childItem.id}
+                item={childItem}
+                onClick={() => selectItem(childItem.id)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Welcome screen component
+const WelcomeScreen = () => {
+  const { actions } = useAppContext();
+  const { createItem } = actions;
+  
+  return (
+    <div className="flex flex-col items-center justify-center h-full p-8 text-center">
+      <h2 className="text-2xl font-bold mb-4">Welcome to StruML</h2>
+      <p className="text-gray-600 mb-6 max-w-lg">
+        StruML helps you create structured documents with hierarchical items, tags, and relations.
+        Get started by creating your first item or selecting an existing one from the sidebar.
+      </p>
+      <button 
+        onClick={() => createItem()}
+        className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600"
+      >
+        Create First Item
+      </button>
+      <div className="mt-8 p-4 bg-gray-50 rounded-lg max-w-lg">
+        <h3 className="font-medium mb-2">Quick Tips:</h3>
+        <ul className="text-left text-gray-600 space-y-2">
+          <li>• Use the sidebar to navigate through your document structure</li>
+          <li>• Add tags to items for better organization and filtering</li>
+          <li>• Create relations between items to show connections</li>
+          <li>• Use Markdown in the content field for rich formatting</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+// Item editor component
+const ItemEditor = () => {
+  const { state, actions } = useAppContext();
+  const { editingItem } = state;
+  const { updateEditingItem, saveEditingItem, cancelEditingItem } = actions;
+  
+  if (!editingItem) return null;
+  
+  const handleTitleChange = (e) => {
+    updateEditingItem({ title: e.target.value });
+  };
+  
+  const handleTagsChange = (e) => {
+    // Handle both event objects and direct string values
+    const tagsValue = typeof e === 'string' ? e : (e.target ? e.target.value : '');
+    updateEditingItem({ tags: tagsValue });
+  };
+  
+  const handleContentChange = (value) => {
+    updateEditingItem({ content: value });
+  };
+  
+  const handleSave = () => {
+    saveEditingItem();
+  };
+  
+  const handleCancel = () => {
+    cancelEditingItem();
+  };
+  
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
+          <h2 className="text-xl font-semibold">Edit Item</h2>
+          <button 
+            onClick={handleCancel}
+            className="text-gray-500 hover:text-gray-700"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        
+        <div className="p-4 flex-1 overflow-y-auto">
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+            <input
+              type="text"
+              value={editingItem.title || ''}
+              onChange={handleTitleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            />
+          </div>
+          
+          <div className="mb-4">
+            <TagSelector
+              value={editingItem.tags || ''}
+              onChange={handleTagsChange}
+              allTags={window.StruMLApp.Utils.extractAllTags(state.document.items)}
+            />
+          </div>
+          
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Content</label>
+            <MarkdownEditor
+              value={editingItem.content || ''}
+              onChange={handleContentChange}
+            />
+          </div>
+        </div>
+        
+        <div className="p-4 border-t border-gray-200 flex justify-end space-x-2">
+          <button
+            onClick={handleCancel}
+            className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSave}
+            className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600"
+          >
+            Save Changes
+          </button>
+          <button
+            onClick={() => {
+              handleSave();
+              // Export the document as JSON after saving
+              setTimeout(() => {
+                window.StruMLApp.Utils.exportAsJson(state.document);
+              }, 100);
+            }}
+            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+          >
+            Save and Export
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Main content component
+const MainContent = () => {
+  const { state } = useAppContext();
+  const { document, selectedItemId, isEditing, isChatbotOpen } = state;
+  
+  const selectedItem = selectedItemId 
+    ? window.StruMLApp.Utils.findItemById(document.items, selectedItemId)
+    : null;
+  
+  return (
+    <div className="flex-1 overflow-hidden bg-white flex">
+      <div className={`flex-1 overflow-y-auto ${isChatbotOpen ? 'w-2/3' : 'w-full'}`}>
+        {selectedItem ? (
+          <ItemView item={selectedItem} />
+        ) : (
+          // Make sure WelcomeScreen is defined before using it
+          document.items.length === 0 ? (
+            <WelcomeScreen />
+          ) : (
+            <div className="flex flex-col items-center justify-center h-full p-8 text-center">
+              <h2 className="text-2xl font-bold mb-4">No Item Selected</h2>
+              <p className="text-gray-600 mb-6 max-w-lg">
+                Please select an item from the sidebar to view or edit its content.
+              </p>
+            </div>
+          )
+        )}
+        
+        {isEditing && <ItemEditor />}
+      </div>
+      
+      {isChatbotOpen && (
+        <div className="w-1/3 border-l border-gray-200">
+          <ChatbotPanel />
+        </div>
+      )}
+    </div>
+  );
+};

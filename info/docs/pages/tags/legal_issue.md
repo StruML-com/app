@@ -1,8 +1,0 @@
-
-
-## 📜 legal_issue
-
-### Definition 
-
-
-

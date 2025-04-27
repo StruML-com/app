@@ -1,2 +1,0 @@
-- [home](/)
-- [contents](pages/contents.md)

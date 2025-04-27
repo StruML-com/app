@@ -1,0 +1,11 @@
+Your task is to improve the content of the item titled '{{ITEM_TITLE}}'.
+
+Based on ALL the context (description, document structure, and the sample item example), provide an improved version of the content for the item '{{ITEM_TITLE}}'.
+- Your response MUST be ONLY a valid JSON object with a single field "content" containing the improved content.
+- The improved content should be more detailed, better structured, and higher quality than the original, while maintaining the same general meaning and purpose.
+
+Example response format:
+```json
+{
+  "content": "This is the improved content for the item. It is more detailed, better structured, and higher quality than the original."
+}

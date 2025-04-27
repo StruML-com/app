@@ -1,8 +1,0 @@
-
-
-## 🔽 funnel
-
-### Definition 
-
-
-

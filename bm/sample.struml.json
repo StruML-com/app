@@ -1,54 +1,63 @@
 {
-  "title": "sample.struml",
+  "title": "StruML doc",
   "items": [
     {
       "title": "📄Business summary",
+      "parentItem": "",
       "content": "",
       "tags": "type::text,mode::basic",
       "items": []
     },
     {
       "title": "📂Market",
+      "parentItem": "",
       "content": "",
       "tags": "type::category,mode::basic",
       "items": [
         {
           "title": "🤔Stakeholders",
+          "parentItem": "📂Market",
           "content": "",
           "tags": "type::weight,mode::basic",
           "items": [
             {
               "title": "People affected by ghosts",
+              "parentItem": "🤔Stakeholders",
               "content": "People feeling the effects of unusual presences and experiencing inexplicable phenomena",
               "tags": "customer",
               "items": []
             },
             {
               "title": "Paranormal Researchers",
+              "parentItem": "🤔Stakeholders",
               "content": "Scientists and academics specializing in paranormal phenomena who may collaborate on research or validate findings.",
               "tags": "",
               "items": []
             },
             {
               "title": "Employees",
+              "parentItem": "🤔Stakeholders",
               "content": "The individuals directly involved in the daily operations, product development, and customer interaction. Their well-being and skills directly impact the quality of service and innovation.",
               "tags": "",
               "items": []
             },
             {
               "title": "Local Community",
+              "parentItem": "🤔Stakeholders",
               "content": "Residents and community groups in areas affected by paranormal activity.",
               "tags": "",
               "items": []
             },
             {
               "title": "Media Outlets",
+              "parentItem": "🤔Stakeholders",
               "content": "News organizations and media channels covering paranormal events and Ghosthunters' activities.",
               "tags": "",
               "items": []
             },
             {
               "title": "Investors and shareholders",
+              "parentItem": "🤔Stakeholders",
               "content": "Individuals or entities providing financial support and holding a stake in the company's success.",
               "tags": "",
               "items": []
@@ -57,63 +66,74 @@
         },
         {
           "title": "🙋Segments",
+          "parentItem": "📂Market",
           "content": "",
           "tags": "type::weight,mode::basic",
           "items": [
             {
               "title": "Residential Homeowners",
+              "parentItem": "🙋Segments",
               "content": "Private individuals experiencing paranormal activity in their homes who require investigation and elimination services. These clients typically seek assistance after conventional explanations for strange occurrences have been ruled out and when the phenomena become too disruptive or frightening to ignore.",
               "tags": "",
               "items": []
             },
             {
               "title": "Commercial Establishments",
+              "parentItem": "🙋Segments",
               "content": "Businesses affected by supernatural presences that impact operations, customer experience, or employee well-being. These entities require professional intervention that minimizes business disruption while effectively resolving paranormal issues that could otherwise lead to lost revenue and damaged reputation.",
               "tags": "",
               "items": []
             },
             {
               "title": "Historic Properties",
+              "parentItem": "🙋Segments",
               "content": "Owners and managers of historic buildings with reported hauntings that require sensitive handling and specialized expertise. These properties often have complex paranormal situations connected to historical events or figures, requiring an approach that respects historical significance while addressing problematic manifestations.",
               "tags": "",
               "items": []
             },
             {
               "title": "🙎Profiles",
+              "parentItem": "🙋Segments",
               "content": "",
               "tags": "type::weight,mode::basic",
               "items": [
                 {
                   "title": "Residential Customer Profile",
+                  "parentItem": "🙎Profiles",
                   "content": "Details of a homeowner who initially dismisses paranormal events but seeks help after disturbances escalate, focusing on their needs and concerns.",
                   "tags": "type::weight",
                   "items": []
                 },
                 {
                   "title": "💎Value proposition",
+                  "parentItem": "🙎Profiles",
                   "content": "",
                   "tags": "type::weight",
                   "items": [
                     {
                       "title": "Scientific Paranormal Elimination",
+                      "parentItem": "💎Value proposition",
                       "content": "Application of rigorous, evidence-based methodologies and specialized equipment to permanently resolve supernatural disturbances. Our approach combines advanced technology with proven protocols to identify, contain, and remove paranormal entities with measurable, verifiable results.",
                       "tags": "",
                       "items": []
                     },
                     {
                       "title": "Professional Validation of Experiences",
+                      "parentItem": "💎Value proposition",
                       "content": "Expert confirmation of paranormal phenomena using advanced detection equipment and documented evidence of supernatural activity. Our scientific analysis provides clients with credible verification of their experiences, distinguishing genuine paranormal occurrences from conventional explanations.",
                       "tags": "",
                       "items": []
                     },
                     {
                       "title": "Rapid Response Emergency Intervention",
+                      "parentItem": "💎Value proposition",
                       "content": "24/7 availability for urgent paranormal situations with guaranteed arrival within 60 minutes in our service area. Our emergency response team deploys immediately with full containment capabilities to address escalating or dangerous supernatural manifestations before they cause harm.",
                       "tags": "",
                       "items": []
                     },
                     {
                       "title": "Comprehensive Paranormal Solutions",
+                      "parentItem": "💎Value proposition",
                       "content": "End-to-end service including investigation, entity identification, containment, removal, and preventative measures. Our holistic approach addresses immediate concerns while implementing long-term solutions to prevent recurrence and restore complete peace of mind.",
                       "tags": "",
                       "items": []
@@ -124,41 +144,48 @@
             },
             {
               "title": "✂️Segmentation",
+              "parentItem": "🙋Segments",
               "content": "",
               "tags": "type::weight,mode::advanced",
               "items": [
                 {
                   "title": "Type of paranormal activity (residual, intelligent, poltergeist)",
+                  "parentItem": "✂️Segmentation",
                   "content": "Classification based on the nature and behavior of the supernatural phenomena, which determines the appropriate investigation methods and equipment needed for effective resolution. This criterion helps tailor the service approach to address specific manifestation types with targeted protocols.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Severity of haunting (mild, moderate, severe)",
+                  "parentItem": "✂️Segmentation",
                   "content": "Assessment of the intensity and impact of paranormal activity, which influences service urgency, resource allocation, and pricing structure. This classification helps prioritize cases and determine the appropriate level of intervention required, from simple monitoring to full-scale containment operations.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Geographic location (urban, rural, remote)",
+                  "parentItem": "✂️Segmentation",
                   "content": "Segmentation based on the physical location of the property, which impacts accessibility, investigation logistics, and communication with clients.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Property type (residential, commercial, public)",
+                  "parentItem": "✂️Segmentation",
                   "content": "Categorization based on the primary use of the affected space, which affects service delivery timing, discretion requirements, and operational constraints. This criterion ensures that service approaches account for the unique characteristics and needs of different property environments.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Client budget (standard, premium, emergency)",
+                  "parentItem": "✂️Segmentation",
                   "content": "Segmentation based on financial parameters that determine service level options and payment arrangements available to the client. This classification helps match clients with appropriate service packages while maintaining profitability across different market segments.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Previous investigation attempts (none, some, multiple failed attempts)",
+                  "parentItem": "✂️Segmentation",
                   "content": "Segmentation based on prior investigative efforts, which affects the scope, methodology, and resources required for a successful resolution.",
                   "tags": "",
                   "items": []
@@ -167,23 +194,27 @@
             },
             {
               "title": "📈Market trends",
+              "parentItem": "🙋Segments",
               "content": "",
               "tags": "type::weight,mode::expert",
               "items": [
                 {
                   "title": "Increasing public acceptance of paranormal phenomena",
+                  "parentItem": "📈Market trends",
                   "content": "Growing mainstream acknowledgment of unexplained experiences has reduced stigma and increased willingness to seek professional paranormal services. This shift is evidenced by more open public discourse about supernatural experiences and greater media coverage treating the topic with seriousness rather than sensationalism.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Rising demand for science-based approaches to supernatural occurrences",
+                  "parentItem": "📈Market trends",
                   "content": "Clients increasingly seek evidence-based methodologies that combine traditional paranormal investigation with scientific instrumentation and documentation. This trend reflects a broader societal movement toward empirical validation and technological solutions even for phenomena that have traditionally fallen outside mainstream scientific inquiry.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Growth in paranormal tourism and commercial exploitation of haunted properties",
+                  "parentItem": "📈Market trends",
                   "content": "Business owners increasingly recognize the commercial potential of paranormal reputations, creating opportunities for consultation services and management of supernatural assets. This trend has transformed what was once considered a liability into a potential revenue stream for properties with documented paranormal activity.",
                   "tags": "",
                   "items": []
@@ -192,29 +223,34 @@
             },
             {
               "title": "📄Market size",
+              "parentItem": "🙋Segments",
               "content": "",
               "tags": "type::text,mode::advanced",
               "items": []
             },
             {
               "title": "🏅Competition",
+              "parentItem": "🙋Segments",
               "content": "",
               "tags": "type::weight,mode::advanced",
               "items": [
                 {
                   "title": "Local Paranormal Investigation Groups",
+                  "parentItem": "🏅Competition",
                   "content": "Amateur and semi-professional teams that conduct investigations but typically lack capture or containment capabilities. These groups often provide free or low-cost services focused on documentation rather than resolution, attracting clients with limited budgets but creating market confusion about professional standards and expectations.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Religious/Spiritual Practitioners",
+                  "parentItem": "🏅Competition",
                   "content": "Clergy, mediums, and spiritual advisors who offer cleansing or blessing services based on religious or metaphysical approaches. These competitors address the market with traditional practices that may appeal to clients with specific cultural or religious affiliations but often lack technological solutions for persistent or aggressive manifestations.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Academic Parapsychology Departments",
+                  "parentItem": "🏅Competition",
                   "content": "University-affiliated researchers who study paranormal phenomena for scientific purposes rather than practical intervention. These entities command scientific credibility but typically focus on research objectives rather than providing comprehensive client services or permanent solutions.",
                   "tags": "",
                   "items": []
@@ -223,29 +259,34 @@
             },
             {
               "title": "🎩Roles",
+              "parentItem": "🙋Segments",
               "content": "",
               "tags": "type::weight,mode::expert",
               "items": [
                 {
                   "title": "Property Owner",
+                  "parentItem": "🎩Roles",
                   "content": "The individual or entity with legal ownership of the haunted property who makes final decisions regarding intervention services. The Property Owner typically initiates contact with Ghosthunters, authorizes expenditures, and evaluates service outcomes based on resolution of the paranormal activity.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Property Manager",
+                  "parentItem": "🎩Roles",
                   "content": "Professional responsible for maintaining property operations who coordinates service scheduling and access logistics. The Property Manager often serves as the main point of contact during investigations, providing historical information about the property and reports of previous incidents.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Occupants/Employees",
+                  "parentItem": "🎩Roles",
                   "content": "Individuals who regularly use the space and may experience direct encounters with paranormal phenomena. These individuals provide crucial eyewitness testimony about paranormal occurrences and may need reassurance and education about the nature of the phenomena and the intervention process.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Building Security",
+                  "parentItem": "🎩Roles",
                   "content": "Staff responsible for facility safety who must coordinate with paranormal technicians during investigations and interventions. Security personnel help manage access to restricted areas, assist with equipment deployment, and help maintain confidentiality during operations.",
                   "tags": "",
                   "items": []
@@ -254,53 +295,62 @@
             },
             {
               "title": "📄Persona",
+              "parentItem": "🙋Segments",
               "content": "",
               "tags": "type::text,mode::advanced",
               "items": []
             },
             {
               "title": "😟Problems",
+              "parentItem": "🙋Segments",
               "content": "",
               "tags": "type::weight,mode::basic",
               "items": [
                 {
                   "title": "Fear for personal and family safety",
+                  "parentItem": "😟Problems",
                   "content": "Concern about potentially malevolent entities causing psychological or physical harm to household members. Parents are particularly anxious about children's vulnerability to frightening experiences and the potential long-term psychological impact.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Unexplained disturbances disrupting daily life",
+                  "parentItem": "😟Problems",
                   "content": "Unusual sounds, moving objects, and visual apparitions create an atmosphere of unpredictability and fear. These phenomena interrupt sleep patterns, cause stress, and make routine activities difficult to perform with confidence and peace of mind.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Skepticism from others about experiences",
+                  "parentItem": "😟Problems",
                   "content": "Friends, family members, and service providers often dismiss reports of paranormal activity as imagination or explainable by conventional causes. This dismissal leads to feelings of isolation and self-doubt, compounding the stress of the experiences themselves.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Property value concerns",
+                  "parentItem": "😟Problems",
                   "content": "Worry that known paranormal activity will negatively impact property value and marketability if disclosure becomes necessary. Property owners face difficult decisions about transparency with potential buyers and the financial consequences of paranormal reputations.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Limited knowledge of available solutions",
+                  "parentItem": "😟Problems",
                   "content": "Confusion about appropriate responses to paranormal activity and uncertainty about effective intervention methods. Most people have no prior experience with supernatural occurrences and lack reference points for evaluating service providers or approaches.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Business disruption and revenue loss",
+                  "parentItem": "😟Problems",
                   "content": "Paranormal activity causing customer discomfort, employee turnover, or interference with business operations. Commercial establishments face particular challenges when supernatural phenomena affect client experiences or workplace functionality.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Finding credible, professional help",
+                  "parentItem": "😟Problems",
                   "content": "Difficulty identifying genuine paranormal professionals amid sensationalism, frauds, and amateurs in the field. The unregulated nature of paranormal services creates a confusing landscape for consumers seeking legitimate assistance.",
                   "tags": "",
                   "items": []
@@ -309,23 +359,27 @@
             },
             {
               "title": "📣Messages",
+              "parentItem": "🙋Segments",
               "content": "",
               "tags": "type::weight,mode::advanced",
               "items": [
                 {
                   "title": "\"We believe you. We can help.\"",
+                  "parentItem": "📣Messages",
                   "content": "A direct message of validation and solution-oriented support that acknowledges the reality of clients' experiences. This message builds immediate trust by addressing the common pain point of skepticism and dismissal that paranormal experiencers often face.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "\"Paranormal problems require professional solutions.\"",
+                  "parentItem": "📣Messages",
                   "content": "Positioning that emphasizes the specialized expertise and equipment necessary for effective supernatural intervention. This message differentiates Ghosthunters from amateur investigators and conventional service providers by highlighting the technical complexity of paranormal resolution.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "\"Restoring peace and normality to haunted spaces since 1984.\"",
+                  "parentItem": "📣Messages",
                   "content": "Heritage messaging that emphasizes long-standing experience and successful outcomes in paranormal management. This approach builds credibility through implied track record and focuses on the ultimate client benefit of restored normalcy.",
                   "tags": "",
                   "items": []
@@ -334,41 +388,48 @@
             },
             {
               "title": "🎙️Channels",
+              "parentItem": "🙋Segments",
               "content": "",
               "tags": "type::weight,mode::basic",
               "items": [
                 {
                   "title": "Website and digital presence",
+                  "parentItem": "🎙️Channels",
                   "content": "Informational online platform with case studies, educational resources, and service descriptions accessible to potential clients. This channel provides detailed information for research-oriented clients while establishing credibility through professional presentation and documented results.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Professional referral network",
+                  "parentItem": "🎙️Channels",
                   "content": "Relationships with real estate agents, historic preservation societies, and property managers who encounter paranormal situations. This network provides qualified leads from trusted intermediaries who can vouch for service quality and appropriate applications.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Media appearances and expert commentary",
+                  "parentItem": "🎙️Channels",
                   "content": "Television, radio, and podcast features positioning team members as authoritative sources on paranormal topics. Media exposure builds brand recognition and creditability while reaching audiences who may not actively search for paranormal services but could recognize the need when issues arise.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "24/7 Emergency hotline",
+                  "parentItem": "🎙️Channels",
                   "content": "Dedicated phone service for immediate response to urgent paranormal situations requiring rapid intervention. This direct channel ensures accessibility during crisis situations, with trained operators who can assess severity and dispatch appropriate resources.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Community workshops and presentations",
+                  "parentItem": "🎙️Channels",
                   "content": "Educational events at libraries, community centers, and conferences on paranormal phenomena and management approaches. These presentations raise awareness, establish expertise, and create face-to-face connections with potential clients in a non-sales environment.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Client testimonials and referrals",
+                  "parentItem": "🎙️Channels",
                   "content": "Word-of-mouth recommendations and documented success stories from previous clients who have experienced resolution. Personal endorsements from satisfied customers provide powerful social proof that builds trust in the effectiveness of services.",
                   "tags": "",
                   "items": []
@@ -377,23 +438,27 @@
             },
             {
               "title": "🤝Relationships",
+              "parentItem": "🙋Segments",
               "content": "",
               "tags": "type::text,mode::advanced",
               "items": [
                 {
                   "title": "Personal Consultation and Assessment",
+                  "parentItem": "🤝Relationships",
                   "content": "One-on-one initial meetings to gather information, understand client concerns, and establish trust. These consultations create rapport while allowing experts to assess the situation in detail and develop customized intervention plans.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Transparent Investigation Process",
+                  "parentItem": "🤝Relationships",
                   "content": "Client involvement and clear communication throughout the paranormal investigation, including explanation of findings and recommended approaches. This transparency builds confidence in the process and helps clients understand the nature of the phenomena they're experiencing.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Ongoing Support and Follow-up",
+                  "parentItem": "🤝Relationships",
                   "content": "Post-intervention monitoring and availability for questions or recurrence for a guaranteed period after service completion. This continued relationship ensures complete resolution and provides clients with peace of mind that support remains available if needed.",
                   "tags": "",
                   "items": []
@@ -402,29 +467,34 @@
             },
             {
               "title": "👁️Perceptions",
+              "parentItem": "🙋Segments",
               "content": "",
               "tags": "type::weight,mode::advanced",
               "items": [
                 {
                   "title": "Professional uniforms and branded vehicles",
+                  "parentItem": "👁️Perceptions",
                   "content": "Distinctive, professional attire and clearly marked service vehicles that convey legitimacy and organization. These visual elements create immediate recognition and distinction from amateur investigators, establishing credibility from the first impression.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Advanced technological equipment",
+                  "parentItem": "👁️Perceptions",
                   "content": "Specialized detection, measurement, and containment devices that demonstrate scientific approach and capabilities. This equipment visually reinforces the scientific methodology and technological advantage offered by professional paranormal services.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Systematic investigation procedures",
+                  "parentItem": "👁️Perceptions",
                   "content": "Organized, methodical approach to paranormal assessment that conveys expertise and thoroughness. The visible process of systematic investigation reassures clients that nothing is being overlooked and that the approach is based on established protocols rather than improvisation.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Testimonials from satisfied clients",
+                  "parentItem": "👁️Perceptions",
                   "content": "Stories and recommendations that highlight successful resolution of similar paranormal situations. These narratives provide social proof of effectiveness and help new clients envision positive outcomes for their own situations.",
                   "tags": "",
                   "items": []
@@ -433,35 +503,41 @@
             },
             {
               "title": "😐Emotions",
+              "parentItem": "🙋Segments",
               "content": "",
               "tags": "type::weight,mode::advanced",
               "items": [
                 {
                   "title": "Relief",
+                  "parentItem": "😐Emotions",
                   "content": "Emotional release when paranormal experiences are validated rather than dismissed or questioned. This validation alleviates the isolation and self-doubt that often accompany unexplained phenomena, establishing immediate rapport and trust.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Hope",
+                  "parentItem": "😐Emotions",
                   "content": "Positive anticipation of resolution and return to normalcy after enduring frightening or disruptive paranormal experiences. This emotion energizes clients' engagement with the solution process and helps overcome hesitation about intervention costs.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Curiosity",
+                  "parentItem": "😐Emotions",
                   "content": "Interest in understanding the nature and origin of the paranormal phenomena affecting their property. This intellectual engagement often transforms fear into fascination once clients feel supported by professional expertise.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Skepticism",
+                  "parentItem": "😐Emotions",
                   "content": "Initial doubt about the effectiveness of paranormal services and concern about potential exploitation. This natural caution requires transparent communication and evidence-based approaches to overcome.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Embarrassment",
+                  "parentItem": "😐Emotions",
                   "content": "Concern about being judged for believing in supernatural phenomena or for seeking specialized paranormal services. This social anxiety influences clients' preferences for discretion and professionalism in service delivery.",
                   "tags": "",
                   "items": []
@@ -470,35 +546,41 @@
             },
             {
               "title": "🦾Behaviors",
+              "parentItem": "🙋Segments",
               "content": "",
               "tags": "type::weight,mode::advanced",
               "items": [
                 {
                   "title": "Delaying professional intervention",
+                  "parentItem": "🦾Behaviors",
                   "content": "Initially attempting to ignore or rationalize paranormal experiences before seeking help, often until phenomena intensify. This hesitation typically results from skepticism, cost concerns, or fear of being perceived as irrational.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Conducting amateur investigations",
+                  "parentItem": "🦾Behaviors",
                   "content": "Using consumer-grade equipment or smartphone apps to attempt paranormal detection and documentation. These preliminary efforts often precede professional engagement and demonstrate the client's attempt to gather evidence and validate their experiences.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Researching paranormal theories",
+                  "parentItem": "🦾Behaviors",
                   "content": "Extensive online research and media consumption about supernatural phenomena to understand experiences. This self-education often leads to misconceptions but demonstrates the client's desire for knowledge and explanation.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Seeking validation from others",
+                  "parentItem": "🦾Behaviors",
                   "content": "Carefully documenting experiences and sharing with trusted individuals to confirm they aren't imagining phenomena. This validation-seeking behavior reflects the fundamental need to have experiences acknowledged as real rather than dismissed.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Implementing ineffective DIY solutions",
+                  "parentItem": "🦾Behaviors",
                   "content": "Trying folk remedies, religious interventions, or amateur cleansing rituals before engaging professional services. These attempts demonstrate both the client's proactive approach to solving the problem and their lack of specialized knowledge.",
                   "tags": "",
                   "items": []
@@ -507,41 +589,48 @@
             },
             {
               "title": "✈️Journey",
+              "parentItem": "🙋Segments",
               "content": "",
               "tags": "type::steps,mode::advanced",
               "items": [
                 {
                   "title": "Awareness",
+                  "parentItem": "✈️Journey",
                   "content": "The client experiences unexplained phenomena that cannot be attributed to conventional causes, creating the initial need recognition. This phase is characterized by confusion, self-doubt, and attempts to find rational explanations for increasingly undeniable paranormal activity.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Research and Consideration",
+                  "parentItem": "✈️Journey",
                   "content": "Investigation of available paranormal services, comparison of approaches, and evaluation of credibility through online research and personal referrals. During this phase, clients are primarily concerned with finding legitimate expertise rather than being exploited by charlatans or ineffective amateurs.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Initial Consultation",
+                  "parentItem": "✈️Journey",
                   "content": "First contact with Ghosthunters to discuss experiences, assess the situation, and determine appropriate service level. This critical interaction establishes trust and expertise while giving clients the validation they seek for their experiences.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Investigation and Assessment",
+                  "parentItem": "✈️Journey",
                   "content": "On-site paranormal investigation using specialized equipment to document activity, identify entity types, and develop intervention strategy. This phase gives clients concrete evidence and explanation of their experiences while preparing for effective resolution.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Intervention and Containment",
+                  "parentItem": "✈️Journey",
                   "content": "Active paranormal elimination procedures implemented based on investigation findings, with client involvement as appropriate. This phase delivers the core service value by physically addressing and resolving the supernatural presence.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Verification and Closure",
+                  "parentItem": "✈️Journey",
                   "content": "Post-intervention monitoring to confirm complete resolution, implementation of preventative measures, and documentation of results. This phase provides clients with confidence that the problem has been fully resolved and reassurance that support remains available if needed.",
                   "tags": "",
                   "items": []
@@ -554,33 +643,39 @@
     },
     {
       "title": "📂Solutions",
+      "parentItem": "",
       "content": "",
       "tags": "type::category,mode::basic",
       "items": [
         {
           "title": "💊Products and services",
+          "parentItem": "📂Solutions",
           "content": "",
           "tags": "type::weight,mode::basic",
           "items": [
             {
               "title": "💼Portfolio",
+              "parentItem": "💊Products and services",
               "content": "",
               "tags": "type::text,mode::basic",
               "items": [
                 {
                   "title": "Ghosthunters Paranormal Services",
+                  "parentItem": "💼Portfolio",
                   "content": "A comprehensive suite of professional services for the detection, investigation, and elimination of supernatural entities and phenomena. Our integrated approach combines scientific methodology, proprietary technology, and specialized expertise to provide complete resolution of paranormal disturbances affecting residential, commercial, and historic properties.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Spectral Containment System",
+                  "parentItem": "💼Portfolio",
                   "content": "A proprietary technology for the safe capture and containment of ectoplasmic entities, preventing their return or release. This revolutionary system enables the permanent resolution of paranormal infestations through advanced particle physics and dimensional containment fields that securely store supernatural entities.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Paranormal Monitoring Solutions",
+                  "parentItem": "💼Portfolio",
                   "content": "Ongoing detection and alert systems for properties with recurrent or potential paranormal activity, providing early warning of supernatural manifestations. These monitoring solutions combine sensitive instrumentation with remote notification capabilities to identify paranormal phenomena before they develop into disruptive or dangerous situations.",
                   "tags": "",
                   "items": []
@@ -589,41 +684,48 @@
             },
             {
               "title": "📄Brochure",
+              "parentItem": "💊Products and services",
               "content": "",
               "tags": "type::text,mode::advanced",
               "items": []
             },
             {
               "title": "📄Components",
+              "parentItem": "💊Products and services",
               "content": "",
               "tags": "type::weight",
               "items": [
                 {
                   "title": "Proton Packs",
+                  "parentItem": "📄Components",
                   "content": "Portable particle accelerators that generate focused streams of positively charged particles to weaken and capture ectoplasmic entities. These sophisticated devices are the primary offensive tool for paranormal containment operations.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Ghost Traps",
+                  "parentItem": "📄Components",
                   "content": "Portable containment devices that temporarily hold captured entities for transport to permanent storage. These compact units create localized dimensional pockets that securely contain supernatural entities until they can be transferred to long-term storage.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "PKE Meters",
+                  "parentItem": "📄Components",
                   "content": "Handheld devices that measure psychokinetic energy fluctuations to detect and locate supernatural presences. These sensitive instruments are essential for initial assessment and entity tracking during investigations.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Ecto Goggles",
+                  "parentItem": "📄Components",
                   "content": "Specialized eyewear that allows visualization of entities and energies outside the normal visible spectrum. This technology enables investigators to observe supernatural phenomena that would otherwise remain invisible to the human eye.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Containment Unit",
+                  "parentItem": "📄Components",
                   "content": "Central facility for permanent storage of captured entities, maintained under strict security and energy protocols. This sophisticated installation provides secure, long-term containment for all captured paranormal entities and prevents their re-manifestation or escape.",
                   "tags": "",
                   "items": []
@@ -632,41 +734,48 @@
             },
             {
               "title": "🌟Features",
+              "parentItem": "💊Products and services",
               "content": "",
               "tags": "type::weight,mode::advanced",
               "items": [
                 {
                   "title": "Advanced entity detection technology",
+                  "parentItem": "🌟Features",
                   "content": "Proprietary equipment that identifies paranormal presences even when dormant or attempting to conceal themselves. This capability ensures thorough assessment of affected properties and prevents entities from evading detection during investigations.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Multi-phase investigation protocol",
+                  "parentItem": "🌟Features",
                   "content": "Systematic approach combining historical research, witness interviews, instrumented monitoring, and provocative techniques to fully characterize paranormal activity. This comprehensive methodology ensures accurate identification of entity types and appropriate intervention strategies.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Non-destructive containment methods",
+                  "parentItem": "🌟Features",
                   "content": "Entity capture and removal techniques that don't damage property structures or historic elements during intervention. These specialized approaches preserve property integrity while effectively addressing paranormal presences, particularly important for heritage buildings and valuable real estate.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "24/7 emergency response capability",
+                  "parentItem": "🌟Features",
                   "content": "Round-the-clock availability for urgent situations requiring immediate paranormal intervention. This service ensures that escalating or dangerous manifestations can be addressed promptly before causing harm or significant disruption.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Evidence documentation and analysis",
+                  "parentItem": "🌟Features",
                   "content": "Comprehensive recording and scientific examination of paranormal phenomena using specialized equipment and methodologies. This feature provides clients with verified evidence of supernatural activity and detailed understanding of the phenomena they've experienced.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Customized protection strategies",
+                  "parentItem": "🌟Features",
                   "content": "Tailored recommendations for preventing future paranormal activity based on property specifics and manifestation patterns. These personalized approaches address the unique vulnerabilities of each location to minimize recurrence risk.",
                   "tags": "",
                   "items": []
@@ -675,23 +784,27 @@
             },
             {
               "title": "📄Roadmap",
+              "parentItem": "💊Products and services",
               "content": "",
               "tags": "type::steps,mode::expert",
               "items": [
                 {
                   "title": "Version 1: Core Paranormal Investigation Services",
+                  "parentItem": "📄Roadmap",
                   "content": "Establishment of basic detection and documentation capabilities with preliminary containment facilities, focusing on building credibility through successful case resolution and scientific validation of paranormal phenomena.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Version 2: Enhanced Containment Technology",
+                  "parentItem": "📄Roadmap",
                   "content": "Development of more advanced entity capture and storage solutions with increased capacity and security, introducing specialized equipment for different classes of paranormal manifestations and improved operational efficiency.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Version 3: Remote Monitoring Systems",
+                  "parentItem": "📄Roadmap",
                   "content": "Implementation of installable paranormal detection networks for continuous property monitoring and early intervention, with client monitoring portals and alert systems for transparent oversight of activity levels.",
                   "tags": "",
                   "items": []
@@ -700,41 +813,48 @@
             },
             {
               "title": "📄Pricing",
+              "parentItem": "💊Products and services",
               "content": "",
               "tags": "type::text,mode::advanced",
               "items": []
             },
             {
               "title": "🛍️Offerings",
+              "parentItem": "💊Products and services",
               "content": "",
               "tags": "type::weight,mode::advanced",
               "items": [
                 {
                   "title": "Complete Elimination Service",
+                  "parentItem": "🛍️Offerings",
                   "content": "End-to-end paranormal resolution including investigation, containment, removal, and preventative measures for full property clearance. This comprehensive solution addresses all aspects of supernatural infestation to provide complete and lasting resolution.",
                   "tags": "price::ad-hoc",
                   "items": []
                 },
                 {
                   "title": "Scientific Investigation Package",
+                  "parentItem": "🛍️Offerings",
                   "content": "Comprehensive assessment of paranormal activity using specialized equipment and systematic protocols to identify entity type and activity patterns. This preliminary service confirms the presence of supernatural phenomena and provides the foundation for appropriate intervention strategies.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Commercial Property Protection Plan",
+                  "parentItem": "🛍️Offerings",
                   "content": "Ongoing monitoring and rapid response services for businesses experiencing or concerned about paranormal activity. This subscription-based service ensures continuous protection against supernatural disruptions to commercial operations and customer experience.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Historic Property Consultation",
+                  "parentItem": "🛍️Offerings",
                   "content": "Specialized assessment and intervention services for heritage buildings with consideration for historical significance and preservation requirements. This specialized offering combines paranormal expertise with sensitivity to historical integrity and preservation standards.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Emergency Containment Response",
+                  "parentItem": "🛍️Offerings",
                   "content": "Urgent intervention for dangerous or escalating paranormal situations requiring immediate professional attention. This rapid-deployment service addresses critical situations where supernatural manifestations pose immediate threats to safety or property.",
                   "tags": "",
                   "items": []
@@ -745,28 +865,33 @@
         },
         {
           "title": "📂Marketing",
+          "parentItem": "📂Solutions",
           "content": "",
           "tags": "type::category,mode::advanced",
           "items": [
             {
               "title": "📄Naming",
+              "parentItem": "📂Marketing",
               "content": "",
               "tags": "type::text,mode::advanced",
               "items": [
                 {
                   "title": "Ghosthunters",
+                  "parentItem": "📄Naming",
                   "content": "The main company name that clearly communicates the service offering in a memorable, approachable way while establishing brand distinctiveness.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Proton Pack",
+                  "parentItem": "📄Naming",
                   "content": "The name for the primary ghost-capturing equipment, suggesting scientific advancement and energy-based technology rather than mystical approaches.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Ecto-Containment System",
+                  "parentItem": "📄Naming",
                   "content": "The terminology for the storage facility, incorporating scientific prefix \"ecto-\" to reinforce the technical rather than supernatural approach to ghost management.",
                   "tags": "",
                   "items": []
@@ -775,18 +900,21 @@
             },
             {
               "title": "📄Branding",
+              "parentItem": "📂Marketing",
               "content": "",
               "tags": "type::text,mode::advanced",
               "items": []
             },
             {
               "title": "📄Visual identity",
+              "parentItem": "📂Marketing",
               "content": "",
               "tags": "type::text,mode::expert",
               "items": []
             },
             {
               "title": "📄Logo",
+              "parentItem": "📂Marketing",
               "content": "",
               "tags": "type::text,mode::expert",
               "items": []
@@ -795,29 +923,34 @@
         },
         {
           "title": "📂Communication",
+          "parentItem": "📂Solutions",
           "content": "",
           "tags": "type::category,mode::advanced",
           "items": [
             {
               "title": "📄Pitch",
+              "parentItem": "📂Communication",
               "content": "",
               "tags": "type::text,mode::advanced",
               "items": []
             },
             {
               "title": "📄Web",
+              "parentItem": "📂Communication",
               "content": "",
               "tags": "type::text,mode::advanced",
               "items": []
             },
             {
               "title": "📄Storytelling",
+              "parentItem": "📂Communication",
               "content": "",
               "tags": "type::text,mode::expert",
               "items": []
             },
             {
               "title": "📄Presentations",
+              "parentItem": "📂Communication",
               "content": "",
               "tags": "type::text,mode::advanced",
               "items": []
@@ -828,33 +961,39 @@
     },
     {
       "title": "📂Organization",
+      "parentItem": "",
       "content": "",
       "tags": "type::category,mode::advanced",
       "items": [
         {
           "title": "📂Business idea",
+          "parentItem": "📂Organization",
           "content": "",
           "tags": "type::category,mode::advanced",
           "items": [
             {
               "title": "📄Inspiration",
+              "parentItem": "📂Business idea",
               "content": "",
               "tags": "type::weight,mode::expert",
               "items": [
                 {
                   "title": "Personal Encounters with the Paranormal",
+                  "parentItem": "📄Inspiration",
                   "content": "The founder's firsthand experiences with unexplained phenomena in their own home, which sparked a curiosity and desire to scientifically understand and manage such occurrences.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Cultural Impact of Ghostbusters",
+                  "parentItem": "📄Inspiration",
                   "content": "The influence of the Ghostbusters movie, which popularized the concept of professional paranormal investigators and highlighted the potential for a technology-driven approach to supernatural disturbances.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Quantum Entanglement Discoveries",
+                  "parentItem": "📄Inspiration",
                   "content": "The fascination with quantum entanglement and its implications for understanding interconnectedness and non-local phenomena, fueling the development of advanced detection and containment technologies.",
                   "tags": "",
                   "items": []
@@ -863,47 +1002,55 @@
             },
             {
               "title": "📄Opportunity",
+              "parentItem": "📂Business idea",
               "content": "",
               "tags": "type::weight,mode::advanced",
               "items": []
             },
             {
               "title": "📄Business status",
+              "parentItem": "📂Business idea",
               "content": "",
               "tags": "type::text,mode::basic",
               "items": []
             },
             {
               "title": "📄Challenges",
+              "parentItem": "📂Business idea",
               "content": "",
               "tags": "type::weight,mode::expert",
               "items": [
                 {
                   "title": "Public Perception: Overcoming Skepticism",
+                  "parentItem": "📄Challenges",
                   "content": "Describe the main challenge in tackling public uncertainty.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Scientific Credibility: Research Funding Limitations",
+                  "parentItem": "📄Challenges",
                   "content": "The restriction in research grants for paranormal studies limits scientific legitimacy.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Technological Development: Component Sourcing Issues",
+                  "parentItem": "📄Challenges",
                   "content": "Difficulties in obtaining rare/specialized components for building and maintaining proprietary paranormal equipment.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Regulatory Compliance: High Legal Costs",
+                  "parentItem": "📄Challenges",
                   "content": "The costs arise from regulatory hurdles associated with experimental scientific research and waste (entity) management.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Scaling Operations: Maintaining Service Consistency",
+                  "parentItem": "📄Challenges",
                   "content": "The difficulty in providing the same service level in more locations impacts quality.",
                   "tags": "",
                   "items": []
@@ -914,52 +1061,61 @@
         },
         {
           "title": "📂Business objectives",
+          "parentItem": "📂Organization",
           "content": "",
           "tags": "type::category,mode::basic",
           "items": [
             {
               "title": "📄Mission",
+              "parentItem": "📂Business objectives",
               "content": "",
               "tags": "type::text,mode::advanced",
               "items": []
             },
             {
               "title": "📄Vision",
+              "parentItem": "📂Business objectives",
               "content": "",
               "tags": "type::text,mode::advanced",
               "items": []
             },
             {
               "title": "🧠Organizational values",
+              "parentItem": "📂Business objectives",
               "content": "",
               "tags": "type::weight,mode::advanced",
               "items": [
                 {
                   "title": "Scientific Integrity",
+                  "parentItem": "🧠Organizational values",
                   "content": "Commitment to evidence-based approaches and technological innovation in addressing paranormal challenges. We maintain rigorous standards in our methodologies, documentation, and analysis, ensuring our work stands up to scrutiny and advances understanding of supernatural phenomena.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Client Empathy",
+                  "parentItem": "🧠Organizational values",
                   "content": "Genuine respect for clients' experiences and concerns without judgment or skepticism. We recognize that paranormal encounters can be frightening and isolating, and we provide validation and support throughout the intervention process.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Operational Excellence",
+                  "parentItem": "🧠Organizational values",
                   "content": "Dedication to consistent, high-quality service delivery and continuous improvement of procedures and equipment. We strive for effectiveness and efficiency in every aspect of our operations, from initial consultation to final resolution.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Knowledge Advancement",
+                  "parentItem": "🧠Organizational values",
                   "content": "Commitment to expanding the collective understanding of paranormal phenomena through research and documentation. We contribute to the field through careful study, systematic recording of phenomena, and open sharing of non-proprietary findings.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Ethical Responsibility",
+                  "parentItem": "🧠Organizational values",
                   "content": "Awareness of the unique ethical considerations in paranormal work, including respect for historical contexts, cultural sensitivities, and potential sentience of entities. We approach our work with consciousness of its implications beyond the immediate technical challenges.",
                   "tags": "",
                   "items": []
@@ -968,22 +1124,26 @@
             },
             {
               "title": "🎯Organizational goals",
+              "parentItem": "📂Business objectives",
               "content": "",
               "tags": "type::weight,mode::advanced",
               "items": [
                 {
                   "title": "Establish Market Leadership",
+                  "parentItem": "🎯Organizational goals",
                   "content": "Become the recognized authority in paranormal elimination services through scientific credibility and proven results.",
                   "tags": "",
                   "items": [
                     {
                       "title": "Build Brand Recognition",
+                      "parentItem": "Establish Market Leadership",
                       "content": "Achieve 75% brand awareness among property owners in service territories within three years.",
                       "tags": "",
                       "items": []
                     },
                     {
                       "title": "Develop Industry Standards",
+                      "parentItem": "Establish Market Leadership",
                       "content": "Create and publish definitive protocols for paranormal classification and intervention that become industry benchmarks.",
                       "tags": "",
                       "items": []
@@ -992,17 +1152,20 @@
                 },
                 {
                   "title": "Expand Service Capacity",
+                  "parentItem": "🎯Organizational goals",
                   "content": "Increase operational capabilities to serve more clients across a wider geographic area.",
                   "tags": "",
                   "items": [
                     {
                       "title": "Geographic Expansion",
+                      "parentItem": "Expand Service Capacity",
                       "content": "Establish operational presence in five major metropolitan areas within five years.",
                       "tags": "",
                       "items": []
                     },
                     {
                       "title": "Team Development",
+                      "parentItem": "Expand Service Capacity",
                       "content": "Train and certify 30 new paranormal specialists by end of year three.",
                       "tags": "",
                       "items": []
@@ -1011,17 +1174,20 @@
                 },
                 {
                   "title": "Advance Technology",
+                  "parentItem": "🎯Organizational goals",
                   "content": "Continuously improve proprietary equipment for more effective and efficient paranormal management.",
                   "tags": "",
                   "items": [
                     {
                       "title": "Equipment Refinement",
+                      "parentItem": "Advance Technology",
                       "content": "Release next-generation containment system with 50% improved capacity and 30% reduced energy consumption.",
                       "tags": "",
                       "items": []
                     },
                     {
                       "title": "Research Integration",
+                      "parentItem": "Advance Technology",
                       "content": "Establish formal research partnerships with two academic institutions to accelerate technology development.",
                       "tags": "",
                       "items": []
@@ -1030,17 +1196,20 @@
                 },
                 {
                   "title": "Ensure Financial Sustainability",
+                  "parentItem": "🎯Organizational goals",
                   "content": "Build a robust financial foundation that supports ongoing operations and future growth.",
                   "tags": "",
                   "items": [
                     {
                       "title": "Revenue Diversification",
+                      "parentItem": "Ensure Financial Sustainability",
                       "content": "Develop three new revenue streams beyond direct intervention services by year three.",
                       "tags": "",
                       "items": []
                     },
                     {
                       "title": "Operational Efficiency",
+                      "parentItem": "Ensure Financial Sustainability",
                       "content": "Improve profit margins by 15% through process optimization and economies of scale.",
                       "tags": "",
                       "items": []
@@ -1053,40 +1222,47 @@
         },
         {
           "title": "📄Operations",
+          "parentItem": "📂Organization",
           "content": "",
           "tags": "type::category,mode::advanced",
           "items": [
             {
               "title": "⚙️Activities",
+              "parentItem": "📄Operations",
               "content": "",
               "tags": "type::weight,mode::advanced",
               "items": [
                 {
                   "title": "Initial client consultation",
+                  "parentItem": "⚙️Activities",
                   "content": "Conducting preliminary assessments of reported paranormal activity through interviews and documentation review to determine appropriate service needs. These consultations establish client expectations, gather essential background information, and identify any special considerations for the case.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Paranormal investigation",
+                  "parentItem": "⚙️Activities",
                   "content": "Performing systematic on-site examination using specialized equipment to detect, measure, and classify supernatural phenomena. This process includes environmental readings, spatial mapping of activity, temporal pattern analysis, and preliminary entity identification.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Entity capture and containment",
+                  "parentItem": "⚙️Activities",
                   "content": "Implementing strategic interventions to safely secure and remove paranormal entities from affected locations using proprietary technology. These operations follow established protocols for different entity types, with safety measures for both clients and technicians.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Equipment maintenance and development",
+                  "parentItem": "⚙️Activities",
                   "content": "Regular servicing of specialized paranormal equipment and ongoing refinement of technology based on field experience. This includes calibration of detection instruments, power cell replacement, containment system inspections, and prototype testing.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Case documentation and analysis",
+                  "parentItem": "⚙️Activities",
                   "content": "Comprehensive recording of all paranormal encounters, interventions, and outcomes for quality assurance and research purposes. This documentation builds the company's knowledge base, informs equipment improvements, and provides evidence for client reports.",
                   "tags": "",
                   "items": []
@@ -1095,47 +1271,55 @@
             },
             {
               "title": "👔Functions",
+              "parentItem": "📄Operations",
               "content": "",
               "tags": "type::weight,mode::expert",
               "items": [
                 {
                   "title": "Field Operations",
+                  "parentItem": "👔Functions",
                   "content": "The front-line team conducting on-site investigations, entity containment, and client interactions throughout the intervention process. These specialists execute the core service delivery with direct responsibility for successful paranormal resolution.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Research and Development",
+                  "parentItem": "👔Functions",
                   "content": "Technical team focused on improving paranormal detection equipment, containment technology, and intervention methodologies. This function drives innovation and ensures technological leadership in the paranormal services field.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Client Services",
+                  "parentItem": "👔Functions",
                   "content": "Team managing initial consultations, case intake, scheduling, and ongoing client communications throughout the service process. These professionals ensure a positive client experience from first contact through case resolution.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Equipment Management",
+                  "parentItem": "👔Functions",
                   "content": "Technical staff responsible for maintenance, repair, and calibration of all paranormal detection and containment technology. This function ensures operational readiness and equipment reliability for all field interventions.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Containment Facility Management",
+                  "parentItem": "👔Functions",
                   "content": "Specialized team overseeing the secure storage and monitoring of captured entities in the central containment unit. These technicians manage the critical infrastructure that prevents recurrence of paranormal manifestations.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Administrative Support",
+                  "parentItem": "👔Functions",
                   "content": "Staff handling accounting, human resources, procurement, and general business operations to support service delivery. This function ensures the organizational foundation for effective paranormal services.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Marketing and Communications",
+                  "parentItem": "👔Functions",
                   "content": "Team managing brand presence, client acquisition efforts, public relations, and educational outreach about paranormal services. This function builds awareness and drives new business while managing the company's public image.",
                   "tags": "",
                   "items": []
@@ -1144,35 +1328,41 @@
             },
             {
               "title": "⭐Resources",
+              "parentItem": "📄Operations",
               "content": "",
               "tags": "type::weight,mode::expert",
               "items": [
                 {
                   "title": "Proprietary Technology",
+                  "parentItem": "⭐Resources",
                   "content": "Specialized equipment including PKE meters, proton packs, ghost traps, and the containment system that enables effective paranormal intervention. This proprietary technology represents a significant competitive advantage and barrier to entry.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Headquarters Facility",
+                  "parentItem": "⭐Resources",
                   "content": "Converted firehouse housing offices, equipment storage, laboratory space, and the central containment unit. This physical location provides the operational hub for all paranormal services and secure entity storage.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Response Vehicles",
+                  "parentItem": "⭐Resources",
                   "content": "Customized transportation with equipment storage, mobile laboratory capabilities, and high-visibility branding for field operations. These vehicles enable rapid deployment to client locations with all necessary intervention tools.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Research Library",
+                  "parentItem": "⭐Resources",
                   "content": "Comprehensive collection of historical records, paranormal research, and case documentation supporting entity identification and intervention planning. This knowledge repository enhances investigation effectiveness and solution development.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Client Database",
+                  "parentItem": "⭐Resources",
                   "content": "Digital system tracking all client interactions, case histories, and intervention outcomes for service improvement and follow-up care. This information asset strengthens client relationships and enables pattern recognition across cases.",
                   "tags": "",
                   "items": []
@@ -1183,58 +1373,68 @@
         },
         {
           "title": "👤Team",
+          "parentItem": "📂Organization",
           "content": "",
           "tags": "type::category,mode::basic",
           "items": [
             {
               "title": "Dr. Peter Venkman",
+              "parentItem": "👤Team",
               "content": "Co-founder and client relations specialist with a background in psychology and parapsychology, bringing expertise in human responses to paranormal phenomena and effective communication strategies.",
               "tags": "",
               "items": []
             },
             {
               "title": "Dr. Egon Spengler",
+              "parentItem": "👤Team",
               "content": "Co-founder and chief technology officer whose expertise in theoretical physics and engineering drives the development and refinement of paranormal detection and containment equipment.",
               "tags": "",
               "items": []
             },
             {
               "title": "Dr. Ray Stantz",
+              "parentItem": "👤Team",
               "content": "Co-founder and paranormal research director whose encyclopedic knowledge of supernatural phenomena, occult history, and entity classification guides investigation methodologies.",
               "tags": "",
               "items": []
             },
             {
               "title": "Winston Zeddemore",
+              "parentItem": "👤Team",
               "content": "Operations manager who joined the founding team early in its development, bringing practical field experience, tactical expertise, and business acumen to paranormal interventions.",
               "tags": "",
               "items": []
             },
             {
               "title": "🎯Goals",
+              "parentItem": "👤Team",
               "content": "",
               "tags": "type::weight,mode::expert",
               "items": [
                 {
                   "title": "Professional recognition",
+                  "parentItem": "🎯Goals",
                   "content": "Establish credibility and respect in scientific communities for contributions to understanding paranormal phenomena through empirical methods and technological innovation.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Financial security",
+                  "parentItem": "🎯Goals",
                   "content": "Build a sustainable business model that provides stable income while funding ongoing research and technological development in paranormal sciences.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Technological advancement",
+                  "parentItem": "🎯Goals",
                   "content": "Develop increasingly effective and sophisticated equipment for paranormal detection, containment, and study that expands capabilities and operational efficiency.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Knowledge expansion",
+                  "parentItem": "🎯Goals",
                   "content": "Advance scientific understanding of paranormal phenomena through systematic documentation, classification, and analysis of encountered entities and manifestations.",
                   "tags": "",
                   "items": []
@@ -1243,35 +1443,41 @@
             },
             {
               "title": "🔧Skills",
+              "parentItem": "👤Team",
               "content": "",
               "tags": "type::weight,mode::expert",
               "items": [
                 {
                   "title": "Paranormal Entity Classification",
+                  "parentItem": "🔧Skills",
                   "content": "Ability to identify and categorize supernatural manifestations based on behavior patterns, energy signatures, and historical precedents. This expertise enables appropriate intervention strategies tailored to specific entity types.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Equipment Engineering",
+                  "parentItem": "🔧Skills",
                   "content": "Specialized knowledge in designing, building, and maintaining technological systems for detecting and containing paranormal phenomena. This technical capability forms the foundation of effective service delivery.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Historical and Occult Research",
+                  "parentItem": "🔧Skills",
                   "content": "Expertise in accessing and interpreting historical records, architectural information, and cultural contexts relevant to paranormal manifestations. This research skill provides crucial background for entity identification and resolution approaches.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Client Psychology",
+                  "parentItem": "🔧Skills",
                   "content": "Understanding of human responses to paranormal experiences and effective techniques for client reassurance and cooperation. This interpersonal skill ensures positive client experiences throughout the intervention process.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Field Operations",
+                  "parentItem": "🔧Skills",
                   "content": "Tactical expertise in executing paranormal interventions safely and effectively in diverse environments and circumstances. This practical skill enables successful entity containment with minimal property disruption.",
                   "tags": "",
                   "items": []
@@ -1280,29 +1486,34 @@
             },
             {
               "title": "➡️Contributions",
+              "parentItem": "👤Team",
               "content": "",
               "tags": "type::weight,mode::expert",
               "items": [
                 {
                   "title": "Scientific Research",
+                  "parentItem": "➡️Contributions",
                   "content": "Development of groundbreaking theories and experimental methodologies that formed the foundation for practical paranormal intervention technologies. This intellectual contribution transformed abstract concepts into functional containment systems.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Technical Innovation",
+                  "parentItem": "➡️Contributions",
                   "content": "Engineering and construction of proprietary equipment including detection devices, containment systems, and storage facilities essential for service delivery. These technological innovations enable the core service capabilities of the business.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Startup Funding",
+                  "parentItem": "➡️Contributions",
                   "content": "Initial capital investment from personal resources and property collateralization to establish headquarters, acquire equipment, and launch operations. This financial commitment enabled the transition from theoretical research to commercialization.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Professional Reputation",
+                  "parentItem": "➡️Contributions",
                   "content": "Leveraging established academic credentials and research publications to build credibility for an unconventional service category. This reputational contribution helped overcome skepticism and establish market legitimacy.",
                   "tags": "",
                   "items": []
@@ -1311,29 +1522,34 @@
             },
             {
               "title": "⬅️Compensations",
+              "parentItem": "👤Team",
               "content": "",
               "tags": "type::weight,mode::expert",
               "items": [
                 {
                   "title": "Ownership Equity",
+                  "parentItem": "⬅️Compensations",
                   "content": "Significant shareholding in the company with corresponding profit distribution and decision-making authority. This ownership stake provides financial benefit proportional to the company's success and growth.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Salary and Performance Bonuses",
+                  "parentItem": "⬅️Compensations",
                   "content": "Regular compensation for ongoing operational roles plus additional rewards for exceptional service outcomes and business development. This combination provides stable income while incentivizing continued excellence and innovation.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Intellectual Property Rights",
+                  "parentItem": "⬅️Compensations",
                   "content": "Recognition and financial interest in patents, trademarks, and other intellectual property developed through company activities. These rights acknowledge creative contributions and provide potential future revenue streams.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Research Opportunities",
+                  "parentItem": "⬅️Compensations",
                   "content": "Access to unique paranormal phenomena and data that advances scientific understanding and professional recognition in specialized fields. This intellectual opportunity supports personal growth and professional development alongside commercial activities.",
                   "tags": "",
                   "items": []
@@ -1342,35 +1558,41 @@
             },
             {
               "title": "🪪Positions",
+              "parentItem": "👤Team",
               "content": "",
               "tags": "type::weight,mode::expert",
               "items": [
                 {
                   "title": "Paranormal Technician",
+                  "parentItem": "🪪Positions",
                   "content": "Field specialist trained in equipment operation, entity identification, and containment procedures who executes on-site interventions. These front-line professionals directly implement paranormal elimination services at client locations.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Research Specialist",
+                  "parentItem": "🪪Positions",
                   "content": "Expert in paranormal phenomena classification, historical research, and case analysis who supports intervention planning. These specialists provide crucial background information and entity identification to guide effective approaches.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Equipment Engineer",
+                  "parentItem": "🪪Positions",
                   "content": "Technical expert responsible for maintaining, repairing, and improving paranormal detection and containment devices. These engineers ensure operational readiness of all equipment and develop enhancements based on field experience.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Client Relations Manager",
+                  "parentItem": "🪪Positions",
                   "content": "Professional who coordinates client communications, manages expectations, and ensures satisfaction throughout the service process. These specialists handle sensitive interactions with often distressed clients experiencing unusual circumstances.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Containment Specialist",
+                  "parentItem": "🪪Positions",
                   "content": "Technician trained in the operation, maintenance, and monitoring of the central containment system for captured entities. These specialists ensure the secure storage of paranormal entities and prevent potential containment breaches.",
                   "tags": "",
                   "items": []
@@ -1381,28 +1603,33 @@
         },
         {
           "title": "📄Project plan",
+          "parentItem": "📂Organization",
           "content": "",
           "tags": "type::category,mode::expert",
           "items": [
             {
               "title": "🗓️Phases",
+              "parentItem": "📄Project plan",
               "content": "",
               "tags": "type::steps,mode::expert",
               "items": [
                 {
                   "title": "Establishment Phase",
+                  "parentItem": "🗓️Phases",
                   "content": "Initial setup of core operations, development of fundamental technologies, and validation of the service model through early client engagements. This foundation-building phase focuses on proof of concept and establishing operational functionality.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Consolidation Phase",
+                  "parentItem": "🗓️Phases",
                   "content": "Refinement of service protocols, expansion of containment capacity, and development of systematized procedures for consistent service delivery. This phase strengthens operational capabilities and improves efficiency based on initial experience.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Expansion Phase",
+                  "parentItem": "🗓️Phases",
                   "content": "Geographic growth, service diversification, and scaling of operations to reach broader markets and establish regional presence. This growth phase leverages established credibility and operational models to extend service reach.",
                   "tags": "",
                   "items": []
@@ -1411,35 +1638,41 @@
             },
             {
               "title": "🏁Milestones",
+              "parentItem": "📄Project plan",
               "content": "",
               "tags": "type::sequence,mode::expert",
               "items": [
                 {
                   "title": "First successful entity containment",
+                  "parentItem": "🏁Milestones",
                   "content": "Demonstrated capability to safely capture and contain a paranormal entity using proprietary technology, validating the core service concept. This achievement confirmed the technical viability of the business model and established proof of concept.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Headquarters establishment",
+                  "parentItem": "🏁Milestones",
                   "content": "Acquisition and retrofitting of permanent facility with containment unit, laboratory, and operations center. This infrastructure development created the physical foundation for ongoing operations and secure entity storage.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "First major commercial contract",
+                  "parentItem": "🏁Milestones",
                   "content": "Securing ongoing service agreement with significant commercial client, establishing stable revenue stream. This business development achievement validated the commercial viability of services beyond residential applications.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Patent approval for containment technology",
+                  "parentItem": "🏁Milestones",
                   "content": "Legal protection of proprietary paranormal containment system, creating defensible competitive advantage. This intellectual property milestone secured the company's technological innovations against competitive imitation.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "First satellite office opening",
+                  "parentItem": "🏁Milestones",
                   "content": "Establishment of operations in second city, demonstrating replicable business model and beginning geographic expansion. This growth milestone initiated the scaling phase and extended service reach beyond the original market.",
                   "tags": "",
                   "items": []
@@ -1450,29 +1683,34 @@
         },
         {
           "title": "📐Metrics",
+          "parentItem": "📂Organization",
           "content": "",
           "tags": "type::weight,mode::advanced",
           "items": [
             {
               "title": "Case resolution rate",
+              "parentItem": "📐Metrics",
               "content": "Percentage of paranormal interventions resulting in complete elimination of supernatural activity, measured through post-service verification. This effectiveness metric directly reflects service quality and technological capability.",
               "tags": "",
               "items": []
             },
             {
               "title": "Response time",
+              "parentItem": "📐Metrics",
               "content": "Average duration between initial client contact and on-site presence of paranormal technicians, measured in hours for standard cases and minutes for emergencies. This operational efficiency metric impacts client satisfaction and service reputation.",
               "tags": "",
               "items": []
             },
             {
               "title": "Client satisfaction score",
+              "parentItem": "📐Metrics",
               "content": "Standardized measurement of client experience based on post-service surveys assessing resolution effectiveness, professionalism, and overall satisfaction. This metric provides insight into service quality from the client perspective.",
               "tags": "",
               "items": []
             },
             {
               "title": "Media mention frequency",
+              "parentItem": "📐Metrics",
               "content": "Number of appearances in news reports, industry publications, and social media discussions, measured monthly. This visibility metric indicates brand awareness and market presence.",
               "tags": "",
               "items": []
@@ -1481,28 +1719,33 @@
         },
         {
           "title": "📂Finance",
+          "parentItem": "📂Organization",
           "content": "",
           "tags": "type::category,mode::basic",
           "items": [
             {
               "title": "💰Revenue",
+              "parentItem": "📂Finance",
               "content": "",
               "tags": "type::weight,mode::advanced",
               "items": [
                 {
                   "title": "Paranormal elimination services",
+                  "parentItem": "💰Revenue",
                   "content": "Fees for investigation, capture, and removal of supernatural entities from residential, commercial, and institutional properties. This core service revenue varies based on complexity, urgency, and entity type, with typical engagements ranging from $500-$15,000.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Ongoing monitoring contracts",
+                  "parentItem": "💰Revenue",
                   "content": "Subscription fees for continuous paranormal detection and rapid response services for commercial properties and high-risk locations. These recurring revenue agreements typically range from $250-$2,000 monthly depending on property size and monitoring intensity.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Consultation services",
+                  "parentItem": "💰Revenue",
                   "content": "Professional advisory fees for property developers, historical sites, and other clients seeking paranormal risk assessment and mitigation strategies. These specialized consultations typically generate $1,500-$5,000 per engagement based on scope and complexity.",
                   "tags": "",
                   "items": []
@@ -1511,41 +1754,48 @@
             },
             {
               "title": "📄Life Time Value",
+              "parentItem": "📂Finance",
               "content": "",
               "tags": "type::text,mode::advanced",
               "items": []
             },
             {
               "title": "💸Costs",
+              "parentItem": "📂Finance",
               "content": "",
               "tags": "type::weight,mode::advanced",
               "items": [
                 {
                   "title": "Equipment development and maintenance",
+                  "parentItem": "💸Costs",
                   "content": "Expenses for designing, manufacturing, and maintaining specialized paranormal detection and containment technology. This category includes R&D costs, component procurement, assembly, and ongoing calibration and repairs.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Facility operations",
+                  "parentItem": "💸Costs",
                   "content": "Costs associated with headquarters maintenance, containment system energy consumption, and security for captured entities. This significant overhead includes specialized power systems, containment field generators, and monitoring technologies.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Field operations",
+                  "parentItem": "💸Costs",
                   "content": "Expenses related to on-site paranormal investigations and interventions, including transportation, equipment deployment, and consumable supplies. These variable costs increase with case volume and geographic service range.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Personnel compensation",
+                  "parentItem": "💸Costs",
                   "content": "Salaries, benefits, and training expenses for paranormal technicians, researchers, engineers, and administrative staff. This represents the largest expense category, reflecting the specialized expertise required.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Marketing and client acquisition",
+                  "parentItem": "💸Costs",
                   "content": "Expenditures for advertising, professional networking, educational events, and reputation management to generate service awareness. These investments build the client pipeline while establishing credibility in an unconventional service category.",
                   "tags": "",
                   "items": []
@@ -1554,41 +1804,48 @@
             },
             {
               "title": "📄Customer Aquisition Cost",
+              "parentItem": "📂Finance",
               "content": "",
               "tags": "type::text,mode::advanced",
               "items": []
             },
             {
               "title": "📄Unit economics",
+              "parentItem": "📂Finance",
               "content": "",
               "tags": "type::text,mode::expert",
               "items": []
             },
             {
               "title": "💵Funding sources",
+              "parentItem": "📂Finance",
               "content": "",
               "tags": "type::weight,mode::expert",
               "items": [
                 {
                   "title": "Founder investments",
+                  "parentItem": "💵Funding sources",
                   "content": "Personal capital contributions from the founding team members, including mortgaging personal property to fund initial equipment development and facility establishment. These investments represented significant personal financial risk and demonstrated founder commitment.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Service revenue",
+                  "parentItem": "💵Funding sources",
                   "content": "Ongoing income from paranormal elimination services, consultation fees, and monitoring contracts that fund current operations and gradual expansion. This organic growth approach has become the primary funding mechanism as service volume increases.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Research grants",
+                  "parentItem": "💵Funding sources",
                   "content": "Limited academic and scientific research funding obtained through university affiliations and specialized paranormal study programs. These grants supported early technology development before commercial viability was established.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Bank loans",
+                  "parentItem": "💵Funding sources",
                   "content": "Traditional debt financing secured against equipment assets and future service contracts to fund specific growth initiatives and equipment upgrades. These financial arrangements provide capital for expansion while maintaining founder control.",
                   "tags": "",
                   "items": []
@@ -1597,35 +1854,41 @@
             },
             {
               "title": "💼Shareholders",
+              "parentItem": "📂Finance",
               "content": "",
               "tags": "type::weight,mode::expert",
               "items": [
                 {
                   "title": "Dr. Peter Venkman",
+                  "parentItem": "💼Shareholders",
                   "content": "Co-founder with 25% equity stake, providing psychology expertise and client relations leadership that drives service satisfaction and referral business. His contributions include initial financial investment and ongoing operational involvement.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Dr. Egon Spengler",
+                  "parentItem": "💼Shareholders",
                   "content": "Co-founder with 25% equity stake, contributing particle physics knowledge and engineering expertise critical to the core containment technology. His technical innovations form the foundation of service capabilities and competitive advantage.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Dr. Ray Stantz",
+                  "parentItem": "💼Shareholders",
                   "content": "Co-founder with 25% equity stake, offering paranormal research expertise and historical knowledge essential for entity identification and intervention strategy. His academic background provides scientific credibility and research methodology.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Winston Zeddemore",
+                  "parentItem": "💼Shareholders",
                   "content": "Early team member with 15% equity stake, contributing practical field experience and operational management that ensures effective service delivery. His equity position reflects critical early-stage involvement and ongoing leadership value.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Employee ownership pool",
+                  "parentItem": "💼Shareholders",
                   "content": "Reserved 10% equity allocation for key employees through stock options that vest based on performance and tenure, aligning interests and supporting retention. This structure allows for recognizing critical contributions from team members beyond the founders.",
                   "tags": "",
                   "items": []
@@ -1634,6 +1897,7 @@
             },
             {
               "title": "📄Projections",
+              "parentItem": "📂Finance",
               "content": "",
               "tags": "type::weight,mode::expert",
               "items": []
@@ -1642,28 +1906,33 @@
         },
         {
           "title": "📂Legal",
+          "parentItem": "📂Organization",
           "content": "",
           "tags": "type::category,mode::advanced",
           "items": [
             {
               "title": "📄Legal issues",
+              "parentItem": "📂Legal",
               "content": "",
               "tags": "type::weight,mode::advanced",
               "items": [
                 {
                   "title": "Paranormal Containment Regulations",
+                  "parentItem": "📄Legal issues",
                   "content": "The storage and handling of captured supernatural entities falls into a regulatory gray area not specifically addressed by existing legislation, requiring proactive compliance standards.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Liability for Paranormal Interventions",
+                  "parentItem": "📄Legal issues",
                   "content": "The unique nature of supernatural elimination services presents complex liability questions requiring specialized insurance coverage and carefully structured client agreements.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Intellectual Property Protection",
+                  "parentItem": "📄Legal issues",
                   "content": "Ghosthunters' proprietary technology requires robust patent, trademark, and trade secret protection to maintain competitive advantage in the paranormal services market.",
                   "tags": "",
                   "items": []
@@ -1672,35 +1941,41 @@
             },
             {
               "title": "📄Contracts",
+              "parentItem": "📂Legal",
               "content": "",
               "tags": "type::weight,mode::expert",
               "items": [
                 {
                   "title": "Service Agreements for Paranormal Elimination",
+                  "parentItem": "📄Contracts",
                   "content": "Comprehensive contracts detailing the scope of services, intervention methods, expected outcomes, and fee structures for paranormal elimination services with appropriate liability limitations.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Property Access Authorizations",
+                  "parentItem": "📄Contracts",
                   "content": "Legal documentation granting Ghosthunters permission to enter, investigate, and perform necessary interventions on client properties with specific parameters regarding allowed activities.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Monitoring Service Contracts",
+                  "parentItem": "📄Contracts",
                   "content": "Ongoing agreements for properties requiring continuous paranormal detection and emergency response services, outlining monitoring parameters, response protocols, and subscription terms.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Confidentiality Agreements",
+                  "parentItem": "📄Contracts",
                   "content": "Binding documents protecting client privacy regarding paranormal incidents while establishing parameters for using anonymized case data for research and development purposes.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Entity Custody Documentation",
+                  "parentItem": "📄Contracts",
                   "content": "Legal records establishing chain of custody for captured entities, including transfer to central containment and perpetual storage responsibilities to address potential liability issues.",
                   "tags": "",
                   "items": []
@@ -1713,47 +1988,55 @@
     },
     {
       "title": "🔢Matrices",
+      "parentItem": "",
       "content": "",
       "tags": "",
       "items": [
         {
           "title": "Journey map (✈️Journey - 😐Emotions)",
+          "parentItem": "🔢Matrices",
           "content": "This matrix establishes the relationships between the different stages of a customer journey map and the emotions that are generated in the customer as they go through each stage.",
           "tags": "type::matrix, source-item::✈️Journey, target-item::😐Emotions, values::(-3);(-2);(-1);(+1);(+2);(+3);(1);(2);(3)",
           "items": []
         },
         {
           "title": "Matrix (✂️Segmentation - 🙎Customer profiles)",
+          "parentItem": "🔢Matrices",
           "content": "This matrix maps segmentation criteria to specific customer profiles, showing how criteria define each profile.",
           "tags": "type::matrix, source-item::✂️Segmentation, target-item::🙎Customer profiles,values::(-3);(-2);(-1);(+1);(+2);(+3);(1);(2);(3)",
           "items": []
         },
         {
           "title": "Matrix (😟Problems - 💎Value proposition)",
+          "parentItem": "🔢Matrices",
           "content": "This matrix links the problems faced by personas to the value propositions that address them.",
           "tags": "type::matrix, source-item::😟Problems, target-item::💎Value proposition,values::(-3);(-2);(-1);(+1);(+2);(+3);(1);(2);(3)",
           "items": []
         },
         {
           "title": "Matrix (💎Value proposition - 📣Messages)",
+          "parentItem": "🔢Matrices",
           "content": "This matrix links value propositions to the messages used to communicate them to customers.",
           "tags": "type::matrix, source-item::💎Value proposition, target-item::📣Messages,values::(-3);(-2);(-1);(+1);(+2);(+3);(1);(2);(3)",
           "items": []
         },
         {
           "title": "Matrix (📣Messages - 🎙️Channels)",
+          "parentItem": "🔢Matrices",
           "content": "This matrix links messages to the channels through which they are delivered to customers.",
           "tags": "type::matrix, source-item::📣Messages, target-item::🎙️Channels,values::(-3);(-2);(-1);(+1);(+2);(+3);(1);(2);(3)",
           "items": []
         },
         {
           "title": "Matrix (🔮Assumptions - 🚨Risks)",
+          "parentItem": "🔢Matrices",
           "content": "This matrix links assumptions to potential risks.",
           "tags": "type::matrix, source-item::🔮Assumptions, target-item::🚨Risks,values::(-3);(-2);(-1);(+1);(+2);(+3);(1);(2);(3)",
           "items": []
         },
         {
           "title": "Matrix (🧪Experiments - 🔮Assumptions)",
+          "parentItem": "🔢Matrices",
           "content": "This matrix links experiments to the hypotheses they test.",
           "tags": "type::matrix, source-item::🧪Experiments, target-item::🔮Assumptions,values::(-3);(-2);(-1);(+1);(+2);(+3);(1);(2);(3)",
           "items": []
@@ -1762,46 +2045,54 @@
     },
     {
       "title": "📂Analysis",
+      "parentItem": "",
       "content": "",
       "tags": "type::category,mode::basic",
       "items": [
         {
           "title": "🔮Assumptions",
+          "parentItem": "📂Analysis",
           "content": "",
           "tags": "type::weight,mode::advanced",
           "items": [
             {
               "title": "Supernatural entities can be scientifically detected",
+              "parentItem": "🔮Assumptions",
               "content": "Paranormal phenomena generate measurable energy signatures and physical effects that can be identified with specialized equipment. This foundational assumption underpins the entire detection methodology and equipment development.",
               "tags": "",
               "items": []
             },
             {
               "title": "Demand for paranormal services will grow",
+              "parentItem": "🔮Assumptions",
               "content": "Public acceptance of paranormal phenomena and willingness to seek professional intervention will continue to increase over time. This market assumption guides expansion planning and investment decisions.",
               "tags": "",
               "items": []
             },
             {
               "title": "Entities can be contained without ethical concerns",
+              "parentItem": "🔮Assumptions",
               "content": "The containment of supernatural entities is ethically justified as a necessary safety measure regardless of their nature or potential sentience. This position forms the basis for intervention and storage protocols.",
               "tags": "",
               "items": []
             },
             {
               "title": "Proprietary technology creates sustainable advantage",
+              "parentItem": "🔮Assumptions",
               "content": "The specialized equipment developed for paranormal work provides a significant and defensible competitive edge that cannot be easily replicated. This technological assumption supports the business model and pricing strategy.",
               "tags": "",
               "items": []
             },
             {
               "title": "Scientific approach increases service credibility",
+              "parentItem": "🔮Assumptions",
               "content": "Clients are more likely to trust and value paranormal services that present a scientific methodology rather than supernatural or spiritual approaches. This positioning assumption drives marketing and operational protocols.",
               "tags": "",
               "items": []
             },
             {
               "title": "Client willingness to disclose paranormal experiences",
+              "parentItem": "🔮Assumptions",
               "content": "Clients are willing to openly share details about paranormal experiences, facilitating accurate investigation and effective solutions.",
               "tags": "",
               "items": []
@@ -1810,41 +2101,48 @@
         },
         {
           "title": "🚨Risks",
+          "parentItem": "📂Analysis",
           "content": "",
           "tags": "type::weight,mode::basic",
           "items": [
             {
               "title": "Containment System Failure",
+              "parentItem": "🚨Risks",
               "content": "Potential release of captured entities due to technical malfunction, power disruption, or capacity overload could pose significant safety and liability issues. This critical risk requires redundant safety systems and strict monitoring protocols.",
               "tags": "",
               "items": []
             },
             {
               "title": "Regulatory Changes",
+              "parentItem": "🚨Risks",
               "content": "Introduction of specific legislation governing paranormal services could impose unforeseen compliance requirements and operational restrictions. This evolving risk necessitates proactive engagement with regulatory development.",
               "tags": "",
               "items": []
             },
             {
               "title": "Competitive Technology Development",
+              "parentItem": "🚨Risks",
               "content": "Emergence of alternative paranormal management methods or equipment that renders current approaches obsolete, threatening market position. This competitive risk drives ongoing R&D investment and technology advancement.",
               "tags": "",
               "items": []
             },
             {
               "title": "Public Perception Shifts",
+              "parentItem": "🚨Risks",
               "content": "Changes in cultural attitudes toward paranormal phenomena could either increase skepticism or normalize supernatural experiences, affecting service demand. This market risk requires flexible marketing approaches and service positioning.",
               "tags": "",
               "items": []
             },
             {
               "title": "Entity Evolution",
+              "parentItem": "🚨Risks",
               "content": "Potential adaptation of paranormal entities to detection or containment methods, requiring new technological solutions and approaches. This paranormal risk highlights the importance of continuous research and capability development.",
               "tags": "",
               "items": []
             },
             {
               "title": "Personnel Safety",
+              "parentItem": "🚨Risks",
               "content": "Physical or psychological harm to technicians during paranormal interventions, particularly with aggressive or unpredictable manifestations. This operational risk necessitates comprehensive training, safety protocols, and support systems.",
               "tags": "",
               "items": []
@@ -1853,41 +2151,48 @@
         },
         {
           "title": "📄Suggestions",
+          "parentItem": "📂Analysis",
           "content": "",
           "tags": "type::weight,mode::expert",
           "items": [
             {
               "title": "Develop Tiered Service Packages",
+              "parentItem": "📄Suggestions",
               "content": "Create structured service offerings at different price points to address varying client needs and budgets, increasing market accessibility. This approach would expand the customer base while maintaining premium options for complex cases.",
               "tags": "",
               "items": []
             },
             {
               "title": "Establish Academic Research Partnerships",
+              "parentItem": "📄Suggestions",
               "content": "Form formal collaborations with universities to enhance scientific credibility and access research resources for technological advancement. These partnerships would strengthen intellectual foundations while sharing development costs.",
               "tags": "",
               "items": []
             },
             {
               "title": "Implement Preventative Service Line",
+              "parentItem": "📄Suggestions",
               "content": "Develop proactive paranormal protection services for properties with historical activity or vulnerability to supernatural phenomena. This new revenue stream would complement reactive services while building recurring income.",
               "tags": "",
               "items": []
             },
             {
               "title": "Create Professional Certification Program",
+              "parentItem": "📄Suggestions",
               "content": "Establish industry standards and training certification for paranormal technicians to enhance credibility and build a qualified talent pipeline. This initiative would raise service quality while positioning the company as an industry leader.",
               "tags": "",
               "items": []
             },
             {
               "title": "Explore Remote Detection Technology",
+              "parentItem": "📄Suggestions",
               "content": "Invest in developing monitoring systems that can identify paranormal activity without on-site personnel, enabling more efficient preliminary assessments. This innovation would improve scalability and reduce initial consultation costs.",
               "tags": "",
               "items": []
             },
             {
               "title": "Enhance Digital Documentation Platform",
+              "parentItem": "📄Suggestions",
               "content": "Upgrade client reporting systems to provide more comprehensive, accessible evidence of paranormal phenomena and resolution. This improvement would strengthen client confidence and support premium pricing.",
               "tags": "",
               "items": []
@@ -1896,23 +2201,27 @@
         },
         {
           "title": "📄Unfair advantage",
+          "parentItem": "📂Analysis",
           "content": "",
           "tags": "type::text,mode::expert",
           "items": [
             {
               "title": "Proprietary Containment Technology",
+              "parentItem": "📄Unfair advantage",
               "content": "Patent-pending systems for the capture and storage of supernatural entities that represent a significant technological breakthrough. This exclusive capability enables permanent resolution rather than temporary treatments offered by competitors.",
               "tags": "",
               "items": []
             },
             {
               "title": "Scientific Credibility",
+              "parentItem": "📄Unfair advantage",
               "content": "Founding team with legitimate academic credentials in relevant scientific fields lends authority and trustworthiness in a market often associated with pseudoscience. This intellectual foundation differentiates the company from amateur or spiritually-oriented alternatives.",
               "tags": "",
               "items": []
             },
             {
               "title": "Extensive Case Documentation",
+              "parentItem": "📄Unfair advantage",
               "content": "Comprehensive library of paranormal encounters, interventions, and outcomes providing unmatched knowledge resources for entity identification and effective response. This accumulated experience enables more efficient and successful interventions than less-established competitors.",
               "tags": "",
               "items": []
@@ -1921,11 +2230,13 @@
         },
         {
           "title": "⭐Assesment",
+          "parentItem": "📂Analysis",
           "content": "",
           "tags": "",
           "items": [
             {
               "title": "⭐rating",
+              "parentItem": "⭐Assesment",
               "content": "* Is this positive for my business?\n* Is it something I excel at compared to similar businesses?\n* If an expert knows this, does it improve their perception of my business?\n* Is this negative for my business?\n* Is it something I am worse at than similar businesses?\n* If an expert knows this, does it worsen their perception of my business?\n\n*High Score (5) Examples**\n\n* 💊#solution Unique analytics feature ⭐5 (Differentiates from competitors)\n* 💰#revenue Product sales ⭐5 (Steady recurring income. Provides financial stability)\n* 🎙️#channel Strategic partnership with relevant influencer ⭐5 (Increases reach and brand trust)\n* 💰#revenue Product sales ⭐⭐-5 (Low margin. Strains financials)\n* 💊#solution Accounting software ⭐⭐-5 (Limited audience focus. Restricts market potential)\n* 🎙️#channel Ads on newspapers ⭐⭐-5 (Limited digital reach. Reduces exposure)\n\n**Low Score (1) Examples**\n\n* 💰#revenue Low-margin product ⭐1 (Limited financial benefit)\n* 🎙️#channel Guatemala Musicians Association ⭐1 (Regional distribution only. Low market reach)\n* 💊#solution Support services ⭐1 (Basic customer service offering. Not unique)\n* 💰#revenue Diverse income streams ⭐-1 (Stable revenue)\n* 🎙️#channel Well-established online sales ⭐-1 (High audience reach)\n* 💊#solution Flexible and adaptable product ⭐-1 (Easy to modify)\n\n",
               "tags": "",
               "items": []
@@ -1936,34 +2247,40 @@
     },
     {
       "title": "📂Validation",
+      "parentItem": "",
       "content": "",
       "tags": "type::category,mode::basic",
       "items": [
         {
           "title": "📄Coherence",
+          "parentItem": "📂Validation",
           "content": "",
           "tags": "type::weight,mode::expert",
           "items": [
             {
               "title": "Scientific Foundations",
+              "parentItem": "📄Coherence",
               "content": "The theoretical frameworks underlying paranormal detection and containment technology are consistent with established principles in particle physics and energy field manipulation. This theoretical coherence supports the plausibility of the technological approach.",
               "tags": "",
               "items": []
             },
             {
               "title": "Market Response Alignment",
+              "parentItem": "📄Coherence",
               "content": "Client acquisition rates and service demand patterns generally confirm predictions about market needs and willingness to engage professional paranormal services. This market coherence validates core business model assumptions.",
               "tags": "",
               "items": []
             },
             {
               "title": "Operational Feasibility",
+              "parentItem": "📄Coherence",
               "content": "Field experience demonstrates that the service delivery model, including detection, capture, and containment procedures, can be consistently executed with trained personnel and proper equipment. This operational coherence confirms service viability.",
               "tags": "",
               "items": []
             },
             {
               "title": "Financial Structure",
+              "parentItem": "📄Coherence",
               "content": "Revenue generation and cost structures are proving sustainable as scale increases, with improving margins that align with financial projections. This financial coherence supports long-term business viability.",
               "tags": "",
               "items": []
@@ -1972,34 +2289,40 @@
         },
         {
           "title": "🧪Experiments",
+          "parentItem": "📂Validation",
           "content": "",
           "tags": "type::weight,mode::advanced",
           "items": [
             {
               "title": "Marketing Message Testing",
+              "parentItem": "🧪Experiments",
               "content": "Comparative analysis of different marketing approaches and messages to identify most effective client acquisition strategies across market segments. This communication experiment optimizes marketing investment and messaging.",
               "tags": "",
               "items": [
                 {
                   "title": "Define Target Customer Segments for Each Message",
+                  "parentItem": "Marketing Message Testing",
                   "content": "Identify the specific customer segments (e.g., residential homeowners, commercial establishments) each marketing message aims to attract, allowing for targeted communication and better response rates.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Establish Clear Objectives for Each Marketing Message",
+                  "parentItem": "Marketing Message Testing",
                   "content": "Set precise, measurable goals for each message, such as increasing website traffic, generating leads, or improving brand awareness, to accurately assess message effectiveness.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Select Diverse Communication Channels for Message Delivery",
+                  "parentItem": "Marketing Message Testing",
                   "content": "Determine the communication channels (e.g., website, social media, professional networks) for each message to reach the intended audience effectively and optimize channel-specific content.",
                   "tags": "",
                   "items": []
                 },
                 {
                   "title": "Establish a/b testing of different messages",
+                  "parentItem": "Marketing Message Testing",
                   "content": "Perform A/B tests of those different marketing messages on different channels.",
                   "tags": "",
                   "items": []
@@ -2008,24 +2331,28 @@
             },
             {
               "title": "Detection Technology Validation Test",
+              "parentItem": "🧪Experiments",
               "content": "Controlled field trials comparing different detection methodologies in verified paranormal locations to optimize sensitivity and accuracy. This testing validates the technical foundation of investigation services and guides equipment refinement.",
               "tags": "",
               "items": []
             },
             {
               "title": "Pricing Sensitivity Analysis",
+              "parentItem": "🧪Experiments",
               "content": "Structured testing of different price points across service categories to determine optimal pricing strategy and client price sensitivity. This market experiment informs pricing models and service packaging.",
               "tags": "",
               "items": []
             },
             {
               "title": "Containment System Stress Test",
+              "parentItem": "🧪Experiments",
               "content": "Deliberate introduction of increasingly powerful entities to containment systems to identify capacity limitations and failure points before field deployment. This critical safety experiment ensures reliable containment under various conditions.",
               "tags": "",
               "items": []
             },
             {
               "title": "Service Delivery Time Study",
+              "parentItem": "🧪Experiments",
               "content": "Analysis of time requirements for different intervention phases to identify efficiency opportunities and optimal staffing models. This operational experiment improves service economics and capacity planning.",
               "tags": "",
               "items": []
@@ -2036,40 +2363,47 @@
     },
     {
       "title": "📄Metamodel",
+      "parentItem": "",
       "content": "",
       "tags": "type::category,mode::advanced",
       "items": [
         {
           "title": "📄Tags",
+          "parentItem": "📄Metamodel",
           "content": "",
           "tags": "",
           "items": []
         },
         {
           "title": "📄Markers",
+          "parentItem": "📄Metamodel",
           "content": "",
           "tags": "type::weight,mode::advanced",
           "items": [
             {
               "title": "➕weight",
+              "parentItem": "📄Markers",
               "content": "* How important is this block for the business model?\n* If it turns out not to be true, is my business model greatly affected?\n* Is this something that could easily change without affecting the business model?",
               "tags": "type::marker,mode::expert",
               "items": []
             },
             {
               "title": "✔️completion",
+              "parentItem": "📄Markers",
               "content": "* Is the block completed?\n* Is it likely to change in the future?\n* Is this content fixed, or can it change based on my decisions?",
               "tags": "type::marker,mode::expert",
               "items": []
             },
             {
               "title": "❓certainty",
+              "parentItem": "📄Markers",
               "content": "* How sure am I that this is true? Do I have enough experience to assert this confidently?\n* Have I verified this in the real world, or are these just assumptions?\n* Is this a statement I can prove with objective facts and data?",
               "tags": "type::marker,mode::advanced",
               "items": []
             },
             {
               "title": "🚩priority",
+              "parentItem": "📄Markers",
               "content": "* Is this something I should prioritize?\n* Is this something urgent?\n* Is this something I should pay attention to?",
               "tags": "type::marker,mode::advanced",
               "items": []
@@ -2080,6 +2414,7 @@
     },
     {
       "title": "🔑Keys",
+      "parentItem": "",
       "content": "",
       "tags": "type::weight,mode::advanced",
       "items": []

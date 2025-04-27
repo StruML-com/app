@@ -1,0 +1,11 @@
+Your task is to suggest relevant tags for the item titled '{{ITEM_TITLE}}'.
+
+Based on ALL the context (description, document structure, and the sample item example), suggest appropriate tags for the item '{{ITEM_TITLE}}'.
+- Your response MUST be ONLY a valid JSON object with a single field "tags" containing a comma-separated string of suggested tags.
+- Consider both standard tags and special format tags (e.g., "type::value" or relation tags like "relates>>OtherItem").
+
+Example response format:
+```json
+{
+  "tags": "important, type::concept, relates>>AnotherItem"
+}

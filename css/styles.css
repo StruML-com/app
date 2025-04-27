@@ -1,0 +1,574 @@
+/* StruML Custom Styles */
+
+/* General styles */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Markdown content styles */
+.markdown-content h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.markdown-content h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 0.8rem;
+  margin-bottom: 0.4rem;
+}
+
+.markdown-content h3 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-top: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.markdown-content p {
+  margin-bottom: 0.75rem;
+}
+
+.markdown-content ul, .markdown-content ol {
+  margin-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.markdown-content ul {
+  list-style-type: disc;
+}
+
+.markdown-content ol {
+  list-style-type: decimal;
+}
+
+.markdown-content code {
+  background-color: #f0f0f0;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.2rem;
+  font-family: monospace;
+}
+
+.markdown-content pre {
+  background-color: #f0f0f0;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  overflow-x: auto;
+  margin-bottom: 0.75rem;
+}
+
+.markdown-content pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Animation for loading states */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Tag styles */
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-right: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.tag-default {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.tag-type {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.tag-priority {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.tag-status {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.tag-relation {
+  background-color: #ede9fe;
+  color: #5b21b6;
+}
+
+/* Relation line styles */
+.relation-line {
+  stroke: #6366f1;
+  stroke-width: 1.5;
+}
+
+.relation-arrow {
+  fill: #6366f1;
+}
+
+/* Tree view styles */
+.tree-item {
+  transition: background-color 0.2s, transform 0.2s, opacity 0.2s;
+  position: relative;
+  margin: 2px 0; /* Añadir margen para separar los ítems */
+  border-radius: 4px; /* Bordes redondeados para mejor apariencia */
+}
+
+.tree-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.tree-item.selected {
+  background-color: rgba(59, 130, 246, 0.1);
+  border-left: 3px solid #3b82f6;
+}
+
+.tree-item.is-dragging {
+  z-index: 1000;
+  opacity: 0.8;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tree-item-header {
+  display: flex;
+  align-items: center;
+  padding: 4px 0; /* Añadir padding para aumentar el área clickeable */
+}
+
+.drag-handle {
+  cursor: grab;
+  opacity: 0.7; /* Aumentar opacidad para mayor visibilidad */
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+}
+
+.drag-handle:hover {
+  opacity: 1;
+  color: #3b82f6; /* Cambiar color al pasar el ratón */
+}
+
+.drop-indicator {
+  height: 3px; /* Aumentar altura por defecto */
+  background-color: #0ea5e9;
+  margin: 0;
+  transition: height 0.2s;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  border-radius: 2px; /* Bordes redondeados */
+}
+
+.drop-indicator.active {
+  height: 5px; /* Aumentar altura cuando está activo */
+  box-shadow: 0 0 4px rgba(14, 165, 233, 0.5); /* Añadir sombra para destacar */
+}
+
+.drop-indicator.before {
+  top: -2px; /* Ajustar posición */
+}
+
+.drop-indicator.after {
+  bottom: -2px; /* Ajustar posición */
+}
+
+.drop-indicator.inside {
+  border: 2px dashed #0ea5e9;
+  background-color: rgba(14, 165, 233, 0.1); /* Añadir color de fondo */
+  height: auto;
+  top: 0;
+  bottom: 0;
+  opacity: 0.5; /* Aumentar opacidad */
+  border-radius: 4px; /* Bordes redondeados */
+}
+
+/* Modal styles */
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.2s;
+}
+
+.modal-content {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Chatbot Panel Styles */
+.chatbot-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatbot-panel h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Estilos para los ítems arrastables en el chatbot */
+.json-item-preview .draggable-item-badge {
+  position: relative;
+  padding-left: 30px; /* Espacio para el icono */
+  background-color: #f0f9ff; /* Fondo azul claro */
+  border: 1px solid #bae6fd; /* Borde azul claro */
+  transition: all 0.3s ease;
+}
+
+.json-item-preview .draggable-item-badge:hover {
+  background-color: #e0f2fe; /* Fondo azul más claro al pasar el ratón */
+  transform: translateY(-2px); /* Efecto de elevación */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para efecto 3D */
+}
+
+.json-item-preview .draggable-item-badge::before {
+  content: "\F4FE"; /* Código del icono de arrastrar de Bootstrap Icons */
+  font-family: "bootstrap-icons";
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #3b82f6; /* Color azul para el icono */
+  font-size: 16px;
+  animation: pulse-drag 2s infinite; /* Animación sutil para llamar la atención */
+}
+
+@keyframes pulse-drag {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Make the document navigation tree wider */
+#document-navigation {
+  width: 150%; /* Increase width by 150% */
+  overflow-x: auto;
+}
+
+/* Styles for the horizontal sidebar layout */
+#main-content {
+  display: flex;
+  height: 100%;
+}
+
+#main-content > div {
+  transition: width 0.3s ease;
+}
+
+/* Styles for the chat messages */
+#chat-messages {
+  height: 400px;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.chat-message {
+  margin-bottom: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+}
+
+.chat-message-user {
+  background-color: #f3f4f6;
+  margin-left: 1rem;
+}
+
+.chat-message-bot {
+  background-color: #dbeafe;
+  margin-right: 1rem;
+}
+
+.chat-message-header {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+/* Styles for the strudol-tag class */
+.strudol-tag {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background-color: #e5e7eb;
+  color: #374151;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  margin-right: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* EasyMDE Editor Styles */
+.easymde-editor {
+  min-height: 300px;
+}
+
+/* Tagify Styles - Using default styles with minimal customization */
+.tagify-container {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+/* Custom styling for tag types */
+.tagify__tag--type {
+  background-color: #dbeafe !important;
+  color: #1e40af !important;
+}
+
+.tagify__tag--priority {
+  background-color: #fef3c7 !important;
+  color: #92400e !important;
+}
+
+.tagify__tag--status {
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+}
+
+.tagify__tag--relation {
+  background-color: #ede9fe !important;
+  color: #5b21b6 !important;
+}
+
+
+/* Customize EasyMDE toolbar */
+.editor-toolbar {
+  border: none !important;
+  background-color: #f9fafb !important;
+}
+
+.editor-toolbar button {
+  color: #374151 !important;
+}
+
+.editor-toolbar button:hover {
+  background-color: #f3f4f6 !important;
+}
+
+.editor-toolbar button.active {
+  background-color: #e5e7eb !important;
+}
+
+/* Customize EasyMDE editor area */
+.CodeMirror {
+  border: none !important;
+  font-family: inherit !important;
+}
+
+/* Thinking animation for chatbot */
+.thinking-animation .dot-typing {
+  position: relative;
+  left: -9999px;
+  width: 6px;
+  height: 6px;
+  border-radius: 5px;
+  background-color: #3b82f6;
+  color: #3b82f6;
+  box-shadow: 9984px 0 0 0 #3b82f6, 9994px 0 0 0 #3b82f6, 10004px 0 0 0 #3b82f6;
+  animation: dot-typing 1.5s infinite linear;
+}
+
+@keyframes dot-typing {
+  0% {
+    box-shadow: 9984px 0 0 0 #3b82f6, 9994px 0 0 0 #3b82f6, 10004px 0 0 0 #3b82f6;
+  }
+  16.667% {
+    box-shadow: 9984px -10px 0 0 #3b82f6, 9994px 0 0 0 #3b82f6, 10004px 0 0 0 #3b82f6;
+  }
+  33.333% {
+    box-shadow: 9984px 0 0 0 #3b82f6, 9994px -10px 0 0 #3b82f6, 10004px 0 0 0 #3b82f6;
+  }
+  50% {
+    box-shadow: 9984px 0 0 0 #3b82f6, 9994px 0 0 0 #3b82f6, 10004px -10px 0 0 #3b82f6;
+  }
+  66.667% {
+    box-shadow: 9984px 0 0 0 #3b82f6, 9994px 0 0 0 #3b82f6, 10004px 0 0 0 #3b82f6;
+  }
+  83.333% {
+    box-shadow: 9984px 0 0 0 #3b82f6, 9994px 0 0 0 #3b82f6, 10004px 0 0 0 #3b82f6;
+  }
+  100% {
+    box-shadow: 9984px 0 0 0 #3b82f6, 9994px 0 0 0 #3b82f6, 10004px 0 0 0 #3b82f6;
+  }
+}
+
+/* Matrix Visualization Styles */
+.matrix-visualization {
+  margin-top: 2rem;
+}
+
+.matrix-heatmap {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.matrix-heatmap th, .matrix-heatmap td {
+  padding: 0.5rem;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+}
+
+.matrix-heatmap th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.matrix-heatmap td {
+  min-width: 80px;
+  height: 40px;
+}
+
+.visualization-container {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+/* Matrix Editor Styles */
+.matrix-table-container {
+  overflow-x: auto;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.matrix-table th {
+  background-color: #f9fafb;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.matrix-table th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 20;
+}
+
+.matrix-table td:first-child {
+  position: sticky;
+  left: 0;
+  background-color: #f9fafb;
+}
+
+.matrix-table td {
+  min-width: 100px;
+}
+
+/* Sankey Diagram Styles */
+.sankey-container {
+  width: 100%;
+  height: 400px;
+  overflow: auto;
+}
+
+.sankey-container svg {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Ensure proper height for the editor */
+.CodeMirror-scroll {
+  min-height: 200px !important;
+  max-height: 400px !important;
+}
+
+/* Improve code block styling */
+.cm-s-easymde .cm-comment {
+  background-color: #f3f4f6 !important;
+  border-radius: 0.375rem !important;
+}
+
+/* Improve blockquote styling */
+.cm-s-easymde .cm-quote {
+  color: #6b7280 !important;
+  font-style: italic !important;
+}
+
+/* Preview styling */
+.editor-preview, .editor-preview-side {
+  background-color: #ffffff !important;
+  border-left: 1px solid #e5e7eb !important;
+}
+
+.editor-preview-side h1, .editor-preview h1 {
+  font-size: 1.8rem !important;
+  font-weight: bold !important;
+  margin-top: 1rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.editor-preview-side h2, .editor-preview h2 {
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  margin-top: 0.8rem !important;
+  margin-bottom: 0.4rem !important;
+}
+
+.editor-preview-side h3, .editor-preview h3 {
+  font-size: 1.3rem !important;
+  font-weight: bold !important;
+  margin-top: 0.6rem !important;
+  margin-bottom: 0.3rem !important;
+}
+
+.editor-preview-side p, .editor-preview p {
+  margin-bottom: 0.75rem !important;
+}
+
+.editor-preview-side pre, .editor-preview pre {
+  background-color: #f3f4f6 !important;
+  border-radius: 0.375rem !important;
+  padding: 0.5rem !important;
+}
+
+.editor-preview-side blockquote, .editor-preview blockquote {
+  border-left: 4px solid #e5e7eb !important;
+  color: #6b7280 !important;
+  padding-left: 1rem !important;
+  margin-left: 0 !important;
+}

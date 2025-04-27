@@ -1,0 +1,6 @@
+Your task is to assist with the business model document titled '{{ITEM_TITLE}}'.
+
+Based on ALL the context (description, document structure, and the sample item example), provide a helpful response related to the item '{{ITEM_TITLE}}'.
+- Your response should be relevant to the user's specific request.
+- If the user's request involves generating content, tags, or other structured data, format your response as a valid JSON object.
+- If the user's request is for general assistance or information, provide a clear and concise response.

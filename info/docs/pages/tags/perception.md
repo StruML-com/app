@@ -1,8 +1,0 @@
-
-
-## 👁️ perception
-
-### Definition 
-
-
-

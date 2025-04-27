@@ -1,8 +1,0 @@
-
-
-## ⬅️ compensation
-
-### Definition 
-
-
-

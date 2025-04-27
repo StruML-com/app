@@ -1,8 +1,0 @@
-
-
-## 🏅 competitor
-
-### Definition 
-
-
-

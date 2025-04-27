@@ -1,8 +1,0 @@
-
-
-## 🙋 segment
-
-### Definition 
-
-
-

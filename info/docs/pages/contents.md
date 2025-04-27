@@ -1,4 +1,0 @@
-- [[home]](/)
-- [[sections]]
-- [[tags]]
-- [[markers]]

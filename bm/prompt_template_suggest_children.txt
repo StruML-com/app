@@ -1,0 +1,22 @@
+Your task is to suggest child items for the parent item titled '{{ITEM_TITLE}}'.
+
+Based on ALL the context (description, document structure, and the sample item example), suggest appropriate child items for the parent item '{{ITEM_TITLE}}'.
+- Your response MUST be ONLY a valid JSON object with a single field "items" containing an array of suggested child items.
+- Each child item should have "title" and "content" fields. You may optionally include a "tags" field if appropriate.
+
+Example response format:
+```json
+{
+  "items": [
+    {
+      "title": "First Child Item",
+      "content": "Description of the first child item.",
+      "tags": "tag1, tag2"
+    },
+    {
+      "title": "Second Child Item",
+      "content": "Description of the second child item.",
+      "tags": "tag3, type::example"
+    }
+  ]
+}

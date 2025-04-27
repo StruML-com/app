@@ -1,0 +1,231 @@
+{
+  "title": "StruML Application Guide",
+  "items": [
+    {
+      "id": "1",
+      "title": "Introduction to StruML",
+      "content": "# Welcome to StruML\n\nStruML (Structured Modeling Language) is a web application for creating, organizing, and structuring domain knowledge in a hierarchical manner. This document serves as both a guide to using the application and a demonstration of its capabilities.\n\n## Key Features\n\n- Hierarchical document structure with nested items\n- Tagging system for item categorization\n- Relations between items with visualization capabilities\n- Markdown content editing\n- Document navigation and filtering\n- Export to various formats (JSON, Markdown, HTML, CSV)\n- AI assistant for content generation\n- Matrix visualization for relationships between items",
+      "tags": "type::section, important",
+      "items": [
+        {
+          "id": "1.1",
+          "title": "Purpose",
+          "content": "StruML helps you organize complex information in a structured way. It's particularly useful for:\n\n- Business modeling\n- Knowledge management\n- Research organization\n- Project planning\n- Concept mapping\n\nBy using a hierarchical structure with relations between items, StruML allows you to represent complex domains in an intuitive way.",
+          "tags": "type::subsection",
+          "items": []
+        },
+        {
+          "id": "1.2",
+          "title": "Core Concepts",
+          "content": "StruML is built around a few core concepts:\n\n1. **Items**: The basic building blocks of your document\n2. **Hierarchy**: Items can contain other items, creating a tree structure\n3. **Tags**: Labels that help categorize and filter items\n4. **Relations**: Connections between items that represent dependencies or associations\n5. **Matrices**: Visualizations of relationships between sets of items",
+          "tags": "type::subsection, important",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Document Structure",
+      "content": "# Document Structure\n\nA StruML document consists of a hierarchical structure of items. Each item can have:\n\n- A title\n- Content (in Markdown format)\n- Tags\n- Relations to other items\n- Child items\n\nThis structure allows you to organize information in a logical way, with parent-child relationships representing containment or categorization.",
+      "tags": "type::section",
+      "items": [
+        {
+          "id": "2.1",
+          "title": "Items",
+          "content": "Items are the basic building blocks of a StruML document. Each item represents a discrete piece of information or concept.\n\nItems can be expanded or collapsed to show or hide their children, making it easy to focus on specific parts of your document.",
+          "tags": "type::subsection",
+          "items": []
+        },
+        {
+          "id": "2.2",
+          "title": "Hierarchy",
+          "content": "Items can be nested to create a hierarchical structure. This hierarchy can represent:\n\n- Categorization (e.g., a category and its subcategories)\n- Decomposition (e.g., a system and its components)\n- Specialization (e.g., a general concept and its specific instances)\n\nYou can reorder items via drag-and-drop to adjust the structure as needed.",
+          "tags": "type::subsection",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Tagging System",
+      "content": "# Tagging System\n\nTags provide a flexible way to categorize items and enable powerful filtering capabilities. Tags can be simple labels or use special formats for additional functionality.",
+      "tags": "type::section",
+      "items": [
+        {
+          "id": "3.1",
+          "title": "Basic Tags",
+          "content": "Basic tags are simple labels that you can assign to items. For example:\n\n- `important`\n- `draft`\n- `review-needed`\n\nYou can filter items by tags to focus on specific aspects of your document.",
+          "tags": "type::subsection, example",
+          "items": []
+        },
+        {
+          "id": "3.2",
+          "title": "Special Tag Formats",
+          "content": "StruML supports special tag formats for additional functionality:\n\n- `type::value` - Classifies items by type (e.g., `type::section`, `type::requirement`)\n- `priority::value` - Indicates priority (e.g., `priority::high`, `priority::medium`, `priority::low`)\n- `status::value` - Indicates status (e.g., `status::draft`, `status::review`, `status::approved`)\n\nThese special tags can affect how items are displayed and can be used for advanced filtering.",
+          "tags": "type::subsection, important",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Relations System",
+      "content": "# Relations System\n\nRelations allow you to create connections between items that aren't necessarily in a parent-child relationship. This is useful for representing dependencies, associations, or any other type of relationship between concepts.",
+      "tags": "type::section",
+      "items": [
+        {
+          "id": "4.1",
+          "title": "Creating Relations",
+          "content": "Relations are created using special tags in the format `relation>>target`, where:\n\n- `relation` is the type of relationship (e.g., `depends`, `supports`, `contradicts`)\n- `target` is the title of the target item\n\nFor example, the tag `depends>>Implementation Plan` creates a dependency relationship to the item titled \"Implementation Plan\".",
+          "tags": "type::subsection, depends>>Relation Types",
+          "items": []
+        },
+        {
+          "id": "4.2",
+          "title": "Relation Types",
+          "content": "StruML supports various relation types, each with its own visual representation:\n\n- `depends` - Indicates a dependency relationship\n- `supports` - Indicates a supporting relationship\n- `contradicts` - Indicates a contradictory relationship\n- `related` - Indicates a general relationship\n\nYou can also use intensity levels:\n- `extremely-high` - Strongest positive relationship\n- `very-high` - Strong positive relationship\n- `high` - Positive relationship\n- `slightly-high` - Weak positive relationship\n- `neutral` - Neutral relationship\n- `slightly-low` - Weak negative relationship\n- `low` - Negative relationship\n- `very-low` - Strong negative relationship\n- `extremely-low` - Strongest negative relationship",
+          "tags": "type::subsection, important",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Matrix Visualization",
+      "content": "# Matrix Visualization\n\nMatrix visualization allows you to see relationships between two sets of items in a grid format. This is particularly useful for analyzing complex relationship patterns.",
+      "tags": "type::section, type::matrix, source-item::Document Structure, target-item::Relations System, values::high;medium;low",
+      "items": [
+        {
+          "id": "5.1",
+          "title": "Creating a Matrix",
+          "content": "To create a matrix, you need to:\n\n1. Create an item with the tag `type::matrix`\n2. Specify the source items with the tag `source-item::Title`\n3. Specify the target items with the tag `target-item::Title`\n4. Optionally specify cell values with the tag `values::value1;value2;value3`\n\nThe matrix will visualize relationships between the children of the source item and the children of the target item.",
+          "tags": "type::subsection",
+          "items": []
+        },
+        {
+          "id": "5.2",
+          "title": "Visualization Types",
+          "content": "StruML provides two types of matrix visualizations:\n\n1. **Heatmap** - Shows relationships as colored cells in a grid\n2. **Sankey Diagram** - Shows relationships as flows between nodes\n\nBoth visualizations are interactive, with tooltips providing additional information when hovering over elements.",
+          "tags": "type::subsection",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "title": "AI Assistant",
+      "content": "# AI Assistant\n\nStruML includes an AI assistant that can help you generate content, answer questions, and provide suggestions based on your document.",
+      "tags": "type::section",
+      "items": [
+        {
+          "id": "6.1",
+          "title": "Custom Requests",
+          "content": "You can send custom requests to the AI assistant to get help with specific tasks, such as:\n\n- Generating content for an item\n- Suggesting tags for an item\n- Identifying potential relations between items\n- Summarizing a section of your document\n\nThe AI assistant will use the context of your current item to provide relevant responses.",
+          "tags": "type::subsection",
+          "items": []
+        },
+        {
+          "id": "6.2",
+          "title": "Predefined Queries",
+          "content": "StruML also provides predefined query types for common tasks, such as:\n\n- Creating a complete item with title, content, tags, and relations\n- Generating a list of potential child items\n- Suggesting improvements to an existing item\n- Identifying inconsistencies or gaps in your document\n\nThese predefined queries can save time and ensure consistent results.",
+          "tags": "type::subsection, related>>Custom Requests",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "title": "Export Options",
+      "content": "# Export Options\n\nStruML allows you to export your document in various formats for different purposes.",
+      "tags": "type::section",
+      "items": [
+        {
+          "id": "7.1",
+          "title": "JSON Export",
+          "content": "JSON export preserves the full structure of your document, including all items, tags, and relations. This is the native format used by StruML and is ideal for:\n\n- Backing up your document\n- Sharing your document with other StruML users\n- Importing your document back into StruML later",
+          "tags": "type::subsection",
+          "items": []
+        },
+        {
+          "id": "7.2",
+          "title": "Markdown Export",
+          "content": "Markdown export converts your document into a hierarchical Markdown file. This is useful for:\n\n- Viewing your document in a Markdown editor\n- Publishing your document on platforms that support Markdown\n- Sharing your document with people who don't use StruML",
+          "tags": "type::subsection",
+          "items": []
+        },
+        {
+          "id": "7.3",
+          "title": "HTML Export",
+          "content": "HTML export generates an HTML file that can be opened in a web browser or copied into a document editor. This is useful for:\n\n- Creating a formatted document for printing\n- Sharing your document with people who need a formatted view\n- Embedding your document in a website",
+          "tags": "type::subsection",
+          "items": []
+        },
+        {
+          "id": "7.4",
+          "title": "CSV Export",
+          "content": "CSV export creates a tabular representation of your document, with columns for item title, parent item, content, and tags. This is useful for:\n\n- Analyzing your document in a spreadsheet\n- Importing your document into other tools that support CSV\n- Creating custom visualizations or reports",
+          "tags": "type::subsection",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "title": "Implementation Plan",
+      "content": "# Implementation Plan\n\nThis section outlines the plan for implementing the StruML application.",
+      "tags": "type::section",
+      "items": [
+        {
+          "id": "8.1",
+          "title": "Phase 1: Core Functionality",
+          "content": "Phase 1 focuses on implementing the core functionality of the application:\n\n1. Set up project structure with Vite build system\n2. Implement document management (create, import, export)\n3. Implement item management (create, edit, delete)\n4. Implement document navigation\n5. Implement local storage persistence",
+          "tags": "type::subsection, priority::high",
+          "items": []
+        },
+        {
+          "id": "8.2",
+          "title": "Phase 2: Advanced Features",
+          "content": "Phase 2 focuses on implementing advanced features:\n\n1. Implement tagging system\n2. Implement relations system\n3. Implement matrix visualization\n4. Implement Markdown editing",
+          "tags": "type::subsection, priority::medium, depends>>Phase 1: Core Functionality",
+          "items": []
+        },
+        {
+          "id": "8.3",
+          "title": "Phase 3: AI Integration",
+          "content": "Phase 3 focuses on integrating the AI assistant and other enhancements:\n\n1. Implement AI assistant integration\n2. Implement information panel\n3. Implement advanced visualizations\n4. Implement performance optimizations",
+          "tags": "type::subsection, priority::low, depends>>Phase 2: Advanced Features",
+          "items": []
+        },
+        {
+          "id": "8.4",
+          "title": "Phase 4: Testing and Refinement",
+          "content": "Phase 4 focuses on testing and refining the application:\n\n1. Implement comprehensive testing\n2. Refine user interface and experience\n3. Optimize performance\n4. Address feedback and bug fixes",
+          "tags": "type::subsection, priority::low, depends>>Phase 3: AI Integration",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "title": "Technology Stack",
+      "content": "# Technology Stack\n\nStruML is built using modern web technologies to ensure performance, maintainability, and a great user experience.",
+      "tags": "type::section",
+      "items": [
+        {
+          "id": "9.1",
+          "title": "Core Technologies",
+          "content": "The core technologies used in StruML include:\n\n- **Frontend Framework**: React with TypeScript\n- **Build System**: Vite\n- **State Management**: Zustand\n- **Routing**: React Router\n- **UI Components**: Tailwind CSS with shadcn/ui\n- **Markdown Editor**: CodeMirror\n- **Markdown Rendering**: Marked with DOMPurify\n- **Visualization**: D3.js\n- **Drag and Drop**: dnd-kit\n- **Testing**: Jest, React Testing Library, Cypress",
+          "tags": "type::subsection",
+          "items": []
+        },
+        {
+          "id": "9.2",
+          "title": "Additional Libraries",
+          "content": "Additional libraries used in StruML include:\n\n- **Form Handling**: react-jsonschema-form\n- **Validation**: Zod\n- **Date Handling**: date-fns\n- **HTTP Client**: Fetch API\n- **Utilities**: Lodash\n- **Icons**: React Icons\n- **File System Access**: File System Access API with fallback for older browsers",
+          "tags": "type::subsection, related>>Core Technologies",
+          "items": []
+        }
+      ]
+    }
+  ]
+}
